@@ -90,3 +90,143 @@ docs
 
 
 => 인터페이스를 설계하면, spring에서는 동적 프록시(Dynamic Proxy)를 이용해 실제 클래스 생성
+
+
+---
+
+### Annotation
+
+[http://www.datanucleus.org:15080/products/datanucleus/jpa/annotations.html](http://www.datanucleus.org:15080/products/datanucleus/jpa/annotations.html)
+
+<table>
+  <tr>
+    <th>어노테이션</th><th>설명</th>
+  </tr>
+  <tr>
+    <td>@Id</td>
+    <td>
+      각 엔티티를 구별할 수 있도록 식별 ID를 가지게 설계 <br />
+      @GeneratedValue <br />
+      strategy : AUTO, TABLE, SEQUENCE, IDENTITY <br />      
+      <table>
+        <tr>
+          <td>AUTO</td>
+          <td>특정 데이터베이스 맞게 자동으로 생성되는 방식</td>
+        </tr>
+        <tr>
+          <td>IDENTITY</td>
+          <td>기본 키 생성 방식 자체를 데이터에베이스에 위임하는 방식 <br />
+            데이터베이스에 의존적인 ㅂ아식, MySQL에서 많이 사용
+          </td>
+        </tr>
+        <tr>
+          <td>SEQUENCE</td>
+          <td>데이터베이스의 시퀀스를 이용해서 식별키 사용(오라클에서 사용)</td>
+        </tr>
+        <tr>
+          <td>TABLE</td>
+          <td>별도의 키를 생성해주는 채번 테이블(번호를 취할 목적으로 만든 테이블)<br />
+          을 이용하는 방식
+          </td>
+        </tr>
+      </table>
+      generator : @TableGenerator, @SequenceGenerator <br />
+    </td>    
+  </tr>
+  <tr>
+    <td>@Column</td>
+    <td>
+      Database 테이블을 구성할 때 인스턴스 변수가 컬럼이 되기 때문에 원한다면 <br />
+      컬럼명을 별도로 지정하거나 컬럼의 사이즈, 제약조건들을 추가하기 위해 사용 <br />
+      <table>
+        <tr>
+          <th>Attribute</th><th>Type</th><th>Description</th><th>Default</th>
+        </tr>
+        <tr>
+          <td>name</td>
+          <td>String</td>
+          <td>컬럼 이름</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>unique</td>
+          <td>boolean</td>
+          <td>유니크 여부</td>
+          <td>true,false</td>
+        </tr>
+        <tr>
+          <td>nullable</td>
+          <td>boolean</td>
+          <td>null 허용 여부</td>
+          <td>true,false</td>
+        </tr>
+        <tr>
+          <td>insertable</td>
+          <td>boolean</td>
+          <td>insert 가능 여부</td>
+          <td>true, false</td>
+        </tr>
+        <tr>
+          <td>updatable</td>
+          <td>boolean</td>
+          <td>수정 가능 여부</td>
+          <td>true,false</td>
+        </tr>
+        <tr>
+          <td>table</td>
+          <td>String</td>
+          <td>테이블 이름</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>length</td>
+          <td>int</td>
+          <td>컬럼사이즈</td>
+          <td>255</td>
+        </tr>
+        <tr>
+          <td>precision</td>
+          <td>int</td>
+          <td>소수 정밀도</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>scale</td>
+          <td>int</td>
+          <td>소수점 이하 자리수</td>
+          <td>0</td>
+        </tr>        
+      </table>
+    </td>    
+  </tr>
+  <tr>
+    <td>@Table</td>
+    <td>
+      클래스가 테이블이 되기 때문에, 클래스의 선언부에 작성하여 테이블명을 어떻게 지정할 지 결정 <br />
+      (@Table이 지정되지 않으면 클래스 이름과 동일 테이블 생성) <br />
+      <table>
+        <tr>
+          <th>Attribute</th><th>Type</th><th>Description</th><th>Default</th>
+        </tr>
+        <tr>
+          <td>name</td> <td>String</td> <td>테이블 이름</td> <td></td>
+        </tr>
+        <tr>
+          <td>catalog</td> <td>String</td> <td>테이블 카테고리</td> <td></td>
+        </tr>
+        <tr>
+          <td>schema</td> <td>String</td> <td>테이블 스키마</td> <td></td>
+        </tr>
+        <tr>
+          <td>uniqueConstraints</td> <td>UniqueConstraint[]</td> <td>칼럼값 유니크 제약 조건</td> <td></td>
+        </tr>
+        <tr>
+          <td>indexes</td> <td>Index[]</td> <td>인덱스 생성</td> <td></td>
+        </tr>        
+      </table>
+    </td>    
+  </tr>  
+</table>
+
+
+---
