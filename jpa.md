@@ -1,9 +1,10 @@
 # JPA(Java Persistence API)
 
+[move to learn.md](https://github.com/zacscoding/spring-boot-book/blob/master/learn.md)
+
 docs
 - [spring getting started](https://spring.io/guides/gs/accessing-data-jpa/)
 -
-
 
 
 > ORM (Object Relation Mapping) ?
