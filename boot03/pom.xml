@@ -93,6 +93,7 @@
 							<goal>process</goal>
 						</goals>
 						<configuration>
+							<!-- for IntelliJ -->
 							<outputDirectory>${basedir}/target/generated-sources/java</outputDirectory>
 							<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
 						</configuration>
