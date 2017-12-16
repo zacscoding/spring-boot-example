@@ -6,6 +6,16 @@ docs
 - [spring getting started](https://spring.io/guides/gs/accessing-data-jpa/)
 -
 
+index  
+- <a href="archi">JPA archi</a>
+- <a href="advantage">JPA 장단점</a>
+- <a href="entity">엔티티, 엔티티매니저</a>
+- <a href="annotation">Annotation</a>
+- <a href="data-page">Spring Data Page </a>
+
+
+
+
 
 > ORM (Object Relation Mapping) ?
 
@@ -18,11 +28,15 @@ docs
 
 ### JPA Archi
 
+<div id="archi"></div>
+
 ![JPA INTRO](./pics/[ch02-01]jpa_intro.png)
 
 ---
 
 ### JPA 장단점
+
+<div id="advantage"></div>
 
 ***장점***  
 
@@ -47,6 +61,8 @@ docs
 ---
 
 ### 엔티티(Entity), 엔티티 매니저(Entity Manager)
+
+<div id="entity"></div>
 
 #### Entity
 
@@ -95,6 +111,8 @@ docs
 ---
 
 ### Annotation
+
+<div id="annotation"></div>
 
 [http://www.datanucleus.org:15080/products/datanucleus/jpa/annotations.html](http://www.datanucleus.org:15080/products/datanucleus/jpa/annotations.html)
 
@@ -230,3 +248,87 @@ docs
 
 
 ---
+
+### org.springframework.data.domain.Page
+
+<div id="data-page"></div>
+
+<table>
+  <tr>
+    <th>메소드</th>   <th>설명</th>
+  </tr>
+  <tr>
+    <td>int getNumber()</td> <td>현재 페이지의 정보</td>
+  </tr>
+  <tr>
+    <td>int getSize()</td> <td>한 페이지의 크기 </td>
+  </tr>
+  <tr>
+    <td>int getTotalPages() </td> <td> 전체 페이지의 수 </td>
+  </tr>
+  <tr>
+    <td>int getNumberOfElements() </td> <td> 결과 데이터 수 </td>
+  </tr>
+  <tr>
+    <td>boolean hasPreviousPage()</td> <td>이전 페이지 존재 여부</td>
+  </tr>
+  <tr>
+    <td>boolean hasNextPage()</td> <td>다음 페이지의 존재여부</td>
+  </tr>
+  <tr>
+    <td>boolean isLastPage</td> <td>마지막 페이지 여부</td>
+  </tr>
+  <tr>
+    <td>Pageable nextPageable()</td> <td>다음 페이지 객체</td>
+  </tr>
+  <tr>
+    <td>Pageable previousPageable()</td> <td>이전 페이지 객체</td>
+  </tr>
+  <tr>
+    <td>List<T> getConent()</td> <td>조회된 데이터</td>
+  </tr>
+  <tr>
+    <td>boolean hasContent()</td> <td>결과 존재 여부</td>
+  </tr>
+  <tr>
+    <td>Sort getSort()</td> <td>검색 시 사용된 Sort 정보</td>
+  </tr>
+</table>
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+asdf
