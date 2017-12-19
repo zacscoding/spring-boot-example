@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Thymeleaf3</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<p>
+    model.addAttribute("now", new Date()); <br/>
+    model.addAttribute("price", 123456789 );<br/>
+    model.addAttribute("title", "This is a just sample." );<br/>
+    model.addAttribute("options", Arrays.asList("AAAA", "BBB", "CCC", "DDD") );<br/>
+</p>
+<br />
+
+<h1 th:text="${now}"></h1>
+<h1 th:text="${price}"></h1>
+<h1 th:text="${title}"></h1>
+<h1 th:text="${options}"></h1>
+
+<hr>
+<h1>#dates, #calendars(날짜 관련)</h1>
+<h2 th:text="${#dates.format(now,'yyyy-MM-dd')}"></h2>
+<div th:with="timeValue=${#dates.createToday()}">
+    <p>[[${timeValue}]]</p>
+</div>
+
+<hr>
+
+<h1>#numbers(숫자관련)</h1>
+<h2 th:text="${#numbers.formatInteger(price,3,'COMMA')}"></h2>
+
+<div th:with="priceVal = 99.87654">
+    <p th:text="${#numbers.formatInteger(priceVal,3, 'COMMA')}"></p>
+    <p th:text="${#numbers.formatDecimal(priceVal,5,10,'POINT')}"></p>
+</div>
+
+<hr >
+
+<h1>#strings(문자 관련)</h1>
+<h1 th:text="${title}"></h1>
+
+<span th:utext="${#strings.replace(title, 's', '<b>s</b>')}"></span>
+<ul>
+    <li th:each="str:${#strings.listSplit(title, ' ')}">
+        [[${str}]]
+    </li>
+</ul>
+
+
+</body>
+</html>

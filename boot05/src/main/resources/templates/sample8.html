@@ -1,0 +1,33 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Thymeleaf3</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <div th:insert="~{fragments/header::header1}"></div>
+
+<ul>
+    <li>
+        <!-- 절대 경로 -->
+        <a th:href="@{http://localhost:8080/sample1}">sample1</a>
+    </li>
+    <li>
+        <!-- 현재 실행되는 컨텍스트 반영
+        boot05/sample1
+        -->
+        <a th:href="@{/sample1}">sample1</a>
+    </li>
+    <li>
+        <a th:href="@{~/sample1}">sample1</a>
+    </li>
+    <li>
+        <!-- 쿼리 스트링 추가
+        /sample1?p1=aaa&amp;p2=bbb -->
+        <a th:href="@{/sample1(p1='aaa', p2='bbb')}">sample1</a>
+    </li>
+</ul>
+
+    <div th:insert="~{fragments/footer::footer1}"></div>
+</body>
+</html>
