@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zerock.domain.WebBoard;
 import org.zerock.persistence.WebBoardRepository;
+import org.zerock.vo.PageMaker;
 import org.zerock.vo.PageVO;
 
 /**
@@ -35,8 +36,9 @@ public class WebBoardController {
         Page<WebBoard> result = webBoardRepository.findAll(webBoardRepository.makePredicate(null,null), page);
         log.info("## [list is called] page : " + page);
         log.info("## result : " + result);
+        log.info("## TOTAL PAGE NUMBER : " + result.getTotalPages());
 
-        model.addAttribute("result", result);
+        model.addAttribute("result", new PageMaker(result));
     }
 
 

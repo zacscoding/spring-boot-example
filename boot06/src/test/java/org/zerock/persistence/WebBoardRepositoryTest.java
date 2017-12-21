@@ -1,6 +1,7 @@
 package org.zerock.persistence;
 
 import lombok.extern.java.Log;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class WebBoardRepositoryTest {
     WebBoardRepository repo;
 
     @Test
+    @Ignore
     public void insertBoardDummies() {
         IntStream.range(0,300).forEach( (int i) -> {
             WebBoard board = new WebBoard();
@@ -44,6 +46,7 @@ public class WebBoardRepositoryTest {
     }
 
     @Test
+    @Ignore
     public void testList1() {
         Pageable pageable = PageRequest.of(0, 20, Sort.Direction.DESC, "bno");
 
@@ -57,6 +60,7 @@ public class WebBoardRepositoryTest {
     }
 
     @Test
+    @Ignore
     public void testList2() {
         Pageable pageable = PageRequest.of(0,20, Sort.Direction.DESC, "bno");
         Page<WebBoard> result = repo.findAll(repo.makePredicate("t", "10"), pageable);

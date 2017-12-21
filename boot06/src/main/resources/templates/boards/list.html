@@ -6,13 +6,73 @@
     <div class="panel-heading">List Page</div>
     <div class="panel-body">
         <!-- Page 1 of 30 으로 나옴 PageableImpl의 toString() 보면 getNumber() +1 -->
-        <p>[[${result}]]</p>
-        <div>[[${result.content}]]</div>
-    </div>
-</div>
+        <!--
+        <p>[[${result.result}]]</p>
+        -->
+        <div th:with="result=${result.result}">
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                    <tr>
+                        <th>BNO</th> <th>TITLE</th> <th>WRITER</th> <th>REGDATE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="odd gradeX" th:each="board:${result.content}">
+                        <td>[[ ${board.bno} ]]</td>
+                        <td>
+                            <a th:href="${board.bno}" class="boardLink">
+                                [[${board.title}]]
+                            </a>
+                        </td>
+                        <td>
+                            [[${board.writer}]]
+                        </td>
+                        <td class="center">
+                            [[${#dates.format(board.regdate,'yyyy-MM-dd')}]]
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- paging -->
+        <nav>
+            <div>
+                <ul class="pagination">
+                    <!-- prev -->
+                    <li class="page-item" th:if="${result.prevPage}">
+                        <a th:href="${result.prevPage.pageNumber} +1">PREV [[ ${result.prevPage.pageNumber} +1]]</a>
+                    </li>
+                    <!-- page list -->
+                    <li class="page-item" th:classappend="${p.pageNumber == result.currentPageNum-1} ? active : ''" th:each="p:${result.pageList}">
+                        <a th:href="${p.pageNumber} + 1">[[${p.pageNumber} + 1]]</a>
+                    </li>
+                    <!-- next -->
+                    <li class="page-item" th:if="${result.nextPage}">
+                        <a th:href="${result.nextPage.pageNumber} + 1">NEXT [[ ${result.nextPage.pageNumber + 1}]]</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- ./ paging -->
+
+        <form id="f1" th:action="@{list}" method="get">
+            <input type="hidden" name="page" th:value="${result.currentPageNum}">
+            <input type="hidden" name="size" th:value="${result.currentPage.pageSize}">
+        </form>
+    </div> <!-- end panel -->
+</div> <!-- end fragment -->
 
 <th:block layout:fragment="script" >
     <script th:inline="javascript">
+        $(document).ready(function() {
+            var formObj = $('#f1');
+            $('.pagination a').on('click', function(e) {
+                e.preventDefault();
 
+                formObj.find('[name="page"]').val( $(this).attr('href') );
+                formObj.submit();
+            });
+        });
     </script>
 </th:block>
