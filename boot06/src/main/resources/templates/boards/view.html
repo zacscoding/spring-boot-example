@@ -1,0 +1,61 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout1}">
+
+<div layout:fragment="content">
+
+    <div class="panel-heading">View Page</div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label>Bno</label>
+            <input class="form-control" name="bno" th:value="${vo.bno}" readonly="readonly">
+        </div>
+        <div class="form-group">
+            <label>Title</label>
+            <input class="form-control" name="title" th:value="${vo.title}" readonly="readonly" />
+        </div>
+
+        <div class="form-group">
+            <label>Content</label>
+            <textarea class="form-control" rows="3" name="content" th:text="${vo.content}" readonly="readonly"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Writer</label>
+            <input class="form-control" name="writer" th:value="${vo.writer}" readonly="readonly"/>
+        </div>
+
+        <div class="form-goup">
+            <label>RegDate</label>
+            <!-- null 값이면, 빈 문자열 출력 됨 -->
+            <input class="form-control" name="regDate" th:value="${#dates.format(vo.regdate,'yyyy-MM-dd')}" readonly="readonly">
+        </div>
+
+        <div class="pull-right">
+            <!-- Thymeleaf의 링크 처리 with (키 = 값) -->
+            <a th:href="@{modify(page=${pageVO.page},
+                            size = ${pageVO.size},
+                            type = ${pageVO.type},
+                            keyword =${pageVO.keyword},
+                            bno = ${vo.bno}
+                        )}" class="btn btn-default">Modify/Delete</a>
+
+            <a th:href="@{list(page=${pageVO.page},
+                            size = ${pageVO.size},
+                            type = ${pageVO.type},
+                            keyword =${pageVO.keyword},
+                            bno = ${vo.bno}
+                        )}" class="btn btn-default">Go list</a>
+        </div>
+
+    </div>
+    <!-- end gragment -->
+
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+
+        </script>
+    </th:block>
+
+</div>
+</html>
