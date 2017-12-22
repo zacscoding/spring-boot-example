@@ -8,6 +8,9 @@
 - Web
 - Lombok
 
+![initialize project](./pics/[ch05-01]init.png)
+
+
 > encoding(utf-8)
 
 > application.properties
