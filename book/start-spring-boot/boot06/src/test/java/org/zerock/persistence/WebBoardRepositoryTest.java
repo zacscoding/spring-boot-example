@@ -32,7 +32,7 @@ public class WebBoardRepositoryTest {
     WebBoardRepository repo;
 
     @Test
-    @Ignore
+    //@Ignore
     public void insertBoardDummies() {
         IntStream.range(0,300).forEach( (int i) -> {
             WebBoard board = new WebBoard();

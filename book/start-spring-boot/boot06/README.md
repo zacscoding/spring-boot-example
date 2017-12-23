@@ -100,3 +100,87 @@ logging.level.org.zerock=info
 
 - Views
 <a href="https://github.com/zacscoding/spring-boot-example/tree/master/book/start-spring-boot/src/main/resources/templates">templates</a>
+
+
+---
+
+
+## ch07 REST 방식의 댓글 처리 + JPA 처리
+
+
+
+
+```
+Hibernate: create table tbl_webreplies (bno bigint not null auto_increment, regdate datetime, reply_text varchar(255), replyer varchar(255), updatedate datetime, board_bno bigint, primary key (bno)) engine=InnoDB
+Hibernate: alter table tbl_webreplies add constraint FKoqessctbkmr17s2vyoy825r2s foreign key (board_bno) references tbl_webboards (bno)
+```
+
+
+#### N+1 검색 문제
+
+> WebBoard.java
+
+```
+...
+public class WebBoard {
+  ...
+  @OneToMany(mappedBy = "board", fetch=FetchType.LAZY)
+  private List<WebReply> replies;
+}
+
+-> list query
+
+Hibernate: select webboard0_.bno as bno1_0_, webboard0_.content as content2_0_, webboard0_.regdate as regdate3_0_, webboard0_.title as title4_0_, webboard0_.updatedate as updateda5_0_, webboard0_.writer as writer6_0_ from tbl_webboards webboard0_ where webboard0_.bno>? order by webboard0_.bno desc limit ?
+Hibernate: select count(webboard0_.bno) as col_0_0_ from tbl_webboards webboard0_ where webboard0_.bno>?
+
+Hibernate: select replies0_.board_bno as board_bn6_1_0_, replies0_.rno as rno1_1_0_, replies0_.rno as rno1_1_1_, replies0_.board_bno as board_bn6_1_1_, replies0_.regdate as regdate2_1_1_, replies0_.reply_text as reply_te3_1_1_, replies0_.replyer as replyer4_1_1_, replies0_.updatedate as updateda5_1_1_ from tbl_webreplies replies0_ where replies0_.board_bno=?
+X10
+```
+
+##### SOl1) @Query
+
+> WebBoardRepository.java
+
+```
+@Query("SELECT b.bno, b.title, b.writer, b.regdate, count(r) FROM WebBoard b"
+      + "LEFT OUTER JOIN b.replies r WHERE b.bno > 0 GROUP BY b")
+```
+
+> Test Code
+
+```
+Pageable pageable = PageRequest.of(0, 10, Direction.DESC, "bno");
+List<Object[]> list = WebBoardRepository.getListWithQuery(pageable);
+list.forEach(arr -> log.info(Arrays.toString(arr)));
+```
+
+
+
+
+
+
+
+
+<br /><br /><br /><br /><br /><br /><br />
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---

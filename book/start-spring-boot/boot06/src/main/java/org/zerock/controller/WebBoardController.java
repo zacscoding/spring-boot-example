@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.WebBoard;
+import org.zerock.persistence.CustomCrudRepository;
 import org.zerock.persistence.WebBoardRepository;
 import org.zerock.vo.PageMaker;
 import org.zerock.vo.PageVO;
@@ -29,7 +30,23 @@ import org.zerock.vo.PageVO;
 public class WebBoardController {
     @Autowired
     private WebBoardRepository webBoardRepository;
+    @Autowired
+    CustomCrudRepository customCrudRepository;
 
+    @GetMapping("/list")
+    public void list(@ModelAttribute("pageVO") PageVO vo, Model model) {
+        Pageable page = vo.makePageable(0,"bno");
+
+        Page<Object[]> result = customCrudRepository.getCustomPage(vo.getType(), vo.getKeyword(), page);
+
+        log.info("## [list is called] page : " + page);
+        log.info("## result : " + result);
+        log.info("## TOTAL PAGE NUMBER : " + result.getTotalPages());
+
+        model.addAttribute("result", new PageMaker(result));
+    }
+
+    /* == before reply cnt
     @GetMapping("/list")
     //@PageableDefault
     // public void list(@PageableDefault(direction = Sort.Direction.DESC, sort="bno", size=10, page=0) Pageable pageable) {
@@ -44,6 +61,7 @@ public class WebBoardController {
 
         model.addAttribute("result", new PageMaker(result));
     }
+    */
 
     @GetMapping("/register")
     public void registerGET(@ModelAttribute("vo") WebBoard vo) {
