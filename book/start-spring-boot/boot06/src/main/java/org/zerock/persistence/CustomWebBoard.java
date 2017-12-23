@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
  * @GitHub : https://github.com/zacscoding
  */
 public interface CustomWebBoard {
-
     public Page<Object[]> getCustomPage(String type, String keyword, Pageable pageable);
 
 }
