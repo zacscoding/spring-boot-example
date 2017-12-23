@@ -5,9 +5,9 @@
 # index
 
 - <a href="#init">Boot Initializer</a>
-- <a href="https://github.com/zacscoding/spring-boot-book/tree/master/boot03/src/main/java/org/zerock/persistence">쿼리 메소드 이용</a>
-- <a href="https://github.com/zacscoding/spring-boot-book/tree/master/boot03/src/test/java/org/zerock/persistence"> 쿼리 테스트 코드 </a>
-- <a href="https://github.com/zacscoding/spring-boot-book/blob/master/jpa.md#data-page"> Page<T> 메소드 정리</a>
+- <a href="https://github.com/zacscoding/spring-boot-example/tree/master/book/start-spring-boot/boot03/src/main/java/org/zerock/persistence">쿼리 메소드 이용</a>
+- <a href="https://github.com/zacscoding/spring-boot-example/tree/master/book/start-spring-boot/boot03/src/test/java/org/zerock/persistence"> 쿼리 테스트 코드 </a>
+- <a href="https://github.com/zacscoding/spring-boot-example/blob/master/book/start-spring-boot/jpa.md#data-page"> Page<T> 메소드 정리</a>
 - <a href="#query-dsl">Querydsl </a>
 
 
@@ -31,7 +31,7 @@
 
 > pom.xml
 
-<a href="https://github.com/zacscoding/spring-boot-book/blob/master/boot03/pom.xml">pom.xml</a>
+<a href="https://github.com/zacscoding/spring-boot-example/blob/master/book/start-spring-boot/boot03/pom.xml">pom.xml</a>
 <a href="http://www.querydsl.com/static/querydsl/4.0.1/reference/ko-KR/html_single/#d0e441">querydsl 한글 DOCS</a>
 
 > IntellJ GenerateSource

@@ -85,18 +85,18 @@ logging.level.org.zerock=info
 > Board CRUD
 
 - Controller
-<a href="https://github.com/zacscoding/spring-boot-book/blob/master/boot06/src/main/java/org/zerock/controller/WebBoardController.java">WebBoardController</a>
+<a href="https://github.com/zacscoding/spring-boot-example/tree/master/book/start-spring-boot/boot06/src/main/java/org/zerock/controller/WebBoardController.java">WebBoardController</a>
 
 
 - Persistence
-<a href="https://github.com/zacscoding/spring-boot-book/blob/master/boot06/src/main/java/org/zerock/persistence/WebBoardRepository.java">WebBoardRepository</a>
+<a href="https://github.com/zacscoding/spring-boot-example/tree/master/book/start-spring-boot/boot06/src/main/java/org/zerock/persistence/WebBoardRepository.java">WebBoardRepository</a>
 
 - Domain
-<a href="https://github.com/zacscoding/spring-boot-book/blob/master/boot06/src/main/java/org/zerock/domain/WebBoard.java">WebBoard</a>
+<a href="https://github.com/zacscoding/spring-boot-example/tree/master/book/start-spring-boot/boot06/src/main/java/org/zerock/domain/WebBoard.java">WebBoard</a>
 
 - DTO
-  + <a href="https://github.com/zacscoding/spring-boot-book/blob/master/boot06/src/main/java/org/zerock/vo/PageMaker.java">PageMaker</a>
-  + <a href="https://github.com/zacscoding/spring-boot-book/blob/master/boot06/src/main/java/org/zerock/vo/PageVO.java">PageVO</a>
+  + <a href="https://github.com/zacscoding/spring-boot-example/tree/master/book/start-spring-boot/boot06/src/main/java/org/zerock/vo/PageMaker.java">PageMaker</a>
+  + <a href="https://github.com/zacscoding/spring-boot-example/tree/master/book/start-spring-boot/boot06/src/main/java/org/zerock/vo/PageVO.java">PageVO</a>
 
 - Views
-<a href="https://github.com/zacscoding/spring-boot-book/tree/master/boot06/src/main/resources/templates">templates</a>
+<a href="https://github.com/zacscoding/spring-boot-example/tree/master/book/start-spring-boot/src/main/resources/templates">templates</a>
