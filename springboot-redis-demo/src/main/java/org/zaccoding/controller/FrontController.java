@@ -10,10 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.zaccoding.DemoApplication;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -25,15 +22,15 @@ import java.util.Set;
 public class FrontController {
     private static final Logger logger = LoggerFactory.getLogger(FrontController.class);
     @Autowired
-    StringRedisTemplate redisTemplate;
+    StringRedisTemplate stringRedisTemplate;
 
     @GetMapping(value="/list-op/{key}/{value}")
     @ResponseBody
     public String index(@PathVariable("key") String key, @PathVariable("value") String value) {
         logger.info("## [request hello] key : {}, value : {}", key, value);
-        ListOperations<String,String> listOperations = redisTemplate.opsForList();
+        ListOperations<String,String> listOperations = stringRedisTemplate.opsForList();
         listOperations.rightPush(key,value);
-        Set<String> keys = redisTemplate.keys("*");
+        Set<String> keys = stringRedisTemplate.keys("*");
         logger.info("## keys size : {}", keys.size());
         StringBuilder sb = new StringBuilder();
         for(String k : keys) {

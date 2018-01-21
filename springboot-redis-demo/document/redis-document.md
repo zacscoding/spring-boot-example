@@ -34,7 +34,7 @@ $ redis-server
 $ redis-cli
 ```
 
-> alias 
+> alias
 
 ```
 # alias redis
@@ -103,9 +103,12 @@ OK
 - 레디스는 일련의 바이트  
 - 바이너리 safe ?  
 => they have a known length not determined by any special terminating characters  
-- 하나의 스트링에 512 mb 까지 저장 가능
+- 하나의 스트링에 512 mb 까지 저장 가능  
+- https://redis.io/commands#string
 
 > Eg) SET name "zaccoding"
+
+> redis-cli
 
 ```
 127.0.0.1:6379> set name zaccoding
@@ -114,12 +117,28 @@ OK
 "zaccoding"
 ```
 
+> Java code
+
+```
+  @Resource(name = "redisTemplate")
+  private ValueOperations<String, String> valueOperations;
+
+  @Test
+  public void setAndGet() {
+      valueOperations.set("name", "zaccoding");
+      assertThat(valueOperations.get("name"),is("zaccoding"));
+  }
+```
+
 #### Hashes
 - 레디스 Hash는 {key,value}의 컬렉션
 - Redis hash는 문자열 필드와 값의 Map  
-=> objects를 나타낼 때 사용
+=> objects를 나타낼 때 사용  
+- https://redis.io/commands/hdel
 
 > Eg) HMSET KEY_NAME FIELD1 VALUE1 ... FIELDN VALUEN
+
+> redis-cli
 
 ```
 127.0.0.1:6379> HMSET user name "zac" hobby "coding"
@@ -133,15 +152,36 @@ OK
 4) "coding"
 ```
 
+> java code  
+
+```
+@Resource(name = "redisTemplate")
+private HashOperations<String, String, String> hashOperations;
+
+@Test
+public void test() {
+    Map<String,String> map = new HashMap<>();
+    map.put("name", "zac");
+    map.put("hobby", "codding");
+    hashOperations.putAll("user", map);
+    hashOperations.entries("user").forEach((k,v) -> {
+        CustomPrinter.println("key : {}, value : {}", k ,v);
+    });
+}
+```
+
 ---
 
 #### Lists  
 - Redis lists는 삽입 순서에 따라 정렬 된 문자열 리스트
 - 리스트의 양끝에 넣을 수 있음(double-ended queue)
 - LPUSH , RPUSH , LRANGE
+- https://redis.io/commands#list
 
 
 > Example
+
+> redis-cli
 
 ```
 127.0.0.1:6379> lpush zaccoding coding1
@@ -159,6 +199,24 @@ OK
 4) "coding1"
 ```
 
+> java code   
+
+```
+@Resource(name = "redisTemplate")
+private ListOperations<String, String> listOperations;
+
+@Test
+public void test() {
+    listOperations.rightPush("zac", "coding1");
+    listOperations.rightPush("zac", "coding2");
+    listOperations.rightPush("zac", "coding3");
+    listOperations.leftPush("zac", "coding0");
+    listOperations.range("zac", 0 , -1).forEach(v -> {
+        CustomPrinter.println("value : " + v);
+    });
+}
+```
+
 ```
 127.0.0.1:6379> rpush bulk 1 2 3 4 5 "foo bar"
 (integer) 6
@@ -172,7 +230,22 @@ OK
 4) "4"
 5) "5"
 6) "foo bar"
+```
 
+> java example  
+
+```
+@Resource(name = "redisTemplate")
+private ListOperations<String, String> listOperations;
+
+@Test
+public void testBulk() {
+    System.out.println(listOperations.rightPushAll("zac", "codding1", "coding2"));
+    //assertTrue(listOperations.rightPush("zac", "codding1", "coding2") == 2L);
+    listOperations.range("zac", 0 , -1).forEach(v -> {
+        CustomPrinter.println("value : " + v);
+    });
+}
 ```
 
 #### Sets  
@@ -180,8 +253,9 @@ OK
 - Redis 에서는 O(1)의 추가, 제거, 테스트? 가능?  
 Redis Sets are an unordered collection of strings. In Redis, you can add, remove, and test for the existence of members in O(1) time complexity.
 - Sets의 member의 최대 수는 2^32-1 (4294967295)
+- https://redis.io/commands#set
 
-> EG
+> redis-cli
 
 ```
 127.0.0.1:6379> sadd zaccoding redis
@@ -198,13 +272,28 @@ Redis Sets are an unordered collection of strings. In Redis, you can add, remove
 3) "redis"
 ```
 
+> java code
+
+```
+@Resource(name = "redisTemplate")
+private SetOperations<String, String> setOperations;
+
+@Test
+public void setUp() {
+    assertTrue(setOperations.add("zaccoding", "redis", "mongodb", "reditmq", "reditmq") == 3L);
+    Set<String> set = setOperations.members("zaccoding");
+    System.out.println("## set class : " + set.getClass().getName());
+    assertTrue(set.size() == 3);
+}
+```
+
 #### Sorted Sets
 
 - Redis Sets와 유사, 중복되지 않는 문자열
 - Sorted Set의 Member 들은 정렬을 위해 스코어와 연관이 있음
 - member는 unique 하는 반면에, 스코어는 repeated 될 수 있음?
 
->Eg
+>redis-cli
 
 ```
 127.0.0.1:6379> zadd zaccoding 0 redis
@@ -219,6 +308,28 @@ Redis Sets are an unordered collection of strings. In Redis, you can add, remove
 1) "mongodb"
 2) "rabitmq"
 3) "redis"
+```
+
+> java code
+
+```
+@Resource(name = "redisTemplate")
+private ZSetOperations<String, String> zSetOperations;
+
+@Test
+public void test() {
+    String key = "zaccoding";
+    zSetOperations.add(key, "redis", 0);
+    zSetOperations.add(key, "mongodb", 0);
+    zSetOperations.add(key, "reditmq", 0);
+    zSetOperations.add(key, "reditmq", 0);
+
+    Set<String> result = zSetOperations.rangeByScore(key, 0 , 1000);
+    Iterator<String> itr = result.iterator();
+    while(itr.hasNext()) {
+        System.out.println(itr.next());
+    }
+}
 ```
 
 ---
