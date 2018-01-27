@@ -385,45 +385,26 @@ OK
 (empty list or set)
 ```
 
-<table>
-  <tr>
-    <td>S.No</td>
-    <td>
-      Command & Description
-    </td>
-  </tr>
-  <tr>
-    <td>DEL KEY</td>
-    <td>
-      KEY가 존재하면 삭제
-    </td>
-  </tr>
-  <tr>
-    <td>DUMP KEY</td>
-    <td>
-      특정 키에 저장 된 값의 serialized를 반환?
+- DEL KEY  
+=> KEY가 존재하면 삭제
+- DUMP KEY  
+=> 특정 키에 저장 된 값의 serialized를 반환?  
 ```
 127.0.0.1:6379> lpush zaccoding coding2
 (integer) 2
 127.0.0.1:6379> DUMP zaccoding
 "\x0e\x01\x1d\x1d\x00\x00\x00\x13\x00\x00\x00\x02\x00\x00\acoding2\t\acoding1\xff\b\x00\xe6R_\xd6ED\x11\xed"
 ```
-    </td>
-  </tr>
-  <tr>
-    <td>EXISTS KEY</td>
-    <td>
-      키 존재 여부
+- EXISTS KEY  
+=> 키 존재 여부  
+
 ```
 127.0.0.1:6379> exists zaccoding
 (integer) 1
 ```      
-    </td>
-  </tr>
-  <tr>
-    <td>EXPIRE KEY</td>
-    <td>
-      특정 시간 후에 키의 expiry setting  
+- EXPIRE KEY  
+=> 특정 시간 후에 키의 expiry setting   
+
 ```
 127.0.0.1:6379> set zac "coding"
 OK
@@ -444,18 +425,11 @@ OK
 127.0.0.1:6379> exists zac
 (integer) 0
 ```      
-    </td>
-  </tr>
-  <tr>
-    <td>EXPIREAT key timestamp</td>
-    <td>
-      특정 시간 후에 키를 만료 => Unix timestamp format을 따름
-    </td>
-  </tr>
-  <tr>
-    <td>PEXPIRE key milliseconds</td>
-    <td>
-      key의 expiry를 밀리세컨드로 setting
+- EXPIREAT key timestamp  
+=> 특정 시간 후에 키를 만료 => Unix timestamp format을 따름
+- PEXPIRE key milliseconds  
+=> key의 expiry를 밀리세컨드로 setting  
+
 ```
 127.0.0.1:6379> set zac "coding"
 OK
@@ -468,18 +442,11 @@ OK
 127.0.0.1:6379> exists zac
 (integer) 0
 ```      
-    </td>
-  </tr>
-  <tr>
-    <td>PEXPIREAT key milliseconds-timestamp</td>
-    <td>
-      Sets the expiry of the key in Unix timestamp specified as milliseconds.
-    </td>
-  </tr>
-  <tr>
-    <td>keys pattern</td>
-    <td>
-    패턴에 매칭되는 키 반환 https://redis.io/commands/keys      
+- PEXPIREAT key milliseconds-timestamp  
+=> Sets the expiry of the key in Unix timestamp specified as milliseconds.  
+- keys pattern  
+=> 패턴에 매칭되는 키 반환 https://redis.io/commands/keys  
+
 ```
 127.0.0.1:6379> MSET firstname zac lastname codding age 19
 OK
@@ -493,18 +460,11 @@ OK
 2) "firstname"
 3) "lastname"
 ```  
-</td>
-  </tr>
-  <tr>
-    <td>MOVE key db</td>
-    <td>
-    키를 다른 데이터베이스로 이동
-    </td>
-  </tr>
-  <tr>
-    <td>PERSIST key</td>
-    <td>
-      키의 expiration을 제거
+- MOVE key db  
+=> 키를 다른 데이터베이스로 이동  
+- PERSIST key  
+=> 키의 expiration을 제거  
+
 ```
 127.0.0.1:6379> set zac "coding"
 OK
@@ -519,12 +479,9 @@ OK
 127.0.0.1:6379> TTL zac
 (integer) -1
 ```  
-</td>
-  </tr>
-  <tr>
-    <td>PTTL key</td>
-    <td>
-      key의 만료 시간(milliseconds)의 남은 시간을 가져옴
+- PTTL key  
+=> key의 만료 시간(milliseconds)의 남은 시간을 가져옴  
+
 ```
 127.0.0.1:6379> expire zac 60
 (integer) 1
@@ -532,24 +489,13 @@ OK
 (integer) 57
 127.0.0.1:6379> PTTL zac
 (integer) 53432
-```  
-</td>
-  </tr>
-  <tr>
-    <td>TTL key</td>
-    <td>
-      키의 만료 시간을 가져옴
-    </td>
-  </tr>
-  <tr>
-    <td>RANDOMKEY</td>
-    <td>
-      레디스로부터 랜덤 키를 반환
-    </td>
-  </tr>
-  <tr>
-    <td>RENAME key newkey</td>
-    <td> 키 이름 변경  
+```   
+- TTL key  
+=> 키의 만료 시간을 가져옴  
+- RANDOMKEY  
+=> 레디스로부터 랜덤 키를 반환
+- RENAME key newkey  
+=>키 이름 변경  
 
 ```
 127.0.0.1:6379> set zac "coding"
@@ -563,13 +509,10 @@ OK
 127.0.0.1:6379> get zaccoding
 "coding"
 ```  
-</td></tr>
-  <tr>
-    <td>RENAMENX key newkey</td>
-    <td>
-      새로운 키가 존재하지 않으면, 키 이름 변경  
+- RENAMENX key newkey  
+=> 새로운 키가 존재하지 않으면, 키 이름 변경  
+
 ```
--- RENAME
 127.0.0.1:6379> set zac1 "coding1"
 OK
 127.0.0.1:6379> set zac2 "coding2"
@@ -582,8 +525,6 @@ OK
 (nil)
 127.0.0.1:6379> flushall
 OK
-
--- RENAMENX
 127.0.0.1:6379> set zac1 "coding1"
 OK
 127.0.0.1:6379> set zac2 "coding2"
@@ -592,16 +533,9 @@ OK
 (integer) 0
 127.0.0.1:6379> get zac2
 "coding2"
-```      
-</td>
-  </tr>
-  <tr>
-    <td>TYPE key</td>
-    <td>
-    키에 저장 된 데이터 타입 반환
-    </td>
-  </tr>
-</table>
+```  
+- TYPE key  
+=> 키에 저장 된 데이터 타입 반환
 
 ---
 
@@ -626,23 +560,13 @@ OK
 
 > Strings Commands  
 
-<table>
-  <tr>
-    <td>SET key value</td>
-    <td>
-      특정 key에 value를 저장
-    </td>
-  </tr>
-  <tr>
-    <td>GET key</td>
-    <td>
-      키의 값을 가져옴
-    </td>
-  </tr>
-  <tr>
-    <td>GETRANGE key start end</td>
-    <td>
-      키에 저장 된 string의 substring을 리턴  
+- SET key value  
+=> 특정 key에 value를 저장
+- GET key  
+=> 키의 값을 가져옴
+- GETRANGE key start end  
+=> 키에 저장 된 string의 substring을 리턴   
+
 ```
 127.0.0.1:6379> set zac coding
 OK
@@ -650,13 +574,10 @@ OK
 "co"
 127.0.0.1:6379> GETRANGE zac 2 -1
 "ding"
-```      
-</td>
-  </tr>
-  <tr>
-    <td>GETSET key value</td>
-    <td>
-      키에 새로운 value를 set & 이전 값을 반환
+```   
+
+- GETSET key value
+=> 키에 새로운 value를 set & 이전 값을 반환  
 ```
 127.0.0.1:6379> set zac coding
 OK
@@ -665,18 +586,12 @@ OK
 127.0.0.1:6379> get zac
 "newcoding"
 ```      
-</td>
-  </tr>
-  <tr>
-    <td>GETBIT key offset</td>
-    <td>
-    키에 저장 된 문자열에서 offset의 bit 값을 반환      
-    </td>
-  </tr>
-  <tr>
-    <td>MGET key1 [key2..]</td>
-    <td>
-주어진 키의 모든 value를 반환  
+
+- GETBIT key offset  
+=> 키에 저장 된 문자열에서 offset의 bit 값을 반환      
+- MGET key1 [key2..]  
+=> 주어진 키의 모든 value를 반환  
+
 ```
 127.0.0.1:6379> set zac1 coding1
 OK
@@ -692,18 +607,11 @@ OK
 2) "coding2"
 3) "coding3"
 ```    
-</td>
-  </tr>
-  <tr>
-    <td>SETBIT key offset value</td>
-    <td>
-    key에 저장 된 string value의 offset에 set or clear
-    </td>
-  </tr>
-  <tr>
-    <td>SETEX key seconds value</td>
-    <td>
-    key의 expire를 가진 value 저장
+- SETBIT key offset value  
+=> key에 저장 된 string value의 offset에 set or clear  
+- SETEX key seconds value  
+=> key의 expire를 가진 value 저장  
+
 ```
 127.0.0.1:6379> SETEX zac 10 coding
 OK
@@ -717,12 +625,9 @@ OK
 127.0.0.1:6379> get zac
 (nil)
 ```    
-</td>
-  </tr>
-  <tr>
-    <td>SETNX key value</td>
-    <td>
-    키가 존재하지 않으면 키의 value를 set
+- SETNX key value  
+=> 키가 존재하지 않으면 키의 value를 set  
+
 ```
 127.0.0.1:6379> set zac coding1
 OK
@@ -731,12 +636,9 @@ OK
 127.0.0.1:6379> get zac
 "coding1"
 ```    
-</td>
-  </tr>
-  <tr>
-    <td>SETRANGE key offset value</td>
-    <td>
-    offset부터 덮어씌움
+- SETRANGE key offset value  
+=> offset부터 덮어씌움  
+
 ```
 127.0.0.1:6379> set zac abcdefg
 OK
@@ -760,24 +662,18 @@ OK
 127.0.0.1:6379> get zac
 "abcdefooaa\x00bb"
 ```    
-</td>
-  </tr>
-  <tr>
-    <td>STRLEN key</td>
-    <td>
-    키에 저장 된 값의 길이를 반환
+- STRLEN key  
+=> 키에 저장 된 값의 길이를 반환  
+
 ```
 127.0.0.1:6379> set zac coding
 OK
 127.0.0.1:6379> strlen zac
 (integer) 6
 ```    
-</td>
-  </tr>
-  <tr>
-    <td>MSET key value [key value ...]</td>
-    <td>
-      다중 [키,값]을 저장
+- MSET key value [key value ...]  
+=> 다중 [키,값]을 저장  
+
 ```
 127.0.0.1:6379> MSET zac1 coding1 zac2 coding2 zac3 coding3
 OK
@@ -794,12 +690,9 @@ OK
 2) "zac3"
 3) "zac1"
 ```      
-</td>
-  </tr>
-  <tr>
-    <td>MSETNX key value [key value ...]</td>
-    <td>
-      키가 존재하지 않으면 다중 키,값 저장(하나라도 존재하면 저장X)
+- MSETNX key value [key value ...]  
+=> 키가 존재하지 않으면 다중 키,값 저장(하나라도 존재하면 저장X)  
+
 ```
 127.0.0.1:6379> set zac1 coding1
 OK
@@ -812,12 +705,9 @@ OK
 127.0.0.1:6379> keys zac*
 1) "zac1"
 ```      
-    </td>
-  </tr>
-  <tr>
-    <td>PSETEX key milliseconds value</td>
-    <td>
-      키 + 값 + expiry 저장
+- PSETEX key milliseconds value  
+=> 키 + 값 + expiry 저장  
+
 ```
 127.0.0.1:6379> PSETEX zac1 5000 coding1
 OK
@@ -830,12 +720,9 @@ OK
 127.0.0.1:6379> ttl zac1
 (integer) -2
 ```      
-</td>
-  </tr>
-  <tr>
-    <td>INCR key</td>    
-    <td>
-      키의 int value 값을 한단계 증가
+- INCR key  
+=> 키의 int value 값을 한단계 증가  
+
 ```
 127.0.0.1:6379> set zac 1
 OK
@@ -850,12 +737,9 @@ OK
 127.0.0.1:6379> INCR zac2
 (integer) 0
 ```      
-</td>
-  </tr>
-  <tr>
-    <td>INCRBY key increment</td>
-    <td>
-    주어진 수만큼 key의 value 값 증가
+- INCRBY key increment  
+=> 주어진 수만큼 key의 value 값 증가  
+
 ```
 127.0.0.1:6379> set zac 1
 OK
@@ -868,12 +752,9 @@ OK
 127.0.0.1:6379> get zac
 "1"
 ```    
-</td>
-  </tr>
-  <tr>
-    <td>INCRBYFLOAT key increment</td>
-    <td>
-      주어진 수(float)만큼 key의 value 증가
+- INCRBYFLOAT key increment  
+=> 주어진 수(float)만큼 key의 value 증가  
+
 ```
 127.0.0.1:6379> set zac 0.1
 OK
@@ -882,12 +763,9 @@ OK
 127.0.0.1:6379> get zac
 "1.6"
 ```      
-</td>
-  </tr>
-  <tr>
-    <td>DECR key  // DECRBY key decrement</td>
-    <td>
-      키의 int value 1감소 // decrement 만큼 감소
+- DECR key  // DECRBY key decrement  
+=> 키의 int value 1감소 // decrement 만큼 감소  
+
 ```
 127.0.0.1:6379> set zac 10
 OK
@@ -898,12 +776,8 @@ OK
 127.0.0.1:6379> get zac
 "4"
 ```      
-</td>
-  </tr>
-  <tr>
-    <td>APPEND key value</td>
-    <td>
-      키의 value에 appned      
+- APPEND key value  
+=> 키의 value에 appned      
 ```
 127.0.0.1:6379> set zac zac
 OK
@@ -912,15 +786,8 @@ OK
 127.0.0.1:6379> get zac
 "zaccoding"
 ```      
-</td>
-  </tr>  
-</table>
-
 
 [Spring-Data-Redis test  code](https://github.com/zacscoding/spring-boot-example/blob/master/springboot-redis-demo/src/test/java/org/zaccoding/datatypes/StringsTest.java)
-
-
-
 
 
 
