@@ -549,8 +549,8 @@ OK
   </tr>
   <tr>
     <td>RENAME key newkey</td>
-    <td>
-      키 이름 변경
+    <td> 키 이름 변경  
+
 ```
 127.0.0.1:6379> set zac "coding"
 OK
@@ -562,15 +562,14 @@ OK
 (nil)
 127.0.0.1:6379> get zaccoding
 "coding"
-```        
-</td>
-  </tr>
+```  
+</td></tr>
   <tr>
     <td>RENAMENX key newkey</td>
     <td>
-      새로운 키가 존재하지 않으면, 키 이름 변경
+      새로운 키가 존재하지 않으면, 키 이름 변경  
 ```
-## RENAME
+-- RENAME
 127.0.0.1:6379> set zac1 "coding1"
 OK
 127.0.0.1:6379> set zac2 "coding2"
@@ -584,7 +583,7 @@ OK
 127.0.0.1:6379> flushall
 OK
 
-## RENAMENX
+-- RENAMENX
 127.0.0.1:6379> set zac1 "coding1"
 OK
 127.0.0.1:6379> set zac2 "coding2"
