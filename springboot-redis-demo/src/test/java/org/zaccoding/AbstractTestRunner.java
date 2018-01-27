@@ -27,6 +27,7 @@ public class AbstractTestRunner {
 
     @After
     public void tearDown() {
+        System.out.println("AbstractTestRunner:tearDown() is called");
         redisTemplate.getConnectionFactory().getConnection().flushAll();
     }
 }
