@@ -111,9 +111,13 @@ public class JspTestController {
 
 > webapp/WEB-INF/jsp/home.jsp  
 
-```
 
-```
+6. test  
+
+http://localhost:8080/boot-demo/jsp/home  
+
+
+
 
 
 
