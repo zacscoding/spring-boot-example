@@ -7,6 +7,7 @@
 - <a href="#commands"> commands </a>
 - <a href="#keys"> keys </a>
 - <a href="#strings">Strings</a>
+- <a href="#hashes">Hashes</a>
 
 ## References
 - https://redis.io/
@@ -32,7 +33,11 @@ $ sudo make install
 
 ```
 $ redis-server
-$ redis-cli
+$ redis-cli  
+127.0.0.1:6379> auth foobared
+OK
+127.0.0.1:6379> ping
+pong
 ```
 
 > alias
@@ -781,13 +786,229 @@ OK
 ```
 127.0.0.1:6379> set zac zac
 OK
-127.0.0.1:6379> append zac coding
+127.0.0.1:6379> append zac codingspring
 (integer) 9
 127.0.0.1:6379> get zac
 "zaccoding"
 ```      
 
 [Spring-Data-Redis test  code](https://github.com/zacscoding/spring-boot-example/blob/master/springboot-redis-demo/src/test/java/org/zaccoding/datatypes/StringsTest.java)
+
+
+---
+
+<div id="hashes"></div>  
+
+## Hashes  
+; Redis Hashes는 string fields와 string values의 맵 형태  
+=> 약 40억 개 이상의 필드-값을 저장  
+
+```
+127.0.0.1:6379> HMSET zac name "zaccoding" hobby "coding" age 19
+OK
+127.0.0.1:6379> HGETALL zac
+1) "name"
+2) "zaccoding"
+3) "hobby"
+4) "coding"
+5) "age"
+6) "19"
+```  
+=> "zac" 이름의 hash에 (name, hobby, age)의 맵 형태 저장  
+
+**Redis Hash Commands**  
+
+> HDEL key field2 [field2]  
+=> 하나 이상의 hash fields를 삭제  
+
+```
+127.0.0.1:6379> HMSET zac name "zaccoding" hobby "coding"
+OK
+127.0.0.1:6379> HGETALL zac
+1) "name"
+2) "zaccoding"
+3) "hobby"
+4) "coding"
+127.0.0.1:6379> HDEL zac hobby
+(integer) 1
+127.0.0.1:6379> HGETALL zac
+1) "name"
+2) "zaccoding"
+```  
+
+> HEXISTS key field  
+=> a hash field가 존재하는지 체크  
+
+```
+127.0.0.1:6379> HMSET zac name "zaccoding" hobby "coding"
+OK
+127.0.0.1:6379> HEXISTS zac hobby
+(integer) 1
+127.0.0.1:6379> HEXISTS zac hobby2
+```  
+
+> HGET key field  
+=> a hash field에 저장 된 특정 키의 값을 가져옴  
+
+```
+127.0.0.1:6379> HMSET zac name "zaccoding" hobby "coding"
+OK
+127.0.0.1:6379> HGET zac hobby
+"coding"
+127.0.0.1:6379> HGET zac hobby2
+(nil)
+```  
+
+> HINCRBY key field increment  
+=> a hash field의 정수 값을 지정 된 수만큼 증가  
+
+```
+127.0.0.1:6379> HMSET zac name "zaccoding" age 19
+OK
+127.0.0.1:6379> HINCRBY zac age 11
+(integer) 30
+127.0.0.1:6379> HGET zac age
+"30"
+```  
+
+> HINCRBYFLOAT key field increment  
+=> a hash field의 float 값을 지정 된 수만큼 증가  
+
+```
+127.0.0.1:6379> HMSET zac name "zaccoding" score 0.123
+OK
+127.0.0.1:6379> HINCRBYFLOAT zac score 0.5
+"0.623"
+127.0.0.1:6379> HGET zac score
+"0.623"
+```  
+
+> HKEYS key  
+=> hash안의 모든 fiels를 가져옴  
+
+```
+127.0.0.1:6379> HMSET zac name "zaccoding" hobby "coding" age 19 score 0.95
+OK
+127.0.0.1:6379> HKEYS zac
+1) "name"
+2) "hobby"
+3) "age"
+4) "score"
+```  
+
+> HLEN key  
+=> hash에 있는 필드의 수를 가져옴  
+
+```
+127.0.0.1:6379> HMSET zac name "zaccoding" hobby "coding" age 19 score 0.95
+OK
+127.0.0.1:6379> HLEN zac
+(integer) 4
+```  
+
+> HMGET key field1 [field2]  
+=> hash fiels의 값을 가져옴  
+
+```  
+127.0.0.1:6379> HMSET zac name "zaccoding" hobby "coding" age 19 score 0.95
+OK
+127.0.0.1:6379> HMGET zac name hobby age
+1) "zaccoding"
+2) "coding"
+3) "19"
+```  
+
+> HMSET key field1 value1 [field2 value2 ]  
+=> 다중 hash fiels의 값들 setting  
+
+```
+127.0.0.1:6379> HMSET zac name "zaccoding" hobby "coding"
+OK
+127.0.0.1:6379> HMSET zac name "zacscoding"
+OK
+127.0.0.1:6379> HGETALL zac
+1) "name"
+2) "zacscoding"
+3) "hobby"
+4) "coding"
+127.0.0.1:6379> HMSET zac hobby "code" age 19
+OK
+127.0.0.1:6379> HGETALL zac
+1) "name"
+2) "zacscoding"
+3) "hobby"
+4) "code"
+5) "age"
+6) "19"
+```  
+
+> HSET key field value  
+=> hash fields의 string value를 setting  
+
+```
+127.0.0.1:6379> HMSET zac name "zaccoding" hobby "coding"
+OK
+127.0.0.1:6379> HSET zac hobby "code"
+(integer) 0
+127.0.0.1:6379> HGETALL zac
+1) "name"
+2) "zaccoding"
+3) "hobby"
+4) "code"
+127.0.0.1:6379> HSET zac major "math"
+(integer) 1
+127.0.0.1:6379> HGETALL zac
+1) "name"
+2) "zaccoding"
+3) "hobby"
+4) "code"
+5) "major"
+6) "math"
+```  
+
+> HSETNX key field value  
+=> hash의 field가 존재하지 않을 때에만 setting  
+
+```
+127.0.0.1:6379> HMSET zac name "zaccoding"
+OK
+127.0.0.1:6379> HSETNX zac name "zacscoding"
+(integer) 0
+127.0.0.1:6379> HSETNX zac hobby "coding"
+(integer) 1
+127.0.0.1:6379> HGETALL zac
+1) "name"
+2) "zaccoding"
+3) "hobby"
+4) "coding"
+```  
+
+> HVALS key  
+=> hash에 존재하는 모든 값을 가져옴  
+
+```
+127.0.0.1:6379> HMSET zac name "zaccoding" hobby "coding" age 19
+OK
+127.0.0.1:6379> HVALS zac
+1) "zaccoding"
+2) "coding"
+3) "19"
+```  
+
+[Spring-Data-Redis test  code](https://github.com/zacscoding/spring-boot-example/blob/master/springboot-redis-demo/src/test/java/org/zaccoding/document/HashesTest.java)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

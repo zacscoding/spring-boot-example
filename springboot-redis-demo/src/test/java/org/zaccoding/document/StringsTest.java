@@ -24,6 +24,7 @@ public class StringsTest extends AbstractTestRunner {
 
     @Test
     public void setAndGet() {
+        System.out.println(redisTemplate.getConnectionFactory().getConnection());
     }
 
 
