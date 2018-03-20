@@ -4,6 +4,7 @@
 !gradle/wrapper/gradle-wrapper.jar
 # Ignore Gradle GUI config
 gradle-app.setting
+out/
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
