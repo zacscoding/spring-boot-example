@@ -35,11 +35,13 @@ configurations {
 dependencies {
     // compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-aop')
     runtime('org.springframework.boot:spring-boot-devtools')
     compileOnly('org.projectlombok:lombok')
     // for jsp
     compile('javax.servlet:jstl')
     compile('org.apache.tomcat.embed:tomcat-embed-jasper')
+
     // comment for intellij
     // providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
     testCompile('org.springframework.boot:spring-boot-starter-test')
