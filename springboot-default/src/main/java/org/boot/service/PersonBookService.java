@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.boot.configuration.aop.annotation.PostFilter;
+import org.boot.configuration.aop.enums.EntityType;
 import org.boot.entity.Book;
 import org.boot.entity.Person;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PersonBookService {
 
-    @PostFilter
+    @PostFilter(entityType = EntityType.PERSON)
     public List<Person> findPersons() {
         int size = 5;
         List<Person> persons = new ArrayList<>(size);
@@ -28,7 +29,7 @@ public class PersonBookService {
         return persons;
     }
 
-    @PostFilter
+    @PostFilter(entityType = EntityType.BOOk)
     public List<Book> findBooks() {
         int size = 5;
         List<Book> books = new ArrayList<>(size);
@@ -39,17 +40,17 @@ public class PersonBookService {
         return books;
     }
 
-    @PostFilter
+    @PostFilter(entityType = EntityType.PERSON)
     public Person getPerson(Person person) {
         return person;
     }
 
-    @PostFilter
+    @PostFilter(entityType = EntityType.BOOk)
     public Book getBook(Book book) {
         return book;
     }
 
-    @PostFilter
+    @PostFilter(entityType = EntityType.PERSON, mapsKey = "DATA")
     public Map<String, Object> getPersonMap() {
         Map<String, Object> ret = new HashMap<>();
 
@@ -62,7 +63,7 @@ public class PersonBookService {
         return ret;
     }
 
-    @PostFilter
+    @PostFilter(entityType = EntityType.BOOk, mapsKey = "DATA")
     public Map<String, Object> getBookMap() {
         Map<String, Object> ret = new HashMap<>();
 
@@ -75,6 +76,4 @@ public class PersonBookService {
         ret.put("DATA", books);
         return ret;
     }
-
-
 }
