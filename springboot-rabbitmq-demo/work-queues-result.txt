@@ -1,0 +1,64 @@
+2018-08-05 23:45:06.894  INFO 37268 --- [pool-3-thread-1] demo.workqueues.WorkQueuesSender         :
+// ==================================================
+[[ WorkQueues Sender ]]Thread : pool-3-thread-1(37)
+Send message : DefaultMessage(index=0, payload=Message-0)
+===================================================== //
+
+2018-08-05 23:45:06.910  INFO 37268 --- [cTaskExecutor-1] demo.workqueues.WorkQueuesReceiver       :
+// ==================================================
+[[ Receiver -1 ]]
+Thread : SimpleAsyncTaskExecutor-1(29)
+Receive message : DefaultMessage(index=0, payload=Message-0)
+===================================================== //
+
+2018-08-05 23:45:10.903  INFO 37268 --- [pool-3-thread-1] demo.workqueues.WorkQueuesSender         :
+// ==================================================
+[[ WorkQueues Sender ]]Thread : pool-3-thread-1(37)
+Send message : DefaultMessage(index=1, payload=Message-1)
+===================================================== //
+
+2018-08-05 23:45:10.906  INFO 37268 --- [cTaskExecutor-1] demo.workqueues.WorkQueuesReceiver       :
+// ==================================================
+[[ Receiver -2 ]]
+Thread : SimpleAsyncTaskExecutor-1(35)
+Receive message : DefaultMessage(index=1, payload=Message-1)
+===================================================== //
+
+2018-08-05 23:45:14.904  INFO 37268 --- [pool-3-thread-1] demo.workqueues.WorkQueuesSender         :
+// ==================================================
+[[ WorkQueues Sender ]]Thread : pool-3-thread-1(37)
+Send message : DefaultMessage(index=2, payload=Message-2)
+===================================================== //
+
+2018-08-05 23:45:14.909  INFO 37268 --- [cTaskExecutor-1] demo.workqueues.WorkQueuesReceiver       :
+// ==================================================
+[[ Receiver -1 ]]
+Thread : SimpleAsyncTaskExecutor-1(29)
+Receive message : DefaultMessage(index=2, payload=Message-2)
+===================================================== //
+
+2018-08-05 23:45:18.908  INFO 37268 --- [pool-3-thread-1] demo.workqueues.WorkQueuesSender         :
+// ==================================================
+[[ WorkQueues Sender ]]Thread : pool-3-thread-1(37)
+Send message : DefaultMessage(index=3, payload=Message-3)
+===================================================== //
+
+2018-08-05 23:45:18.926  INFO 37268 --- [cTaskExecutor-1] demo.workqueues.WorkQueuesReceiver       :
+// ==================================================
+[[ Receiver -2 ]]
+Thread : SimpleAsyncTaskExecutor-1(35)
+Receive message : DefaultMessage(index=3, payload=Message-3)
+===================================================== //
+
+2018-08-05 23:45:22.909  INFO 37268 --- [pool-3-thread-1] demo.workqueues.WorkQueuesSender         :
+// ==================================================
+[[ WorkQueues Sender ]]Thread : pool-3-thread-1(37)
+Send message : DefaultMessage(index=4, payload=Message-4)
+===================================================== //
+
+2018-08-05 23:45:22.911  INFO 37268 --- [cTaskExecutor-1] demo.workqueues.WorkQueuesReceiver       :
+// ==================================================
+[[ Receiver -1 ]]
+Thread : SimpleAsyncTaskExecutor-1(29)
+Receive message : DefaultMessage(index=4, payload=Message-4)
+===================================================== //

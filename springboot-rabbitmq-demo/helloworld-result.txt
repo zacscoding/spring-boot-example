@@ -1,0 +1,25 @@
+2018-08-05 23:44:11.602  INFO 30164 --- [pool-3-thread-1] demo.helloworld.HellowWorldSender        :
+// ==================================================
+[[ Hello World Sender ]]Thread : pool-3-thread-1(33)
+Send message : DefaultMessage(index=0, payload=Message-0)
+===================================================== //
+
+2018-08-05 23:44:11.647  INFO 30164 --- [cTaskExecutor-1] demo.helloworld.HelloWorldReceiver       :
+// ==================================================
+[[ Receiver ]]
+Thread : SimpleAsyncTaskExecutor-1(29)
+Receive message : DefaultMessage(index=0, payload=Message-0)
+===================================================== //
+
+2018-08-05 23:44:14.628  INFO 30164 --- [pool-3-thread-1] demo.helloworld.HellowWorldSender        :
+// ==================================================
+[[ Hello World Sender ]]Thread : pool-3-thread-1(33)
+Send message : DefaultMessage(index=1, payload=Message-1)
+===================================================== //
+
+2018-08-05 23:44:14.630  INFO 30164 --- [cTaskExecutor-1] demo.helloworld.HelloWorldReceiver       :
+// ==================================================
+[[ Receiver ]]
+Thread : SimpleAsyncTaskExecutor-1(29)
+Receive message : DefaultMessage(index=1, payload=Message-1)
+===================================================== //

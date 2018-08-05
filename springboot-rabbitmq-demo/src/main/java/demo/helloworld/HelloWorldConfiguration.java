@@ -26,20 +26,30 @@ public class HelloWorldConfiguration {
         return new Queue(queueName, false);
     }
 
-//    @Bean
-//    public SimpleMessageListenerContainer container(ConnectionFactory connectionFactory, MessageListenerAdapter listenerAdapter) {
-//        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-//
-//        container.setConnectionFactory(connectionFactory);
-//        container.setQueueNames(queueName);
-//        container.setMessageListener(listenerAdapter);
-//
-//        return container;
-//    }
-//
-//    @Bean
-//    public MessageListenerAdapter listenerAdapter(HelloWorldReceiver receiver) {
-//        return new MessageListenerAdapter(receiver, "receiveMessage");
-//    }
+    @Bean
+    public HelloWorldReceiver receiver() {
+        return new HelloWorldReceiver();
+    }
+
+    @Bean
+    public HellowWorldSender sender() {
+        return new HellowWorldSender();
+    }
+
+    //    @Bean
+    //    public SimpleMessageListenerContainer container(ConnectionFactory connectionFactory, MessageListenerAdapter listenerAdapter) {
+    //        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
+    //
+    //        container.setConnectionFactory(connectionFactory);
+    //        container.setQueueNames(queueName);
+    //        container.setMessageListener(listenerAdapter);
+    //
+    //        return container;
+    //    }
+    //
+    //    @Bean
+    //    public MessageListenerAdapter listenerAdapter(HelloWorldReceiver receiver) {
+    //        return new MessageListenerAdapter(receiver, "receiveMessage");
+    //    }
 
 }
