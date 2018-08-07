@@ -23,7 +23,7 @@ public class HellowWorldSender {
     private RabbitTemplate rabbitTemplate;
     @Autowired
     private Queue queue;
-    private long index = 0L;
+    private int index = 0;
 
     @Scheduled(fixedDelay = 3000L, initialDelay = 500)
     public void sendTask() {
@@ -36,6 +36,6 @@ public class HellowWorldSender {
         log.info(sb.toString());
 
         rabbitTemplate.convertAndSend(queue.getName(), sendMessage);
-        index += 1L;
+        index++;
     }
 }

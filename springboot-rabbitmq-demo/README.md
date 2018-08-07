@@ -114,8 +114,12 @@ Deleting user "test2" ...
 http://localhost:15672
 ```
 
+---
 
----  
+## Tutorials
+
+TODO :: WILL ADD EXPLAIN
+  
 
 ## refs  
 

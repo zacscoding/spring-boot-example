@@ -19,6 +19,6 @@ import lombok.ToString;
 @ToString
 public class DefaultMessage implements Serializable {
 
-    private Long index;
+    private Integer index;
     private String payload;
 }

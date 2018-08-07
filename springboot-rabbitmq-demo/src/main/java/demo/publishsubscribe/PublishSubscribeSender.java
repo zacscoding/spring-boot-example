@@ -21,7 +21,7 @@ public class PublishSubscribeSender {
     @Autowired
     private FanoutExchange fanoutExchange;
 
-    private long index = 0L;
+    private int index = 0;
 
     @Scheduled(fixedDelay = 4000L, initialDelay = 500)
     public void sendTask() {
@@ -35,7 +35,6 @@ public class PublishSubscribeSender {
         log.info(sb.toString());
 
         rabbitTemplate.convertAndSend(fanoutExchange.getName(), "", sendMessage);
-        index += 1L;
+        index++;
     }
-
 }

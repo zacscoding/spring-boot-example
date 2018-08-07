@@ -1,0 +1,90 @@
+2018-08-07 09:07:41.868  INFO 16876 --- [pool-3-thread-1] demo.topics.TopicsSender                 :
+// ==================================================
+[[ Topics Sender ]]Thread : pool-3-thread-1(37)
+Key : quick.orange.rabbit
+Send message : DefaultMessage(index=0, payload=Message-0 >>>> key : quick.orange.rabbit)
+===================================================== //
+
+2018-08-07 09:07:41.903  INFO 16876 --- [cTaskExecutor-1] demo.topics.TopicsReceiver1              :
+// ==================================================
+[[ Topics Receiver1 ]]
+Thread : SimpleAsyncTaskExecutor-1(31)
+Receive message : DefaultMessage(index=0, payload=Message-0 >>>> key : quick.orange.rabbit)
+===================================================== //
+
+2018-08-07 09:07:41.903  INFO 16876 --- [cTaskExecutor-1] demo.topics.TopicsReceiver2              :
+// ==================================================
+[[ Topics Receiver2 ]]
+Thread : SimpleAsyncTaskExecutor-1(35)
+Receive message : DefaultMessage(index=0, payload=Message-0 >>>> key : quick.orange.rabbit)
+===================================================== //
+
+2018-08-07 09:07:44.891  INFO 16876 --- [pool-3-thread-1] demo.topics.TopicsSender                 :
+// ==================================================
+[[ Topics Sender ]]Thread : pool-3-thread-1(37)
+Key : lazy.orange.elephant
+Send message : DefaultMessage(index=1, payload=Message-1 >>>> key : lazy.orange.elephant)
+===================================================== //
+
+2018-08-07 09:07:44.896  INFO 16876 --- [cTaskExecutor-1] demo.topics.TopicsReceiver1              :
+// ==================================================
+[[ Topics Receiver1 ]]
+Thread : SimpleAsyncTaskExecutor-1(31)
+Receive message : DefaultMessage(index=1, payload=Message-1 >>>> key : lazy.orange.elephant)
+===================================================== //
+
+2018-08-07 09:07:44.896  INFO 16876 --- [cTaskExecutor-1] demo.topics.TopicsReceiver2              :
+// ==================================================
+[[ Topics Receiver2 ]]
+Thread : SimpleAsyncTaskExecutor-1(35)
+Receive message : DefaultMessage(index=1, payload=Message-1 >>>> key : lazy.orange.elephant)
+===================================================== //
+
+2018-08-07 09:07:47.894  INFO 16876 --- [pool-3-thread-1] demo.topics.TopicsSender                 :
+// ==================================================
+[[ Topics Sender ]]Thread : pool-3-thread-1(37)
+Key : quick.orange.fox
+Send message : DefaultMessage(index=2, payload=Message-2 >>>> key : quick.orange.fox)
+===================================================== //
+
+2018-08-07 09:07:47.896  INFO 16876 --- [cTaskExecutor-1] demo.topics.TopicsReceiver1              :
+// ==================================================
+[[ Topics Receiver1 ]]
+Thread : SimpleAsyncTaskExecutor-1(31)
+Receive message : DefaultMessage(index=2, payload=Message-2 >>>> key : quick.orange.fox)
+===================================================== //
+
+2018-08-07 09:07:50.896  INFO 16876 --- [pool-3-thread-1] demo.topics.TopicsSender                 :
+// ==================================================
+[[ Topics Sender ]]Thread : pool-3-thread-1(37)
+Key : lazy.brown.fox
+Send message : DefaultMessage(index=3, payload=Message-3 >>>> key : lazy.brown.fox)
+===================================================== //
+
+2018-08-07 09:07:50.899  INFO 16876 --- [cTaskExecutor-1] demo.topics.TopicsReceiver2              :
+// ==================================================
+[[ Topics Receiver2 ]]
+Thread : SimpleAsyncTaskExecutor-1(35)
+Receive message : DefaultMessage(index=3, payload=Message-3 >>>> key : lazy.brown.fox)
+===================================================== //
+
+2018-08-07 09:07:53.898  INFO 16876 --- [pool-3-thread-1] demo.topics.TopicsSender                 :
+// ==================================================
+[[ Topics Sender ]]Thread : pool-3-thread-1(37)
+Key : lazy.pink.rabbit
+Send message : DefaultMessage(index=4, payload=Message-4 >>>> key : lazy.pink.rabbit)
+===================================================== //
+
+2018-08-07 09:07:53.902  INFO 16876 --- [cTaskExecutor-1] demo.topics.TopicsReceiver2              :
+// ==================================================
+[[ Topics Receiver2 ]]
+Thread : SimpleAsyncTaskExecutor-1(35)
+Receive message : DefaultMessage(index=4, payload=Message-4 >>>> key : lazy.pink.rabbit)
+===================================================== //
+
+2018-08-07 09:07:56.901  INFO 16876 --- [pool-3-thread-1] demo.topics.TopicsSender                 :
+// ==================================================
+[[ Topics Sender ]]Thread : pool-3-thread-1(37)
+Key : quick.brown.fox
+Send message : DefaultMessage(index=5, payload=Message-5 >>>> key : quick.brown.fox)
+===================================================== //
