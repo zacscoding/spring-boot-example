@@ -1,4 +1,7 @@
 var stompClient = null;
+var sendMessageDestination;
+var subscribeDestination;
+var dynamic = false;
 
 function setConnected(connected) {
   $("#connect").prop("disabled", connected);
@@ -13,12 +16,22 @@ function setConnected(connected) {
 }
 
 function connect() {
+  dynamic = $('#dynamic').prop('checked');
+  if (!dynamic) {
+    sendMessageDestination = '/app/static/hello';
+    subscribeDestination = '/topic/greetings';
+  } else {
+    var name = 'hivava';
+    sendMessageDestination = '/app/dynamic/hello2/' + name;
+    subscribeDestination = '/topic/dynamic/' + name;
+  }
+
   var socket = new SockJS('/gs-guide-websocket');
   stompClient = Stomp.over(socket);
   stompClient.connect({}, function (frame) {
     setConnected(true);
     console.log('Connected: ' + frame);
-    stompClient.subscribe('/topic/greetings', function (greeting) {
+    stompClient.subscribe(subscribeDestination, function (greeting) {
       showGreeting(JSON.parse(greeting.body).content);
     });
   });
@@ -33,7 +46,7 @@ function disconnect() {
 }
 
 function sendName() {
-  stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
+  stompClient.send(sendMessageDestination, {}, JSON.stringify({'name': $("#name").val()}));
 }
 
 function showGreeting(message) {
