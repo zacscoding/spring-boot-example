@@ -1,6 +1,5 @@
 package demo.stomp;
 
-import ch.qos.logback.classic.Logger;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +24,7 @@ public class GreetingController {
 
     @Autowired
     private SimpMessagingTemplate template;
+
 
     @MessageMapping("/static/hello")   // if a message is sent to destination "/hello", then the greeting() method is called.
     @SendTo("/topic/greetings") // The return value is broadcast to all subscribers to "/topic/greetings"

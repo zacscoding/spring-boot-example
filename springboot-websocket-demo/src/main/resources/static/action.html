@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Action with Websocket</title>
+  <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/main.css" rel="stylesheet">
+  <script src="/webjars/jquery/jquery.min.js"></script>
+  <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+  <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+  <script src="/action.js"></script>
+</head>
+<body>
+<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+  enabled. Please enable
+  Javascript and reload this page!</h2></noscript>
+<div id="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-2">
+        <label for="moduleName">Module name </label>
+      </div>
+      <div class="col-md-3">
+        <input type="text" id="moduleName" class="form-control" placeholder="Module name">
+      </div>
+      <div class="col-md-2">
+        <label for="actionType">Action type</label>
+      </div>
+      <div class="col-md-3">
+        <input type="text" id="actionType" class="form-control" placeholder="Action type">
+      </div>
+      <div class="col-md-2">
+        <button id="btnAction" class="btn btn-default">Request</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table id="conversation" class="table table-striped">
+        <thead>
+        <tr>
+          <th>Action result</th>
+        </tr>
+        </thead>
+        <tbody id="action-results">
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

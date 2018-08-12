@@ -25,7 +25,7 @@ public class StompWebsocketConfiguration implements WebSocketMessageBrokerConfig
     public void configureMessageBroker(MessageBrokerRegistry config) {
         // to enable a simple memory-based message broker to carry the
         // greeting messages back to the client on destinations prefixed with "/topic".
-        config.enableSimpleBroker("/topic");
+        config.enableSimpleBroker("/topic", "/result/action");
         config.setApplicationDestinationPrefixes("/app");
     }
 
