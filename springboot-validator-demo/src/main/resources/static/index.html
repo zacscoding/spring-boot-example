@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Validation Server</title>
+  <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+<div id="main-content" class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h1> Join </h1>
+      <form>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name">
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">Phone</label>
+          <input type="text" class="form-control" id="phoneNumber">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" id="email">
+        </div>
+        <div class="form-group">
+          <label for="birth">Birth day</label>
+          <input type="text" class="form-control" id="birth" placeholder="yyMMdd">
+        </div>
+        <button type="button" class="btn btn-primary" id="btnSave">Sign up</button>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <h1> Members </h1>
+      <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>BirthDay</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
+
+<script id="table-template" type="text/x-handlebars-template">
+  {{#each members}}
+  <tr>
+    <td>{{id}}</td>
+    <td>{{name}}</td>
+    <td>{{phoneNumber}}</td>
+    <td>{{email}}</td>
+    <td>{{birth}}</td>
+  </tr>
+  {{/each}}
+</script>
+
+<script type="application/javascript">
+  var $tbody = $('#tbody');
+
+  var findAll = function () {
+    $.ajax({
+      url    : '/members',
+      method : 'GET',
+      success: function (response) {
+        var source = $("#table-template").html();
+        var template = Handlebars.compile(source);
+        var html = template({members: response});
+        $tbody.html('');
+        $tbody.html(html);
+      }
+    });
+  };
+
+  var markingErrorField = function (response) {
+    const errorFields = response.responseJSON.errors;
+
+    if (!errorFields) {
+      alert(response.response.message);
+      return;
+    }
+
+    var $field, error;
+    for (var i = 0, length = errorFields.length; i < length; i++) {
+      error = errorFields[i];
+      $field = $('#' + error['field']);
+
+      if ($field && $field.length > 0) {
+        $field.siblings('.error-message').remove();
+        $field.after('<span class="error-message text-muted taxt-small text-danger">' + error.defaultMessage + '</span>');
+      }
+    }
+  };
+
+  $('#btnSave').click(function () {
+    var member = {
+      name       : $('#name').val(),
+      phoneNumber: $('#phoneNumber').val(),
+      email      : $('#email').val(),
+      birth      : $('#birth').val()
+    };
+    $.ajax({
+      url        : '/member',
+      method     : 'POST',
+      data       : JSON.stringify(member),
+      contentType: "application/json; charset=utf-8",
+      success    : function (response) {
+        findAll();
+      },
+      error      : function (response) {
+        markingErrorField(response);
+      }
+    });
+  });
+  findAll();
+</script>
+</body>
+</html>
