@@ -16,6 +16,10 @@ import org.springframework.context.annotation.Lazy;
 @Configuration
 public class LazyBeanConfiguration2 {
 
+    public LazyBeanConfiguration2() {
+        log.info("## LazyBeanConfiguration2() is called");
+    }
+
     @Bean
     public LazyBeanService3 lazyBeanService3() {
         log.info("## lazyBeanService3() is called in LazyBeanConfiguration");
