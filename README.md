@@ -24,5 +24,7 @@
 ; default + custom validator + handle validation result (including UI)  
 - <a href="https://github.com/zacscoding/spring-boot-example/tree/master/springboot-websocket-demo">spring boot websocket demo</a>  
 ; spring boot stomp websocket demo
-- <a href="https://github.com/zacscoding/spring-boot-example/tree/master/springboot-websocket-demo">spring boot kafka demo</a>  
+- <a href="https://github.com/zacscoding/spring-boot-example/tree/master/springboot-kafka-demo">spring boot kafka demo</a>  
 ; default producer & consumer, request-reply demo
+- <a href="https://github.com/zacscoding/spring-boot-example/tree/master/springboot-okhttp-demo">spring boot mock controller + okhttp demo</a>  
+; okhttp client + mock controller demo
