@@ -19,5 +19,6 @@ import lombok.ToString;
 public class JsonRpcRequest {
 
     private String id;
+    private long elapsed;
     private String requestBody;
 }
