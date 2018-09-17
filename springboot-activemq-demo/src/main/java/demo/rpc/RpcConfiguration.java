@@ -34,8 +34,9 @@ public class RpcConfiguration {
         configurer.configure(factory, connectionFactory);
         // You could still override some of Boot's default if necessary.
         factory.setErrorHandler(errorHandler());
-        // factory.setConcurrency("1000");
-        factory.setTaskExecutor(Executors.newFixedThreadPool(1000));
+        // factory.setConcurrency("4-10");
+        factory.setConcurrency("10");
+        factory.setTaskExecutor(Executors.newFixedThreadPool(500));
         return factory;
     }
 

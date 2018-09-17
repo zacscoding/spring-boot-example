@@ -1,9 +1,10 @@
 package demo.rpc;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jms.core.JmsTemplate;
@@ -27,8 +28,6 @@ public class RpcClient {
     private RpcClient(JmsTemplate jmsTemplate, MessageConverter messageConverter) {
         this.jmsTemplate = jmsTemplate;
         this.messageConverter = messageConverter;
-
-        new ActiveMQQueue();
     }
 
     public JsonRpcResponse processRequest(JsonRpcRequest request) {

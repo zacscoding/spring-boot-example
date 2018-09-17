@@ -46,16 +46,15 @@ public class RpcRequestTest {
 
     // NOT WORKING!!!
     /*
-    >> Final success :: 10 (294 MS)
-    >> Final success :: 100 (1671 MS)
-    >> Final success :: 1000 (15722 MS)
+    >> Final success :: 10 (240 MS)
+    >> Final success :: 100 (896 MS)
+    >> Final success :: 1000 (10807 MS)
      */
     @Test
     public void concurrent() throws InterruptedException {
-        long start = System.currentTimeMillis();
         final int threadCount = 1000;
         Thread[] threads = new Thread[threadCount];
-
+        long start = System.currentTimeMillis();
         for (int i = 0; i < threadCount; i++) {
             threads[i] = new TestThread(client, String.valueOf(i));
             threads[i].start();

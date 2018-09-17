@@ -14,7 +14,9 @@ public class RpcServer {
 
     @RabbitListener(queues = "rpc.requests")
     public int fibonacci(int n) {
-        int result = (n < 0) ? -1 : fib(n);
+        log.info("RabbitListener : {}", Thread.currentThread().getName());
+        // int result = (n < 0) ? -1 : fib(n);
+        int result = n;
 
         StringBuilder sb = new StringBuilder("\n// ==================================================\n")
             .append("[[ RPC SERVER ]]\n")

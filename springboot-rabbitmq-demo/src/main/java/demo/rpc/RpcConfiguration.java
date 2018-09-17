@@ -42,6 +42,7 @@ public class RpcConfiguration {
     // client
     @Bean
     public RpcClient client() {
-        return new RpcClient();
+        // return new SingleRpcClient();
+        return new MultipleRpcClient();
     }
 }

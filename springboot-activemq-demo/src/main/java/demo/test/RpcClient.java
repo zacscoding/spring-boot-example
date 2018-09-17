@@ -1,4 +1,4 @@
-package demo.rpc;
+package demo.test;
 
 /**
  * @author zacconding
@@ -6,4 +6,5 @@ package demo.rpc;
  * @GitHub : https://github.com/zacscoding
  */
 public interface RpcClient {
+
 }
