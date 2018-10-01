@@ -1,8 +1,6 @@
 package demo.rpc;
 
 import java.util.Random;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.DirectExchange;
@@ -10,7 +8,6 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 /**
  * @author zacconding
@@ -33,6 +30,8 @@ public class MultipleRpcClient implements RpcClient {
 
         final int threadCount = new Random().nextInt(500) + 1;
         RequestTask[] tasks = new RequestTask[threadCount];
+
+        long start = System.currentTimeMillis();
         for (int i = 0; i < threadCount; i++) {
             tasks[i] = new RequestTask(rabbitTemplate, exchange, req.incrementAndGet());
             tasks[i].setDaemon(true);
@@ -42,6 +41,7 @@ public class MultipleRpcClient implements RpcClient {
         for (int i = 0; i < threadCount; i++) {
             tasks[i].join();
         }
+        long elapsed = System.currentTimeMillis() - start;
 
         int fail = 0;
         for (int i = 0; i < threadCount; i++) {
@@ -49,7 +49,9 @@ public class MultipleRpcClient implements RpcClient {
                 fail++;
             }
         }
-        log.info("Request : {} | success : {} | fail : {}", threadCount, (threadCount - fail), fail);
+        double average = (double)elapsed / tasks.length;
+        log.info("Request : {} | success : {} | fail : {} ==> elapsed : {} ms | average : {} ms"
+            , threadCount, (threadCount - fail), fail, elapsed, average);
     }
 
     public static class RequestTask extends Thread {
@@ -67,8 +69,8 @@ public class MultipleRpcClient implements RpcClient {
 
         public void run() {
             Integer response = (Integer) rabbitTemplate.convertSendAndReceive(exchange.getName(), "rpc", requestId);
-            if (response == null || requestId != response.intValue()) {
-                log.warn("## Find different value.. req : " + requestId + " , res : " + response);
+            if (response == null || requestId * 2 != response.intValue()) {
+                // log.warn("## Find different value.. req : " + requestId + " , res : " + response);
             } else {
                 success = true;
             }

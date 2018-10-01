@@ -1,11 +1,16 @@
 package demo.rpc2;
 
+import java.util.Arrays;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.jms.ConnectionFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.command.ActiveMQQueue;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.env.Environment;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;

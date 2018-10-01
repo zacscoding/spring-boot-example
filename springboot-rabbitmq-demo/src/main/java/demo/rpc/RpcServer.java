@@ -1,5 +1,6 @@
 package demo.rpc;
 
+import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -12,11 +13,11 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 @Slf4j
 public class RpcServer {
 
-    @RabbitListener(queues = "rpc.requests")
-    public int fibonacci(int n) {
-        log.info("RabbitListener : {}", Thread.currentThread().getName());
+    // @RabbitListener(queues = "rpc.requests")
+    public int multiply(int n) {
+        // log.info("RabbitListener : {}", Thread.currentThread().getName());
         // int result = (n < 0) ? -1 : fib(n);
-        int result = n;
+        int result = n * 2;
 
         StringBuilder sb = new StringBuilder("\n// ==================================================\n")
             .append("[[ RPC SERVER ]]\n")
@@ -25,12 +26,13 @@ public class RpcServer {
             .append("==> Result : ").append(result).append("\n")
             .append("===================================================== //\n");
 
-        log.info(sb.toString());
+        // log.info(sb.toString());
+        try {
+            TimeUnit.SECONDS.sleep(1L);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         return result;
-    }
-
-    private int fib(int n) {
-        return (n == 0) ? 0 : n == 1 ? 1 : (fib(n - 1) + fib(n - 2));
     }
 }

@@ -1,21 +1,19 @@
 package demo.rpc;
 
 import lombok.extern.slf4j.Slf4j;
-import org.omg.CORBA.Environment;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 /**
  * @author zacconding
  * @Date 2018-08-08
  * @GitHub : https://github.com/zacscoding
  */
-@Profile("rpc")
 @Slf4j
+@Profile("rpc")
 public class SingleRpcClient implements RpcClient {
 
     @Autowired
@@ -31,6 +29,11 @@ public class SingleRpcClient implements RpcClient {
         log.info(">> RpcClient execute..");
         int request = start++;
         Integer response = (Integer) rabbitTemplate.convertSendAndReceive(exchange.getName(), "rpc", request);
+
+        if (response == null || request * 2 != response.intValue()) {
+            log.info("Find invalid response.. request : {} ==> Response : {}", request, response);
+            throw new RuntimeException();
+        }
 
         StringBuilder sb = new StringBuilder("\n// ==================================================\n")
             .append("[[ RPC CLIENT ]]")

@@ -4,6 +4,7 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -14,8 +15,9 @@ import org.springframework.stereotype.Component;
  * @GitHub : https://github.com/zacscoding
  */
 @Profile("rpc2")
+@ConditionalOnProperty(name = "rpc2.request.schedule", havingValue = "true")
 @Slf4j
-//@Component
+@Component
 public class Rpc2ScheduleRequest {
 
     private AtomicInteger failure = new AtomicInteger(0);
