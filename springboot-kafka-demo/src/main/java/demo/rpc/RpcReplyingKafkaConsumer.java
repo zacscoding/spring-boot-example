@@ -1,5 +1,6 @@
 package demo.rpc;
 
+import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -19,6 +20,12 @@ public class RpcReplyingKafkaConsumer {
     @KafkaListener(topics = "${rpc.kafka.topic.request-topic}")
     @SendTo
     public RpcResponse listen(RpcRequest request) {
+        try {
+            TimeUnit.SECONDS.sleep(1L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         RpcResponse response = new RpcResponse(request.getNum1() + request.getNum2());
         // log.info("[Consumer] consume rpc request : {} - res : {}", request, response);
         return response;

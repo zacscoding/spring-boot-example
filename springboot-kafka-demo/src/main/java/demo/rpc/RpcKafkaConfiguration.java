@@ -66,7 +66,6 @@ public class RpcKafkaConfiguration {
         return new DefaultKafkaConsumerFactory<>(consumerConfigs(), new StringDeserializer(), new JsonDeserializer<>(RpcResponse.class));
     }
 
-
     @Bean
     public ProducerFactory<String, RpcRequest> rpcRequestProducerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
@@ -94,6 +93,7 @@ public class RpcKafkaConfiguration {
         ConcurrentKafkaListenerContainerFactory<String, RpcResponse> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         // NOTE - set up of reply template
+        factory.setConcurrency(Integer.valueOf(100));
         factory.setReplyTemplate(kafkaTemplate());
         return factory;
     }

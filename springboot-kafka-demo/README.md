@@ -26,6 +26,12 @@ __consumer_offsets
 test
 ```  
 
+> Remove topic  
+
+```aidl
+app@ubuntu:~/kafka/kafka_2.12-2.0.0$ ./bin/kafka-topics.sh --zookeeper 127.0.0.1:2181 --delete --topic request-topic
+```
+
 > Start a consumer  
 
 ```
