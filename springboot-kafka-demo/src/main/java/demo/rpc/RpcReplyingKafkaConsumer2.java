@@ -54,8 +54,9 @@ public class RpcReplyingKafkaConsumer2 implements MessageListener<String, RpcReq
 
     @Override
     public void onMessage(ConsumerRecord<String, RpcRequest> record) {
+        System.out.println("## Check out thread at server " + Thread.currentThread().getName() + "-" + Thread.currentThread().getId());
         final Runnable runnable = () -> {
-            System.out.println("## Check thread : " + Thread.currentThread().getName() + "-" + Thread.currentThread().getId());
+            System.out.println("## Check in thread at server " + Thread.currentThread().getName() + "-" + Thread.currentThread().getId());
             RpcRequest request = record.value();
             RpcResponse response = new RpcResponse(request.getNum1() + request.getNum2());
 
