@@ -21,8 +21,9 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "tbl_webboards")
 @EqualsAndHashCode(of = "bno")
-@ToString(exclude="replies")
+@ToString(exclude = "replies")
 public class Board {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bno;

@@ -27,6 +27,7 @@ import java.util.stream.IntStream;
 @Log
 @Commit
 public class ReplyRepositoryTest {
+
     @Autowired
     private WebBoardRepository boardRepo;
     @Autowired
@@ -38,14 +39,14 @@ public class ReplyRepositoryTest {
 
         Arrays.stream(bnos).forEach(num -> {
             // create board
-            WebBoard board=  new WebBoard();
+            WebBoard board = new WebBoard();
             board.setBno(num);
 
             // create replies
-            IntStream.range(0,10).forEach(i -> {
+            IntStream.range(0, 10).forEach(i -> {
                 WebReply reply = new WebReply();
                 reply.setReplyText("REPLY ..." + i);
-                reply.setReplyer("replyer"+i);
+                reply.setReplyer("replyer" + i);
                 reply.setBoard(board);
 
                 replyRepo.save(reply);
@@ -54,18 +55,17 @@ public class ReplyRepositoryTest {
     }
 
     private Long[] getTopBno(int size) {
-        if(size < 1) {
+        if (size < 1) {
             return null;
         }
 
         Long[] bnos = new Long[size];
-        Page<WebBoard> results = boardRepo.findAll(boardRepo.makePredicate(null,null),
-                PageRequest.of(0,size, Sort.Direction.DESC, "bno"));
+        Page<WebBoard> results = boardRepo.findAll(boardRepo.makePredicate(null, null), PageRequest.of(0, size, Sort.Direction.DESC, "bno"));
 
         int idx = 0;
 
         for (WebBoard board : results.getContent()) {
-            if(idx > bnos.length) {
+            if (idx > bnos.length) {
                 break;
             }
             bnos[idx++] = board.getBno();
@@ -73,8 +73,6 @@ public class ReplyRepositoryTest {
 
         return bnos;
     }
-
-
 
 
 }

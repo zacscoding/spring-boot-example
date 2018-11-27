@@ -17,6 +17,7 @@ import static org.junit.Assert.assertTrue;
  * @GitHub : https://github.com/zacscoding
  */
 public class SetsTest extends AbstractTestRunner {
+
     @Resource(name = "redisTemplate")
     private SetOperations<String, String> setOperations;
 

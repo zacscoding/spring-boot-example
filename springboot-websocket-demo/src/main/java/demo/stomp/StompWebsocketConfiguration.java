@@ -10,6 +10,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 
 /**
  * https://spring.io/guides/gs/messaging-stomp-websocket/
+ *
  * @author zacconding
  * @Date 2018-08-09
  * @GitHub : https://github.com/zacscoding

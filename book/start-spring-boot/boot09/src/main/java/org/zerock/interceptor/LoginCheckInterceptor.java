@@ -13,13 +13,14 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Log
 public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.info("## pre handle");
 
         String dest = request.getParameter("dest");
 
-        if(dest != null) {
+        if (dest != null) {
             log.info("## exist dest : " + dest);
             request.getSession().setAttribute("dest", dest);
         }

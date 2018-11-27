@@ -97,7 +97,8 @@
 
       if ($field && $field.length > 0) {
         $field.siblings('.error-message').remove();
-        $field.after('<span class="error-message text-muted taxt-small text-danger">' + error.defaultMessage + '</span>');
+        $field.after(
+            '<span class="error-message text-muted taxt-small text-danger">' + error.defaultMessage + '</span>');
       }
     }
   };

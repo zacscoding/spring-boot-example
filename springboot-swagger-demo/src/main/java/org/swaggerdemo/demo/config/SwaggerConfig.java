@@ -25,20 +25,15 @@ public class SwaggerConfig {
 
     @Bean
     public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-            .select()
-            // .apis(RequestHandlerSelectors.any())
-            .apis(RequestHandlerSelectors.basePackage("org.swaggerdemo.demo.controller"))
-            // .paths(PathSelectors.any())
-            .paths(PathSelectors.ant("/person/**"))
-            .build();
+        return new Docket(DocumentationType.SWAGGER_2).select()
+                                                      // .apis(RequestHandlerSelectors.any())
+                                                      .apis(RequestHandlerSelectors.basePackage("org.swaggerdemo.demo.controller"))
+                                                      // .paths(PathSelectors.any())
+                                                      .paths(PathSelectors.ant("/person/**")).build();
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-            .title("Spring boot Swagger Demo")
-            .description("This is demo app")
-            .build();
+        return new ApiInfoBuilder().title("Spring boot Swagger Demo").description("This is demo app").build();
     }
 
 }

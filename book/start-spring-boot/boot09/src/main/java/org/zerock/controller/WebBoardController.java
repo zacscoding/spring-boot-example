@@ -29,6 +29,7 @@ import org.zerock.vo.PageVO;
 @RequestMapping("/boards/")
 @Log
 public class WebBoardController {
+
     @Autowired
     private WebBoardRepository webBoardRepository;
     @Autowired
@@ -36,7 +37,7 @@ public class WebBoardController {
 
     @GetMapping("/list")
     public void list(@ModelAttribute("pageVO") PageVO vo, Model model) {
-        Pageable page = vo.makePageable(0,"bno");
+        Pageable page = vo.makePageable(0, "bno");
 
         Page<Object[]> result = customCrudRepository.getCustomPage(vo.getType(), vo.getKeyword(), page);
 
@@ -74,7 +75,7 @@ public class WebBoardController {
         log.info("## register POST : " + vo);
 
         webBoardRepository.save(vo);
-        rttr.addFlashAttribute("msg","success");
+        rttr.addFlashAttribute("msg", "success");
 
         return "redirect:/boards/list";
     }
@@ -88,7 +89,7 @@ public class WebBoardController {
         });
     }
 
-    @Secured(value={"ROLE_BASIC", "ROLE_MANAGER", "ROLE_ADMIN"})
+    @Secured(value = {"ROLE_BASIC", "ROLE_MANAGER", "ROLE_ADMIN"})
     @GetMapping("/modify")
     public void modify(Long bno, @ModelAttribute("pageVO") PageVO vo, Model model) {
         log.info("## modify GET: " + bno);
@@ -97,7 +98,7 @@ public class WebBoardController {
         });
     }
 
-    @Secured(value={"ROLE_BASIC", "ROLE_MANAGER", "ROLE_ADMIN"})
+    @Secured(value = {"ROLE_BASIC", "ROLE_MANAGER", "ROLE_ADMIN"})
     @PostMapping("/modify")
     public String modifyPost(WebBoard board, PageVO vo, RedirectAttributes rttr) {
         log.info("## modify Post : " + board);
@@ -121,7 +122,7 @@ public class WebBoardController {
         return "redirect:/boards/view";
     }
 
-    @Secured(value={"ROLE_BASIC", "ROLE_MANAGER", "ROLE_ADMIN"})
+    @Secured(value = {"ROLE_BASIC", "ROLE_MANAGER", "ROLE_ADMIN"})
     @PostMapping("/delete")
     public String delete(Long bno, PageVO vo, RedirectAttributes rttr) {
         log.info("## delete : " + bno);
@@ -136,7 +137,6 @@ public class WebBoardController {
 
         return "redirect:/boards/list";
     }
-
 
 
 }

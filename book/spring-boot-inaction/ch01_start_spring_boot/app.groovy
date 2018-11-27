@@ -1,7 +1,7 @@
 @RestController
 class HelloController {
-  @RequestMapping("/")
-  def hello() {
-    return "Hello World";
-  }
+    @RequestMapping("/")
+    def hello() {
+        return "Hello World";
+    }
 }

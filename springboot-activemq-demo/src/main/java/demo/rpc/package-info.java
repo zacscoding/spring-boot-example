@@ -1,6 +1,6 @@
 /**
  * TODO ::
- *  - ErrorHandler or Session closed -> handle response message
+ * - ErrorHandler or Session closed -> handle response message
  *
  * @author zacconding
  * @Date 2018-09-13

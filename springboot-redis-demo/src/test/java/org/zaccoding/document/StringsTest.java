@@ -14,6 +14,7 @@ import org.zaccoding.AbstractTestRunner;
  * @GitHub : https://github.com/zacscoding
  */
 public class StringsTest extends AbstractTestRunner {
+
     @Autowired
     StringRedisTemplate redisTemplate;
 
@@ -26,8 +27,6 @@ public class StringsTest extends AbstractTestRunner {
     public void setAndGet() {
         System.out.println(redisTemplate.getConnectionFactory().getConnection());
     }
-
-
 
 
 }

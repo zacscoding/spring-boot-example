@@ -1,4 +1,5 @@
 package org.bootdemo.util;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -51,7 +52,7 @@ public class GsonUtil {
         ps.println(toStringPretty(inst));
     }
 
-    public static String  jsonStringToPretty(String jsonString) {
+    public static String jsonStringToPretty(String jsonString) {
         if (jsonString == null || jsonString.length() == 0) {
             return "{}";
         }

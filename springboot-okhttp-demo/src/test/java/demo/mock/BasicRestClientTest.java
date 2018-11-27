@@ -28,6 +28,6 @@ public class BasicRestClientTest {
 
     @Test
     public void greetingShouldReturnDefaultMessage() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/temp",String.class)).contains("temp");
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/temp", String.class)).contains("temp");
     }
 }

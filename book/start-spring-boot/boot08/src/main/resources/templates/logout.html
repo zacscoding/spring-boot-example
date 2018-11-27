@@ -3,8 +3,8 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>Hello Spring Security</title>
-    <meta charset="utf-8" />
+  <title>Hello Spring Security</title>
+  <meta charset="utf-8"/>
 </head>
 <body>
 
@@ -26,24 +26,24 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
 
 <div class="panel panel-default">
-    <div class="panel-body">
+  <div class="panel-body">
 
-        <h2>CUSTOM LOGOUT PAGE</h2>
+    <h2>CUSTOM LOGOUT PAGE</h2>
 
-        <form method="post">
-            <h3>Logout</h3>
-            <input type="hidden" th:name="${_csrf.parameterName}"
-                   th:value="${_csrf.token}" />
-            <button type="submit" class="btn">LogOut</button>
-        </form>
+    <form method="post">
+      <h3>Logout</h3>
+      <input type="hidden" th:name="${_csrf.parameterName}"
+             th:value="${_csrf.token}"/>
+      <button type="submit" class="btn">LogOut</button>
+    </form>
 
 
-    </div>
+  </div>
 </div>
 </body>
 </html>

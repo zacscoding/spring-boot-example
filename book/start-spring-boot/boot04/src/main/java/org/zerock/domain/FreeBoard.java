@@ -16,12 +16,14 @@ import java.util.List;
  * @Date 2017-12-17
  * @GitHub : https://github.com/zacscoding
  */
-@Getter @Setter
+@Getter
+@Setter
 @ToString(exclude = "replies")
 @Entity
-@Table(name="tbl_freeboards")
-@EqualsAndHashCode(of="bno")
+@Table(name = "tbl_freeboards")
+@EqualsAndHashCode(of = "bno")
 public class FreeBoard {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bno;

@@ -36,11 +36,8 @@ public class DockerBasicTest {
     @Before
     public void setUp() {
         logger.setLevel(Level.INFO);
-        DefaultDockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
-                                                                    .withRegistryPassword("apppw")
-                                                                    .withRegistryUsername("app")
-                                                                    .withDockerHost("tcp://192.168.79.128:2376")
-                                                                    .build();
+        DefaultDockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder().withRegistryPassword("apppw").withRegistryUsername("app")
+                                                                    .withDockerHost("tcp://192.168.79.128:2376").build();
         dockerClient = DockerClientBuilder.getInstance(config).build();
     }
 
@@ -56,11 +53,7 @@ public class DockerBasicTest {
         or
         $ docker container ls -a -s -f status=exited
          */
-        List<Container> containers = dockerClient.listContainersCmd()
-                                                 .withShowSize(true)
-                                                 .withShowAll(true)
-                                                 .withStatusFilter(Arrays.asList("exited"))
-                                                 .exec();
+        List<Container> containers = dockerClient.listContainersCmd().withShowSize(true).withShowAll(true).withStatusFilter(Arrays.asList("exited")).exec();
         for (Container container : containers) {
             System.out.println("------------------------------------------------------------------------------");
             GsonUtil.printGsonPretty(container);
@@ -79,27 +72,18 @@ public class DockerBasicTest {
         mongo:3.6 --bind_ip_all
          */
 
-        CreateContainerResponse container = dockerClient.createContainerCmd("mongo:3.6")
-            .withCmd("--bind_ip_all")
-            .withName("mongo")
-            .withHostName("mongoapp")
-            .withEnv("MONGO_LATEST_VERSION=3.6")
-            .withPortBindings(PortBinding.parse("9999:27017"))
-            .withBinds(Bind.parse("/home/app/mongo/data/db:/data/db"))
-            .exec();
+        CreateContainerResponse container = dockerClient.createContainerCmd("mongo:3.6").withCmd("--bind_ip_all").withName("mongo").withHostName("mongoapp")
+                                                        .withEnv("MONGO_LATEST_VERSION=3.6").withPortBindings(PortBinding.parse("9999:27017"))
+                                                        .withBinds(Bind.parse("/home/app/mongo/data/db:/data/db")).exec();
 
-        List<Container> containers = dockerClient.listContainersCmd()
-                                                 .withNameFilter(Arrays.asList("mongoapp"))
-                                                 .exec();
+        List<Container> containers = dockerClient.listContainersCmd().withNameFilter(Arrays.asList("mongoapp")).exec();
 
         displayContainer(containers);
     }
 
     @Test
     public void startStopKill() {
-        List<Container> containers = dockerClient.listContainersCmd()
-                                                 .withShowAll(true)
-                                                 .exec();
+        List<Container> containers = dockerClient.listContainersCmd().withShowAll(true).exec();
 
         String containerId = containers.get(0).getId();
 
@@ -115,9 +99,7 @@ public class DockerBasicTest {
 
     @Test
     public void inspect() {
-        List<Container> containers = dockerClient.listContainersCmd()
-                                                 .withShowAll(true)
-                                                 .exec();
+        List<Container> containers = dockerClient.listContainersCmd().withShowAll(true).exec();
 
         InspectContainerResponse containerResponse = dockerClient.inspectContainerCmd(containers.get(0).getId()).exec();
 

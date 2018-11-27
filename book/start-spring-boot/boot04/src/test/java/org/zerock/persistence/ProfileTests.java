@@ -26,6 +26,7 @@ import java.util.stream.IntStream;
 @Log
 @Commit // 테스트 결과 커밋
 public class ProfileTests {
+
     @Autowired
     MemberRepository memberRepository;
     @Autowired
@@ -34,10 +35,10 @@ public class ProfileTests {
     @Test
     @Ignore
     public void insertMembers() {
-        IntStream.range(1,101).forEach(i-> {
+        IntStream.range(1, 101).forEach(i -> {
             Member member = new Member();
             member.setUid("user" + i);
-            member.setUpw("pw"+i);
+            member.setUpw("pw" + i);
             member.setUname("사용자" + i);
             memberRepository.save(member);
         });
@@ -49,10 +50,10 @@ public class ProfileTests {
         Member member = new Member();
         member.setUid("user1");
 
-        for(int i=1; i<5; i++) {
+        for (int i = 1; i < 5; i++) {
             Profile profile = new Profile();
             profile.setFname("face" + i + ".jpg");
-            if(i == 1) {
+            if (i == 1) {
                 profile.setCurrent(true);
             }
 
@@ -76,7 +77,6 @@ public class ProfileTests {
             System.out.println(Arrays.toString(arr));
         });
     }
-
 
 
 }

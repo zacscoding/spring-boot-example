@@ -11,4 +11,5 @@ import org.springframework.context.annotation.Profile;
 @Profile("props")
 @EnableConfigurationProperties(TestProperties.class)
 public class PropsConfiguration {
+
 }

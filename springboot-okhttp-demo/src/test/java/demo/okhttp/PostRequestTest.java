@@ -40,13 +40,9 @@ public class PostRequestTest {
     // Basic POST
     @Test
     public void whenSendPostRequestThenCorrect() throws IOException {
-        RequestBody formBody = new FormBody.Builder()
-            .add("username", "zaccoding")
-            .add("hobby", "coding").build();
+        RequestBody formBody = new FormBody.Builder().add("username", "zaccoding").add("hobby", "coding").build();
 
-        Request request = new Request.Builder().url("http://localhost:" + port + "/okhttp/users")
-                                               .post(formBody)
-                                               .build();
+        Request request = new Request.Builder().url("http://localhost:" + port + "/okhttp/users").post(formBody).build();
 
         Call call = client.newCall(request);
         Response response = call.execute();
@@ -76,10 +72,7 @@ public class PostRequestTest {
 
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
 
-        Request request = new Request.Builder()
-            .url("http://localhost:" + port + "/okhttp/details")
-            .post(body)
-            .build();
+        Request request = new Request.Builder().url("http://localhost:" + port + "/okhttp/details").post(body).build();
 
         Call call = client.newCall(request);
         Response response = call.execute();
@@ -88,17 +81,12 @@ public class PostRequestTest {
 
     @Test
     public void whenSendMultipartRequestThenCorrect() throws IOException {
-        RequestBody requestBody = new MultipartBody.Builder()
-            .setType(MultipartBody.FORM)
-            .addFormDataPart("username", "hivava")
-            .addFormDataPart("file", "file.json"
-                , RequestBody.create(MediaType.parse("application/octet-stream"), new ClassPathResource("file.json").getFile()))
-            .build();
+        RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM).addFormDataPart("username", "hivava")
+                                                             .addFormDataPart("file", "file.json", RequestBody
+                                                                 .create(MediaType.parse("application/octet-stream"),
+                                                                     new ClassPathResource("file.json").getFile())).build();
 
-        Request request = new Request.Builder()
-            .url("http://localhost:" + port + "/okhttp/multipart")
-            .post(requestBody)
-            .build();
+        Request request = new Request.Builder().url("http://localhost:" + port + "/okhttp/multipart").post(requestBody).build();
 
         Call call = client.newCall(request);
         Response response = call.execute();

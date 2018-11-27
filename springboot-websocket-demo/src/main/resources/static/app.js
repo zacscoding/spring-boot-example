@@ -8,8 +8,7 @@ function setConnected(connected) {
   $("#disconnect").prop("disabled", !connected);
   if (connected) {
     $("#conversation").show();
-  }
-  else {
+  } else {
     $("#conversation").hide();
   }
   $("#greetings").html("");

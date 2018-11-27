@@ -15,12 +15,14 @@ import java.util.List;
  * @Date 2017-12-17
  * @GitHub : https://github.com/zacscoding
  */
-@Getter@Setter
+@Getter
+@Setter
 @ToString(exclude = "files")
 @Entity
 @Table(name = "tbl_pds")
-@EqualsAndHashCode(of="pid")
+@EqualsAndHashCode(of = "pid")
 public class PDSBoard {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pid;

@@ -12,8 +12,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 //@SpringBootConfiguration
 // @WebAppConfiguration
 public class ReadinglistApplicationTests {
-	@Test
-	public void contextLoads() {
-	}
+
+    @Test
+    public void contextLoads() {
+    }
 
 }

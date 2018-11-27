@@ -16,10 +16,14 @@ import javax.persistence.Table;
  * @Date 2017-12-17
  * @GitHub : https://github.com/zacscoding
  */
-@Getter @Setter @ToString @EqualsAndHashCode(of="uid")
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode(of = "uid")
 @Entity
-@Table(name="tbl_members")
+@Table(name = "tbl_members")
 public class Member {
+
     @Id
     private String uid;
     private String upw;

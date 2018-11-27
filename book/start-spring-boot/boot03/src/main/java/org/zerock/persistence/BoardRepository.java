@@ -16,11 +16,13 @@ import java.util.List;
 // find..By // read..By // query..By // get..By // count..By
 // 'find' + 'Entity (지정하지 않으면 Repository의 T 타입) + 'By' + '컬럼 이름'
 // https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods.query-creation
-public interface BoardRepository extends CrudRepository<Board, Long > {
+public interface BoardRepository extends CrudRepository<Board, Long> {
+
     // =========================================
     // 기본 쿼리 메소드 이용
     // =========================================
     public List<Board> findBoardByTitle(String title);
+
     public Collection<Board> findByWriter(String writer);
 
     // =========================================

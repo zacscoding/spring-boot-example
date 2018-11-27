@@ -22,6 +22,7 @@ import java.util.List;
 @RequestMapping("/replies/*")
 @Log
 public class WebReplyController {
+
     @Autowired
     ReplyRepository replyRepo;
 
@@ -32,7 +33,7 @@ public class WebReplyController {
         WebBoard webBoard = new WebBoard();
         webBoard.setBno(bno);
 
-        return new ResponseEntity<>(getListByBoard(webBoard),HttpStatus.OK);
+        return new ResponseEntity<>(getListByBoard(webBoard), HttpStatus.OK);
     }
 
     @Transactional
@@ -84,8 +85,6 @@ public class WebReplyController {
 
         return replyRepo.getRepliesOfBoard(board);
     }
-
-
 
 
 }

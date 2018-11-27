@@ -18,7 +18,8 @@ import java.util.List;
  */
 @Getter
 public class ZerockSecurityUser extends User {
-    private static final String ROLE_PREFIX="ROLE_";
+
+    private static final String ROLE_PREFIX = "ROLE_";
     private Member member;
 
     public ZerockSecurityUser(Member member) {

@@ -52,10 +52,10 @@ public class StringsTest extends AbstractTestRunner {
     @Test
     public void multiGetAndSet() {
         // given
-        Map<String,String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         List<String> keys = new ArrayList<>();
         List<String> values = new ArrayList<>();
-        for(int i=1; i<=5; i++) {
+        for (int i = 1; i <= 5; i++) {
             String key = "key" + i;
             String value = "value" + i;
             map.put(key, value);
@@ -79,8 +79,7 @@ public class StringsTest extends AbstractTestRunner {
         System.out.println("## success to save");
         try {
             Thread.sleep(expireTime);
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             fail("FAIL!!!");
         }
         // then

@@ -31,13 +31,13 @@ public class TopicsSender {
         String key = keys[keyIdx];
         DefaultMessage sendMessage = new DefaultMessage(messageIdx, "Message-" + messageIdx + " >>>> key : " + key);
 
-
-        StringBuilder sb = new StringBuilder("\n// ==================================================\n")
-            .append("[[ Topics Sender ]]")
-            .append("Thread : ").append(Thread.currentThread().getName()).append("(").append(Thread.currentThread().getId()).append(")\n")
-            .append("Key : ").append(key).append("\n")
-            .append("Send message : ").append(sendMessage.toString()).append("\n")
-            .append("===================================================== //\n");
+        StringBuilder sb = new StringBuilder("\n// ==================================================\n").append("[[ Topics Sender ]]").append("Thread : ")
+                                                                                                         .append(Thread.currentThread().getName()).append("(")
+                                                                                                         .append(Thread.currentThread().getId()).append(")\n")
+                                                                                                         .append("Key : ").append(key).append("\n")
+                                                                                                         .append("Send message : ")
+                                                                                                         .append(sendMessage.toString()).append("\n").append(
+                "===================================================== //\n");
         log.info(sb.toString());
 
         rabbitTemplate.convertAndSend(topic.getName(), key, sendMessage);

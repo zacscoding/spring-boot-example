@@ -16,12 +16,14 @@ import java.util.List;
  * @Date : 2017-12-20
  * @GitHub : https://github.com/zacscoding
  */
-@Getter@Setter
+@Getter
+@Setter
 @ToString(exclude = "replies")
 @Entity
-@Table(name="tbl_webboards")
-@EqualsAndHashCode(of="bno")
+@Table(name = "tbl_webboards")
+@EqualsAndHashCode(of = "bno")
 public class WebBoard {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bno;
@@ -34,6 +36,6 @@ public class WebBoard {
     @UpdateTimestamp
     private Timestamp updatedate;
 
-    @OneToMany(mappedBy = "board", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
     private List<WebReply> replies;
 }

@@ -28,6 +28,7 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true) // Method Secured
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     DataSource dataSource;
     @Autowired
@@ -36,27 +37,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         log.info("# security config..");
-        http
-                .authorizeRequests()
-                    .antMatchers("/guest/**").permitAll()
-                    .antMatchers("/manager/**").hasRole("MANAGER")
-                    .antMatchers("/admin/**").hasRole("ADMIN")
-                .and()
-                .formLogin()
-                    .loginPage("/login")
-                .and()
-                .exceptionHandling()
-                    .accessDeniedPage("/accessDenied")
-                .and()
-                .logout()
-                    .logoutUrl("/logout")
-                    .invalidateHttpSession(true)
-                .and()
-                .rememberMe()
-                    .key("zerock")
-                    .userDetailsService(zerockUsersService)
-                    .tokenRepository(getJDBCRepository())
-                    .tokenValiditySeconds(60 * 60 * 24);
+        http.authorizeRequests().antMatchers("/guest/**").permitAll().antMatchers("/manager/**").hasRole("MANAGER").antMatchers("/admin/**").hasRole("ADMIN")
+            .and().formLogin().loginPage("/login").and().exceptionHandling().accessDeniedPage("/accessDenied").and().logout().logoutUrl("/logout")
+            .invalidateHttpSession(true).and().rememberMe().key("zerock").userDetailsService(zerockUsersService).tokenRepository(getJDBCRepository())
+            .tokenValiditySeconds(60 * 60 * 24);
     }
 
     @Bean
@@ -69,8 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-
-    private PersistentTokenRepository getJDBCRepository () {
+    private PersistentTokenRepository getJDBCRepository() {
         JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();
         repo.setDataSource(dataSource);
         return repo;

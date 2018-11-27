@@ -24,17 +24,18 @@ import java.util.Arrays;
 @Log
 @Commit
 public class CustomRepositoryTest {
+
     @Autowired
     CustomCrudRepository repo;
 
     @Test
     public void test1() {
-        Pageable pageable = PageRequest.of(0,10, Sort.Direction.DESC, "bno");
+        Pageable pageable = PageRequest.of(0, 10, Sort.Direction.DESC, "bno");
 
         String type = "w";
         String keyword = "user09";
 
-        Page<Object[]> result = repo.getCustomPage(type,keyword,pageable);
+        Page<Object[]> result = repo.getCustomPage(type, keyword, pageable);
 
         log.info("" + result);
         log.info("## TOTAL PAGES : " + result.getTotalPages());

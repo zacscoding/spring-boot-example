@@ -26,6 +26,7 @@ import static org.junit.Assert.assertTrue;
  * @GitHub : https://github.com/zacscoding
  */
 public class BoardRepostitoryTest extends AbstractTestRunner {
+
     @Autowired
     BoardRepository boardRepository;
 
@@ -33,7 +34,7 @@ public class BoardRepostitoryTest extends AbstractTestRunner {
     public void findBoardByTitle() {
         String title = "제목..177";
         boardRepository.findBoardByTitle(title).forEach(board -> {
-            assertThat(board.getTitle(),is(title));
+            assertThat(board.getTitle(), is(title));
         });
     }
 
@@ -59,7 +60,7 @@ public class BoardRepostitoryTest extends AbstractTestRunner {
         String title = "5";
         Long bno = 50L;
 
-        boardRepository.findByTitleContainingAndBnoGreaterThan(title,bno).forEach(board -> {
+        boardRepository.findByTitleContainingAndBnoGreaterThan(title, bno).forEach(board -> {
             assertTrue(board.getTitle().contains(title));
             assertTrue(board.getBno() > bno);
         });
@@ -88,9 +89,9 @@ public class BoardRepostitoryTest extends AbstractTestRunner {
     @Test
     public void findByBnoGreateThanWithPage() {
         Long bno = 0L;
-        Pageable pageable = new PageRequest(0,10,Sort.Direction.ASC, "bno");
+        Pageable pageable = new PageRequest(0, 10, Sort.Direction.ASC, "bno");
 
-        Page<Board> results = boardRepository.findByBnoGreaterThan(bno,pageable);
+        Page<Board> results = boardRepository.findByBnoGreaterThan(bno, pageable);
 
         System.out.println("## PAGE SIZE getSize() : " + results.getSize());
         System.out.println("## TOTAL PAGES getTotalPages() : " + results.getTotalPages());
@@ -98,6 +99,8 @@ public class BoardRepostitoryTest extends AbstractTestRunner {
         System.out.println("## NEXT nextPageable() : " + results.nextPageable());
 
         List<Board> boards = results.getContent();
-        boards.forEach(board -> {System.out.println(board);});
+        boards.forEach(board -> {
+            System.out.println(board);
+        });
     }
 }

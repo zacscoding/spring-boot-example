@@ -9,4 +9,5 @@ package demo.appctx;
  */
 public interface DaemonMaker {
 
-    String getName();}
+    String getName();
+}

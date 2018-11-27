@@ -19,10 +19,11 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name="tbl_members")
-@EqualsAndHashCode(of="uid")
+@Table(name = "tbl_members")
+@EqualsAndHashCode(of = "uid")
 @ToString
 public class Member {
+
     @Id
     private String uid;
     private String upw;
@@ -33,6 +34,6 @@ public class Member {
     private LocalDateTime updatedate;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name="member")
+    @JoinColumn(name = "member")
     private List<MemberRole> roles;
 }

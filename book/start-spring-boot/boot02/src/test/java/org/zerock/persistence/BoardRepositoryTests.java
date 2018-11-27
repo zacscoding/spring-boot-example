@@ -22,9 +22,11 @@ import static org.junit.Assert.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BoardRepositoryTests {
+
     @Autowired
     private BoardRepository boardRepo;
     private Board board1;
+
     @Before
     public void setUp() {
         boardRepo.deleteAll();

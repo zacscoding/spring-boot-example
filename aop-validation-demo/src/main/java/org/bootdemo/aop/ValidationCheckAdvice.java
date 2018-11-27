@@ -105,6 +105,7 @@ public class ValidationCheckAdvice {
     }
 
     private static class FilterEntity {
+
         private String uri;
         private boolean isFiltered;
         private List<Pair<Integer, List<ParameterRule>>> paramRules;

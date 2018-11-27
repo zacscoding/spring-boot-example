@@ -30,10 +30,7 @@ public class PostRequestWithHeaderTest {
     public void whenSetHeaderThenCorrect() throws IOException {
         OkHttpClient client = new OkHttpClient();
 
-        Request request = new Request.Builder()
-            .url("http://localhost:" + port + "/okhttp/defaultHeader")
-            .addHeader("Content-Type", "application/json")
-            .build();
+        Request request = new Request.Builder().url("http://localhost:" + port + "/okhttp/defaultHeader").addHeader("Content-Type", "application/json").build();
 
         Call call = client.newCall(request);
         Response response = call.execute();
@@ -44,10 +41,7 @@ public class PostRequestWithHeaderTest {
     public void whenSetDefaultHeaderThenCorrect() throws IOException {
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new DefaultContentTypeInterceptor("application/json")).build();
 
-        Request request = new Request.Builder()
-            .url("http://localhost:" + port + "/okhttp/defaultHeader")
-            .addHeader("Content-Type", "application/json")
-            .build();
+        Request request = new Request.Builder().url("http://localhost:" + port + "/okhttp/defaultHeader").addHeader("Content-Type", "application/json").build();
 
         Call call = client.newCall(request);
         Response response = call.execute();

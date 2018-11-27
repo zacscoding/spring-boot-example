@@ -74,8 +74,8 @@ public class ValueCheckConfiguration {
 
     private void displaySpaces() {
         System.out.println("## >>>> check spaces..");
-        SimpleLogger.println("noSpace length : {}->{} | leftSpace length : {}->{} | rightSpace length : {}->{}"
-            , noSpace.length(), noSpace.trim().length(), leftSpace.length(), leftSpace.trim().length(), rightSpace.length(), rightSpace.trim().length());
+        SimpleLogger.println("noSpace length : {}->{} | leftSpace length : {}->{} | rightSpace length : {}->{}", noSpace.length(), noSpace.trim().length(),
+            leftSpace.length(), leftSpace.trim().length(), rightSpace.length(), rightSpace.trim().length());
         System.out.println("---------------------------------------------------------------");
     }
 
@@ -88,18 +88,18 @@ public class ValueCheckConfiguration {
 
     private void displayArray() {
         System.out.println("## >>>> Check array values...");
-        SimpleLogger.println("{} : {}\n{} : {}"
-            ,"@Value(\"${valueproperties.listString}\")", Arrays.toString(arrayString)
-            ,"@Value(\"${valueproperties.listInt}\")", Arrays.toString(arrayInt));
+        SimpleLogger
+            .println("{} : {}\n{} : {}", "@Value(\"${valueproperties.listString}\")", Arrays.toString(arrayString), "@Value(\"${valueproperties.listInt}\")",
+                Arrays.toString(arrayInt));
         System.out.println("---------------------------------------------------------------");
     }
 
     private void displaySpEL() {
-        SimpleLogger.println("{} : {}"
-            ,"@Value(\"#{valueCheckTestClass.name}\")", valueCheckTestClassName);
+        SimpleLogger.println("{} : {}", "@Value(\"#{valueCheckTestClass.name}\")", valueCheckTestClassName);
     }
 
     public static class ValueCheckTestClass {
+
         public String getName() {
             return "hivava";
         }

@@ -21,6 +21,7 @@ import java.util.List;
  * @GitHub : https://github.com/zacscoding
  */
 public class BoardRepositoryByQuerydslTest extends AbstractTestRunner {
+
     @Autowired
     BoardRepositoryByQuerydsl boardRepository;
 
@@ -32,7 +33,7 @@ public class BoardRepositoryByQuerydslTest extends AbstractTestRunner {
         BooleanBuilder builder = new BooleanBuilder();
         QBoard board = QBoard.board;
         // check search type
-        if(type.equals("t")) {
+        if (type.equals("t")) {
             builder.and(board.title.like("%" + keyword + "%"));
         }
 
@@ -40,7 +41,7 @@ public class BoardRepositoryByQuerydslTest extends AbstractTestRunner {
         builder.and(board.bno.gt(0L));
 
         // pageable
-        Pageable pageable = new PageRequest(0,10);
+        Pageable pageable = new PageRequest(0, 10);
 
         Page<Board> results = boardRepository.findAll(builder, pageable);
 
@@ -49,9 +50,10 @@ public class BoardRepositoryByQuerydslTest extends AbstractTestRunner {
         System.out.println("## TOTAL COUNT getTotalElements() : " + results.getTotalElements());
         System.out.println("## NEXT nextPageable() : " + results.nextPageable());
         List<Board> boards = results.getContent();
-        boards.forEach(b -> {System.out.println(b);});
+        boards.forEach(b -> {
+            System.out.println(b);
+        });
     }
-
 
 
 }

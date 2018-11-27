@@ -28,7 +28,8 @@ import org.springframework.util.ErrorHandler;
 public class RpcConfiguration {
 
     @Bean
-    public JmsListenerContainerFactory<?> listenerContainerFactory(ConnectionFactory connectionFactory, DefaultJmsListenerContainerFactoryConfigurer configurer) {
+    public JmsListenerContainerFactory<?> listenerContainerFactory(ConnectionFactory connectionFactory,
+        DefaultJmsListenerContainerFactoryConfigurer configurer) {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         // This provides all boot's default to this factory, including the message converter
         configurer.configure(factory, connectionFactory);

@@ -6,4 +6,5 @@ package demo.rpc;
  * @GitHub : https://github.com/zacscoding
  */
 public interface RpcClient {
+
 }

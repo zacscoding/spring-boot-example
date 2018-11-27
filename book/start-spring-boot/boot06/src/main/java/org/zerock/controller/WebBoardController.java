@@ -28,6 +28,7 @@ import org.zerock.vo.PageVO;
 @RequestMapping("/boards/")
 @Log
 public class WebBoardController {
+
     @Autowired
     private WebBoardRepository webBoardRepository;
     @Autowired
@@ -35,7 +36,7 @@ public class WebBoardController {
 
     @GetMapping("/list")
     public void list(@ModelAttribute("pageVO") PageVO vo, Model model) {
-        Pageable page = vo.makePageable(0,"bno");
+        Pageable page = vo.makePageable(0, "bno");
 
         Page<Object[]> result = customCrudRepository.getCustomPage(vo.getType(), vo.getKeyword(), page);
 
@@ -73,7 +74,7 @@ public class WebBoardController {
         log.info("## register POST : " + vo);
 
         webBoardRepository.save(vo);
-        rttr.addFlashAttribute("msg","success");
+        rttr.addFlashAttribute("msg", "success");
 
         return "redirect:/boards/list";
     }
@@ -132,7 +133,6 @@ public class WebBoardController {
 
         return "redirect:/boards/list";
     }
-
 
 
 }

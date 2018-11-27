@@ -16,8 +16,8 @@ import org.springframework.util.CollectionUtils;
 public class FilteringService {
 
     public void filterPerson(Person person) {
-        if(person != null) {
-            if(person.getName().equals("name2")) {
+        if (person != null) {
+            if (person.getName().equals("name2")) {
                 person.setName("## Secret ##");
                 person.setAge(0);
             }
@@ -25,16 +25,16 @@ public class FilteringService {
     }
 
     public void filterPersons(Collection<Person> persons) {
-        if(!CollectionUtils.isEmpty(persons)) {
-            for(Person person : persons) {
+        if (!CollectionUtils.isEmpty(persons)) {
+            for (Person person : persons) {
                 filterPerson(person);
             }
         }
     }
 
     public void filterBook(Book book) {
-        if(book != null) {
-            if("Book2".equals(book.getBookName())) {
+        if (book != null) {
+            if ("Book2".equals(book.getBookName())) {
                 book.setBookName("## Secret ##");
                 book.setPrice(0);
             }
@@ -42,8 +42,8 @@ public class FilteringService {
     }
 
     public void filterBooks(Collection<Book> books) {
-        if(!CollectionUtils.isEmpty(books)) {
-            for(Book book : books) {
+        if (!CollectionUtils.isEmpty(books)) {
+            for (Book book : books) {
                 filterBook(book);
             }
         }

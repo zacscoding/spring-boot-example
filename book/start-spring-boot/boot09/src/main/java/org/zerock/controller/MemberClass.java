@@ -20,6 +20,7 @@ import org.zerock.persistence.MemberRepository;
 @RequestMapping("/member/")
 @Log
 public class MemberClass {
+
     @Autowired
     PasswordEncoder passwordEncoder;
     @Autowired

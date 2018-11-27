@@ -30,7 +30,7 @@ public class SampleController {
         vo.setVal3("v3");
 
         Method[] methods = vo.getClass().getDeclaredMethods();
-        for(Method method : methods) {
+        for (Method method : methods) {
             System.out.println(String.format("## exist method : [%s] in SampleVO", method.toString()));
         }
 

@@ -65,16 +65,11 @@ public class RestTemplateTimeoutTest {
 
     private ClientHttpRequestFactory getClientHttpRequestFactory() {
         int timeout = 5000;
-        RequestConfig config = RequestConfig.custom()
-                                            .setConnectTimeout(1000) // time until establish conn
-                                            .setConnectionRequestTimeout(timeout)
-                                            .setSocketTimeout(timeout) // data read
+        RequestConfig config = RequestConfig.custom().setConnectTimeout(1000) // time until establish conn
+                                            .setConnectionRequestTimeout(timeout).setSocketTimeout(timeout) // data read
                                             .build();
 
-        CloseableHttpClient client = HttpClientBuilder
-            .create()
-            .setDefaultRequestConfig(config)
-            .build();
+        CloseableHttpClient client = HttpClientBuilder.create().setDefaultRequestConfig(config).build();
 
         return new HttpComponentsClientHttpRequestFactory(client);
     }

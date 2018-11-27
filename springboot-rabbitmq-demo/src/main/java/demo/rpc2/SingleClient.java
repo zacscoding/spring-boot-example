@@ -32,12 +32,13 @@ public class SingleClient {
 
         Rpc2Response res = client.call(req);
 
-        StringBuilder sb = new StringBuilder("\n// ==================================================\n")
-            .append("[[ RPC CLIENT ]]")
-            .append("Thread : ").append(Thread.currentThread().getName()).append("(").append(Thread.currentThread().getId()).append(")\n")
-            .append("Request : ").append(req.toString()).append("\n")
-            .append("Response : ").append(res.toString()).append("\n")
-            .append("===================================================== //\n");
+        StringBuilder sb = new StringBuilder("\n// ==================================================\n").append("[[ RPC CLIENT ]]").append("Thread : ")
+                                                                                                         .append(Thread.currentThread().getName()).append("(")
+                                                                                                         .append(Thread.currentThread().getId()).append(")\n")
+                                                                                                         .append("Request : ").append(req.toString())
+                                                                                                         .append("\n").append("Response : ")
+                                                                                                         .append(res.toString()).append("\n").append(
+                "===================================================== //\n");
         log.info(sb.toString());
     }
 }

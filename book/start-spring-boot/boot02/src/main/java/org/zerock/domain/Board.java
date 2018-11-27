@@ -15,10 +15,13 @@ import java.sql.Timestamp;
  * @Date 2017-12-16
  * @GitHub : https://github.com/zacscoding
  */
-@Getter@Setter@ToString
+@Getter
+@Setter
+@ToString
 @Entity // Entity 임을 명시
 @Table(name = "tbl_boards")
 public class Board {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long bno;

@@ -34,7 +34,7 @@ public class PropertiesTest {
         properties.load(new ClassPathResource("application.properties").getInputStream());
         Set keySet = properties.keySet();
         for (Object o : keySet) {
-            String key = (String)o;
+            String key = (String) o;
             if (key.startsWith("spring.activemq") || key.startsWith("jms")) {
                 System.out.println("\"" + key + "\",");
             }
@@ -43,35 +43,14 @@ public class PropertiesTest {
 
     @Test
     public void profileTest() {
-        List<String> keys = Arrays.asList(
-            "spring.activemq.pool.expiry-timeout",
-            "jms.template.default-destination",
-            "spring.activemq.non-blocking-redelivery",
-            "spring.activemq.pool.create-connection-on-startup",
-            "spring.activemq.pool.block-if-full-timeout",
-            "spring.activemq.broker-url",
-            "spring.activemq.pool.reconnect-on-exception",
-            "jms.template.receive-timeout",
-            "jms.pub-sub-domain",
-            "spring.activemq.packages.trusted",
-            "jms.template.time-to-live",
-            "spring.activemq.in-memory",
-            "spring.activemq.pool.idle-timeout",
-            "jms.listener.concurrency",
-            "spring.activemq.pool.enabled",
-            "jms.template.delivery-mode",
-            "spring.activemq.pool.block-if-full",
-            "jms.listener.max-concurrency",
-            "spring.activemq.pool.time-between-expiration-check",
-            "jms.listener.auto-startup",
-            "spring.activemq.pool.maximum-active-session-per-connection",
-            "spring.activemq.pool.use-anonymous-producers",
-            "spring.activemq.packages.trust-all",
-            "spring.activemq.pool.max-connections",
-            "jms.template.priority",
-            "jms.listener.acknowledge-mode",
-            "jms.template.qos-enabled"
-        );
+        List<String> keys = Arrays.asList("spring.activemq.pool.expiry-timeout", "jms.template.default-destination", "spring.activemq.non-blocking-redelivery",
+            "spring.activemq.pool.create-connection-on-startup", "spring.activemq.pool.block-if-full-timeout", "spring.activemq.broker-url",
+            "spring.activemq.pool.reconnect-on-exception", "jms.template.receive-timeout", "jms.pub-sub-domain", "spring.activemq.packages.trusted",
+            "jms.template.time-to-live", "spring.activemq.in-memory", "spring.activemq.pool.idle-timeout", "jms.listener.concurrency",
+            "spring.activemq.pool.enabled", "jms.template.delivery-mode", "spring.activemq.pool.block-if-full", "jms.listener.max-concurrency",
+            "spring.activemq.pool.time-between-expiration-check", "jms.listener.auto-startup", "spring.activemq.pool.maximum-active-session-per-connection",
+            "spring.activemq.pool.use-anonymous-producers", "spring.activemq.packages.trust-all", "spring.activemq.pool.max-connections",
+            "jms.template.priority", "jms.listener.acknowledge-mode", "jms.template.qos-enabled");
 
         for (String property : keys) {
             log.info("## {} : {}", property, environment.getProperty(property));

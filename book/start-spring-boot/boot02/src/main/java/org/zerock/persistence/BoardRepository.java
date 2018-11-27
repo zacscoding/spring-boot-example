@@ -8,6 +8,6 @@ import org.zerock.domain.Board;
  * @Date 2017-12-16
  * @GitHub : https://github.com/zacscoding
  */
-public interface BoardRepository extends CrudRepository<Board,Long> {
+public interface BoardRepository extends CrudRepository<Board, Long> {
 
 }

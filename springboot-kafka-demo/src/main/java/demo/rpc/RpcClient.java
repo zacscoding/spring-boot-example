@@ -87,12 +87,9 @@ public class RpcClient {
                 long end = System.currentTimeMillis();
                 log.info("## After request : {} => {}", start, (end - start));
                 StringBuilder sb = new StringBuilder("//=============================================\n");
-                sb.append("<<<<<< Rpc Client >>>>>>\n")
-                  .append("> request count : ").append(index).append("\n")
-                  .append("> request : ").append(request).append("\n")
-                  .append("> offset : ").append(consumerRecord.offset()).append("\n")
-                  .append("> topic : ").append(consumerRecord.topic()).append("\n")
-                  .append("===============================================//");
+                sb.append("<<<<<< Rpc Client >>>>>>\n").append("> request count : ").append(index).append("\n").append("> request : ").append(request)
+                  .append("\n").append("> offset : ").append(consumerRecord.offset()).append("\n").append("> topic : ").append(consumerRecord.topic())
+                  .append("\n").append("===============================================//");
 
                 //log.info("\n" + sb.toString());
 

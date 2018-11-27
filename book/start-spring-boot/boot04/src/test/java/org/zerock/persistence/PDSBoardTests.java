@@ -27,6 +27,7 @@ import java.util.stream.IntStream;
 @Log
 @Commit
 public class PDSBoardTests {
+
     @Autowired
     PDSBoardRepository pdsBoardRepository;
 
@@ -41,7 +42,7 @@ public class PDSBoardTests {
         PDSFile file2 = new PDSFile();
         file2.setPdsfile("file2.doc");
 
-        pds.setFiles(Arrays.asList(file1,file2));
+        pds.setFiles(Arrays.asList(file1, file2));
 
         log.info("## try to save PDS : " + pds);
 
@@ -56,7 +57,7 @@ public class PDSBoardTests {
         Long fno = 1L;
         String newName = "updatedFile1.doc";
 
-        int applied = pdsBoardRepository.updatePDSFile(fno,newName);
+        int applied = pdsBoardRepository.updatePDSFile(fno, newName);
         log.info("# updated count : " + applied);
     }
 
@@ -74,7 +75,7 @@ public class PDSBoardTests {
             target.setPdsfile(newName);
 
             int idx = pds.getFiles().indexOf(target);
-            if(idx > -1) {
+            if (idx > -1) {
                 List<PDSFile> list = pds.getFiles();
                 list.remove(idx);
                 list.add(target);
@@ -96,9 +97,9 @@ public class PDSBoardTests {
     @Test
     public void insertDummies() {
         List<PDSBoard> list = new ArrayList<>(100);
-        IntStream.range(1,100).forEach(i -> {
+        IntStream.range(1, 100).forEach(i -> {
             PDSBoard pds = new PDSBoard();
-            pds.setPname("자료"+i);
+            pds.setPname("자료" + i);
 
             PDSFile file1 = new PDSFile();
             file1.setPdsfile("file1.doc");
@@ -106,7 +107,7 @@ public class PDSBoardTests {
             PDSFile file2 = new PDSFile();
             file2.setPdsfile("file2.doc");
 
-            pds.setFiles(Arrays.asList(file1,file2));
+            pds.setFiles(Arrays.asList(file1, file2));
 
             log.info("# try to save pds");
 

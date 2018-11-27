@@ -35,12 +35,13 @@ public class SingleRpcClient implements RpcClient {
             throw new RuntimeException();
         }
 
-        StringBuilder sb = new StringBuilder("\n// ==================================================\n")
-            .append("[[ RPC CLIENT ]]")
-            .append("Thread : ").append(Thread.currentThread().getName()).append("(").append(Thread.currentThread().getId()).append(")\n")
-            .append("Request : ").append(request).append("\n")
-            .append("Response : ").append(response).append("\n")
-            .append("===================================================== //\n");
+        StringBuilder sb = new StringBuilder("\n// ==================================================\n").append("[[ RPC CLIENT ]]").append("Thread : ")
+                                                                                                         .append(Thread.currentThread().getName()).append("(")
+                                                                                                         .append(Thread.currentThread().getId()).append(")\n")
+                                                                                                         .append("Request : ").append(request).append("\n")
+                                                                                                         .append("Response : ").append(response).append("\n")
+                                                                                                         .append(
+                                                                                                             "===================================================== //\n");
 
         log.info(sb.toString());
     }

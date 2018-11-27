@@ -1,38 +1,42 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Thymeleaf3</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Thymeleaf3</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 
 <!-- 지역 변수 선언 -->
 <table border="1" th:with="target='u0001'" style="width:100%;">
-    <tr>
-        <th>MID</th> <th>MNAE</th> <th>REGDATE</th>
-    </tr>
-    <tr th:each="member : ${members}">
-        <td th:text = "${member.mid == target ? 'SECRET' : member.mid}">Doe</td>
-        <td th:text="${member.mname}"></td>
-        <td th:text="${#dates.format(member.regdate,'yyyy-MM-dd')}"></td>
-    </tr>
+  <tr>
+    <th>MID</th>
+    <th>MNAE</th>
+    <th>REGDATE</th>
+  </tr>
+  <tr th:each="member : ${members}">
+    <td th:text="${member.mid == target ? 'SECRET' : member.mid}">Doe</td>
+    <td th:text="${member.mname}"></td>
+    <td th:text="${#dates.format(member.regdate,'yyyy-MM-dd')}"></td>
+  </tr>
 </table>
 
-<hr >
+<hr>
 
 <table border="1" th:with="target='u0001'" style="width:100%;">
-    <tr>
-        <th>MID</th> <th>MNAE</th> <th>REGDATE</th>
-    </tr>
-    <tr th:each="member : ${members}">
-        <td th:if="${member.mid}">
-            <a href="modify" th:if="${member.mid == target}">MODIFY</a>
-            <p th:unless="${member.mid == target}">VIEW</p>
-        </td>
-        <td th:text = "${member.mid == target ? 'SECRET' : member.mid}">Doe</td>
-        <td th:text="${member.mname}"></td>
-        <td th:text="${#dates.format(member.regdate,'yyyy-MM-dd')}"></td>
-    </tr>
+  <tr>
+    <th>MID</th>
+    <th>MNAE</th>
+    <th>REGDATE</th>
+  </tr>
+  <tr th:each="member : ${members}">
+    <td th:if="${member.mid}">
+      <a href="modify" th:if="${member.mid == target}">MODIFY</a>
+      <p th:unless="${member.mid == target}">VIEW</p>
+    </td>
+    <td th:text="${member.mid == target ? 'SECRET' : member.mid}">Doe</td>
+    <td th:text="${member.mname}"></td>
+    <td th:text="${#dates.format(member.regdate,'yyyy-MM-dd')}"></td>
+  </tr>
 </table>
 
 <h1 th:text="${target}">not exist target</h1>

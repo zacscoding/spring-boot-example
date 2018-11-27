@@ -9,19 +9,18 @@ import java.util.concurrent.TimeUnit;
  * @GitHub : https://github.com/zacscoding
  */
 public class NextTimeUtil {
+
     public long nextTime() {
         Calendar cal = Calendar.getInstance();
         int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-        if(dayOfWeek > 0 && dayOfWeek < 7) {
+        if (dayOfWeek > 0 && dayOfWeek < 7) {
             int hour = cal.get(Calendar.HOUR_OF_DAY);
-            if(hour < 18) {
+            if (hour < 18) {
                 return TimeUnit.MINUTES.toMillis(30);
-            }
-            else {
+            } else {
                 return TimeUnit.HOURS.toMillis(1);
             }
-        }
-        else {
+        } else {
             return TimeUnit.HOURS.toMillis(2);
         }
     }

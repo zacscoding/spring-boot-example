@@ -8,6 +8,7 @@ import java.util.Date;
 
 /**
  * Simple Logger for dev...
+ *
  * @author zacconding
  * @Date 2018-01-14
  * @GitHub : https://github.com/zacscoding
@@ -247,9 +248,8 @@ public class SimpleLogger {
         // this is append..this is appendln...
         // arg1 : 1, not arg1 : { , arg2 : test, not arg2 : }
         // after new line..
-        SimpleLogger.build().append("this is append..").appendln("this is appendln...")
-                    .append("arg1 : {}, not arg1 : { , arg2 : {}, not arg2 : }", 1, "test").newLine()
-                    .appendln("after new line..").flush();
+        SimpleLogger.build().append("this is append..").appendln("this is appendln...").append("arg1 : {}, not arg1 : { , arg2 : {}, not arg2 : }", 1, "test")
+                    .newLine().appendln("after new line..").flush();
 
         // tab1	tab2
         SimpleLogger.build().appendTab("tab1").appendln("tab2").flush();

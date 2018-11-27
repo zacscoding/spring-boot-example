@@ -28,11 +28,12 @@ public class HellowWorldSender {
     @Scheduled(fixedDelay = 3000L, initialDelay = 500)
     public void sendTask() {
         DefaultMessage sendMessage = new DefaultMessage(index, "Message-" + index);
-        StringBuilder sb = new StringBuilder("\n// ==================================================\n")
-            .append("[[ Hello World Sender ]]")
-            .append("Thread : ").append(Thread.currentThread().getName()).append("(").append(Thread.currentThread().getId()).append(")\n")
-            .append("Send message : ").append(sendMessage.toString()).append("\n")
-            .append("===================================================== //\n");
+        StringBuilder sb = new StringBuilder("\n// ==================================================\n").append("[[ Hello World Sender ]]").append("Thread : ")
+                                                                                                         .append(Thread.currentThread().getName()).append("(")
+                                                                                                         .append(Thread.currentThread().getId()).append(")\n")
+                                                                                                         .append("Send message : ")
+                                                                                                         .append(sendMessage.toString()).append("\n").append(
+                "===================================================== //\n");
         log.info(sb.toString());
 
         rabbitTemplate.convertAndSend(queue.getName(), sendMessage);

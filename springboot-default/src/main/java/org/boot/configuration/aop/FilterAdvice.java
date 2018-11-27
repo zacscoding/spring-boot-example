@@ -47,7 +47,7 @@ public class FilterAdvice {
             String id = getIdFromSignature(pjp.getSignature());
             // extract @PostFilter annotation
             PostFilter postFilter = persistents.get(id);
-            if(postFilter == null) {
+            if (postFilter == null) {
                 lock.lock();
                 if ((postFilter = persistents.get(id)) == null) {
                     postFilter = extractAnnotation(pjp);
@@ -64,14 +64,14 @@ public class FilterAdvice {
     }
 
     private void handleObject(Object result, PostFilter postFilter) {
-        if(result instanceof Collection<?>) {
+        if (result instanceof Collection<?>) {
             handleCollection((Collection<?>) result, postFilter);
-        } else if(result instanceof Map<?,?>) {
-            handleMap((Map<?,?>) result, postFilter);
+        } else if (result instanceof Map<?, ?>) {
+            handleMap((Map<?, ?>) result, postFilter);
         } else {
-            if(result instanceof Person) {
+            if (result instanceof Person) {
                 filteringService.filterPerson((Person) result);
-            } else if(result instanceof Book) {
+            } else if (result instanceof Book) {
                 filteringService.filterBook((Book) result);
             } else {
                 log.error("Cant`t handle result : " + result.getClass().getName());
@@ -82,7 +82,7 @@ public class FilterAdvice {
     private void handleCollection(Collection<?> collection, PostFilter postFilter) {
         if (postFilter.entityType() == EntityType.PERSON) {
             filteringService.filterPersons((Collection<Person>) collection);
-        } else if(postFilter.entityType() == EntityType.BOOk) {
+        } else if (postFilter.entityType() == EntityType.BOOk) {
             filteringService.filterBooks((Collection<Book>) collection);
         }
     }
@@ -90,13 +90,13 @@ public class FilterAdvice {
     private void handleMap(Map<?, ?> map, PostFilter postFilter) {
         String key = postFilter.mapsKey();
 
-        if(!StringUtils.hasText(key)) {
+        if (!StringUtils.hasText(key)) {
             throw new IllegalArgumentException("Map result must be add maps key to extract data");
         }
 
         log.info("is Map");
         Object data = map.get(key);
-        if(data != null) {
+        if (data != null) {
             handleObject(data, postFilter);
         }
     }

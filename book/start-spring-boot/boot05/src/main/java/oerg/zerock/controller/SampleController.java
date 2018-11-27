@@ -19,19 +19,20 @@ import java.util.stream.IntStream;
  */
 @Controller
 public class SampleController {
+
     @GetMapping("/sample1")
     public void sample1(Model model) {
         System.out.println("## sample1() request");
         // model.addAttribute("greeting","Hello World!!");
-        model.addAttribute("greeting","안녕하세요");
+        model.addAttribute("greeting", "안녕하세요");
     }
 
     @GetMapping("/sample2")
     public void sample2(Model model) {
         System.out.println("## sample2() request");
-        MemberVO vo = new MemberVO(123,"u00","p00","홍길동", new Timestamp(System.currentTimeMillis()));
+        MemberVO vo = new MemberVO(123, "u00", "p00", "홍길동", new Timestamp(System.currentTimeMillis()));
 
-        model.addAttribute("vo",vo);
+        model.addAttribute("vo", vo);
     }
 
     @GetMapping("/sample3")
@@ -39,8 +40,8 @@ public class SampleController {
         System.out.println("## sample3() request");
         List<MemberVO> members = new ArrayList<>();
 
-        IntStream.range(1,11).forEach(i -> {
-            members.add(new MemberVO(123,"u0" + i,"p0" + i,"홍길동" + i, new Timestamp(System.currentTimeMillis())));
+        IntStream.range(1, 11).forEach(i -> {
+            members.add(new MemberVO(123, "u0" + i, "p0" + i, "홍길동" + i, new Timestamp(System.currentTimeMillis())));
         });
 
         model.addAttribute("members", members);
@@ -51,8 +52,8 @@ public class SampleController {
         System.out.println("## sample4() request");
         List<MemberVO> members = new ArrayList<>();
 
-        IntStream.range(1,11).forEach(i -> {
-            members.add(new MemberVO(123,"u000" + i%3,"p0000" + i%3,"홍길동" + i, new Timestamp(System.currentTimeMillis())));
+        IntStream.range(1, 11).forEach(i -> {
+            members.add(new MemberVO(123, "u000" + i % 3, "p0000" + i % 3, "홍길동" + i, new Timestamp(System.currentTimeMillis())));
         });
 
         model.addAttribute("members", members);
@@ -64,7 +65,7 @@ public class SampleController {
 
         String result = "SUCCESS";
 
-        model.addAttribute("result",result);
+        model.addAttribute("result", result);
     }
 
     @GetMapping("/sample6")
@@ -72,14 +73,14 @@ public class SampleController {
         System.out.println("## sample6() request");
         List<MemberVO> members = new ArrayList<>();
 
-        IntStream.range(1,11).forEach(i -> {
-            members.add(new MemberVO(123,"u0" + i,"p0" + i,"홍길동" + i, new Timestamp(System.currentTimeMillis())));
+        IntStream.range(1, 11).forEach(i -> {
+            members.add(new MemberVO(123, "u0" + i, "p0" + i, "홍길동" + i, new Timestamp(System.currentTimeMillis())));
         });
 
         model.addAttribute("members", members);
 
         String result = "SUCCESS";
-        model.addAttribute("result",result);
+        model.addAttribute("result", result);
     }
 
     @GetMapping("/sample7")
@@ -87,9 +88,9 @@ public class SampleController {
         System.out.println("## sample7() request");
 
         model.addAttribute("now", new Date());
-        model.addAttribute("price", 123456789 );
-        model.addAttribute("title", "This is a just sample." );
-        model.addAttribute("options", Arrays.asList("AAAA", "BBB", "CCC", "DDD") );
+        model.addAttribute("price", 123456789);
+        model.addAttribute("title", "This is a just sample.");
+        model.addAttribute("options", Arrays.asList("AAAA", "BBB", "CCC", "DDD"));
     }
 
     @GetMapping("/sample8")

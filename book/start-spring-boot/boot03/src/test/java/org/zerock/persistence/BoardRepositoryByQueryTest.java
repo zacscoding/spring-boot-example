@@ -17,6 +17,7 @@ import java.util.Arrays;
  * @GitHub : https://github.com/zacscoding
  */
 public class BoardRepositoryByQueryTest extends AbstractTestRunner {
+
     @Autowired
     BoardRepositoryByQuery boardRepository;
 
@@ -38,7 +39,7 @@ public class BoardRepositoryByQueryTest extends AbstractTestRunner {
 
     @Test
     public void findByWriter() {
-        String writer ="01";
+        String writer = "01";
         boardRepository.findByWriter(writer).forEach(board -> {
             System.out.println(board);
         });
@@ -62,7 +63,7 @@ public class BoardRepositoryByQueryTest extends AbstractTestRunner {
 
     @Test
     public void findByPage() {
-        Pageable pageble = new PageRequest(0,10);
+        Pageable pageble = new PageRequest(0, 10);
         boardRepository.findByPage(pageble).forEach(board -> {
             System.out.println(board);
         });

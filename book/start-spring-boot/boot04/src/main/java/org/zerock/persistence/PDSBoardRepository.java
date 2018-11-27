@@ -16,6 +16,7 @@ public interface PDSBoardRepository extends CrudRepository<PDSBoard, Long> {
 
     /**
      * 첨부 파일 수정 처리 메소드
+     *
      * @Modifying을 통해 @Query에 DML사용 가능
      * "from"은 생략 가능.
      */
@@ -35,8 +36,7 @@ public interface PDSBoardRepository extends CrudRepository<PDSBoard, Long> {
      * 자료와 첨부파일의 수를 자료 번호의 역순으로 출력하는 메소드
      * p.files를 엔티티를 이용해 pdsno로 출력
      */
-    @Query("SELECT p, count(f) FROM PDSBoard p LEFT OUTER JOIN p.files f "
-        + "where p.pid > 0 GROUP BY p ORDER BY p.pid DESC")
+    @Query("SELECT p, count(f) FROM PDSBoard p LEFT OUTER JOIN p.files f " + "where p.pid > 0 GROUP BY p ORDER BY p.pid DESC")
     public List<Object[]> getSummary();
 
 }

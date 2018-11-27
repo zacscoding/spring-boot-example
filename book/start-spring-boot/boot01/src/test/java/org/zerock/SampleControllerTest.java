@@ -23,6 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // @SpringBootTest
 @WebMvcTest(SampleController.class)
 public class SampleControllerTest {
+
     @Autowired
     MockMvc mock;
 

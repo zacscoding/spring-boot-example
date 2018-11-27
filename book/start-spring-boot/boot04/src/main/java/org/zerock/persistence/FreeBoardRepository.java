@@ -20,8 +20,7 @@ public interface FreeBoardRepository extends CrudRepository<FreeBoard, Long> {
      * @Query와 Fetch Join을 이용한 처리
      * List :: 행(row) // Object[] :: 열(Column)
      */
-    @Query("SELECT b.bno, b.title, count(r) FROM FreeBoard b LEFT OUTER JOIN b.replies r "
-            + " WHERE b.bno > 0 GROUP BY b ")
+    @Query("SELECT b.bno, b.title, count(r) FROM FreeBoard b LEFT OUTER JOIN b.replies r " + " WHERE b.bno > 0 GROUP BY b ")
     public List<Object[]> getPage(Pageable page);
 
 

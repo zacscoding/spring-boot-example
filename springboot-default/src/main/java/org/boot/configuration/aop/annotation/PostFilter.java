@@ -14,6 +14,8 @@ import org.boot.configuration.aop.enums.EntityType;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PostFilter {
+
     EntityType entityType();
+
     String mapsKey() default "";
 }

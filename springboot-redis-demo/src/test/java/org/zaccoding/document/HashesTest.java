@@ -109,9 +109,7 @@ class HashesTestPerson {
             return false;
         }
         HashesTestPerson that = (HashesTestPerson) o;
-        return this.age == that.age &&
-            Double.compare(this.score, that.score) == 0 &&
-            Objects.equals(this.name, that.name) &&
-            Objects.equals(this.hobby, that.hobby);
+        return this.age == that.age && Double.compare(this.score, that.score) == 0 && Objects.equals(this.name, that.name) && Objects
+            .equals(this.hobby, that.hobby);
     }
 }

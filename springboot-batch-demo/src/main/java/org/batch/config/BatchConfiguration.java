@@ -40,15 +40,10 @@ public class BatchConfiguration {
     // == tag :: reader writer process []
     @Bean
     public FlatFileItemReader<Person> reader() {
-        return new FlatFileItemReaderBuilder<Person>()
-            .name("personItemReader")
-            .resource(new ClassPathResource("sample-data.csv"))
-            .delimited()
-            .names(new String[]{"firstName", "lastName"})
-            .fieldSetMapper(new BeanWrapperFieldSetMapper<Person>() {{
+        return new FlatFileItemReaderBuilder<Person>().name("personItemReader").resource(new ClassPathResource("sample-data.csv")).delimited()
+                                                      .names(new String[] {"firstName", "lastName"}).fieldSetMapper(new BeanWrapperFieldSetMapper<Person>() {{
                 setTargetType(Person.class);
-            }})
-            .build();
+            }}).build();
     }
 
     @Bean
@@ -58,33 +53,20 @@ public class BatchConfiguration {
 
     @Bean
     public JdbcBatchItemWriter<Person> writer(DataSource ds) {
-        return new JdbcBatchItemWriterBuilder<Person>()
-            .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-            .sql("INSERT INTO people (first_name, last_name) VALUES (:firstName, :lastName)")
-            .dataSource(ds)
-            .build();
+        return new JdbcBatchItemWriterBuilder<Person>().itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
+                                                       .sql("INSERT INTO people (first_name, last_name) VALUES (:firstName, :lastName)").dataSource(ds).build();
     }
     // == end :: reader writer process []
 
     // == tag :: jobstep[]
     @Bean
     public Job importUserJob(JobCompletionNotificationListener listener, Step step1) {
-        return jobBuilderFactory.get("importUserJob")
-                                .incrementer(new RunIdIncrementer())
-                                .listener(listener)
-                                .flow(step1)
-                                .end()
-                                .build();
+        return jobBuilderFactory.get("importUserJob").incrementer(new RunIdIncrementer()).listener(listener).flow(step1).end().build();
     }
 
     @Bean
     public Step step1(JdbcBatchItemWriter<Person> writer) {
-        return stepBuilderFactory.get("step1")
-            .<Person, Person>chunk(2)
-            .reader(reader())
-            .processor(processor())
-            .writer(writer)
-            .build();
+        return stepBuilderFactory.get("step1").<Person, Person>chunk(2).reader(reader()).processor(processor()).writer(writer).build();
     }
     // == end :: job step[]
 

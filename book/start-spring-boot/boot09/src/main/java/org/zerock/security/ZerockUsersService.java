@@ -16,6 +16,7 @@ import org.zerock.persistence.MemberRepository;
 @Service
 @Log
 public class ZerockUsersService implements UserDetailsService {
+
     @Autowired
     private MemberRepository memberRepository;
 
@@ -23,9 +24,7 @@ public class ZerockUsersService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("## request loadUserByUserName userName : " + username);
 
-        return memberRepository.findById(username)
-                .filter(m -> m != null)
-                .map(m -> new ZerockSecurityUser(m)).get();
+        return memberRepository.findById(username).filter(m -> m != null).map(m -> new ZerockSecurityUser(m)).get();
     }
 
     /*

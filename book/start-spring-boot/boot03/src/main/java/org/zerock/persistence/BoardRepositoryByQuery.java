@@ -17,7 +17,8 @@ import java.util.List;
 // @Query 이용
 // => 프로젝트가 로딩될 때 쿼리를 검증 함 (오류가 나면 시작X)
 // =========================================
-public interface BoardRepositoryByQuery extends CrudRepository<Board,Long> {
+public interface BoardRepositoryByQuery extends CrudRepository<Board, Long> {
+
     // =========================================
     // @Query 이용 (JPQL 객체 쿼리)
     // table -> Board // ?1 :: 첫번째 param

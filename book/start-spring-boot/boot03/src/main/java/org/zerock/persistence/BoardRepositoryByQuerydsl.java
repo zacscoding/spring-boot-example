@@ -9,6 +9,6 @@ import org.zerock.domain.Board;
  * @Date 2017-12-17
  * @GitHub : https://github.com/zacscoding
  */
-public interface BoardRepositoryByQuerydsl extends CrudRepository<Board,Long>, QueryDslPredicateExecutor<Board> {
+public interface BoardRepositoryByQuerydsl extends CrudRepository<Board, Long>, QueryDslPredicateExecutor<Board> {
 
 }

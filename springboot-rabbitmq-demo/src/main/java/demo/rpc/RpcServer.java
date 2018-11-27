@@ -19,12 +19,13 @@ public class RpcServer {
         // int result = (n < 0) ? -1 : fib(n);
         int result = n * 2;
 
-        StringBuilder sb = new StringBuilder("\n// ==================================================\n")
-            .append("[[ RPC SERVER ]]\n")
-            .append("Thread : ").append(Thread.currentThread().getName()).append("(").append(Thread.currentThread().getId()).append(")\n")
-            .append("Receive param : ").append(n).append("\n")
-            .append("==> Result : ").append(result).append("\n")
-            .append("===================================================== //\n");
+        StringBuilder sb = new StringBuilder("\n// ==================================================\n").append("[[ RPC SERVER ]]\n").append("Thread : ")
+                                                                                                         .append(Thread.currentThread().getName()).append("(")
+                                                                                                         .append(Thread.currentThread().getId()).append(")\n")
+                                                                                                         .append("Receive param : ").append(n).append("\n")
+                                                                                                         .append("==> Result : ").append(result).append("\n")
+                                                                                                         .append(
+                                                                                                             "===================================================== //\n");
 
         // log.info(sb.toString());
         try {

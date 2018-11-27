@@ -21,6 +21,7 @@ import sun.security.util.Password;
 @RequestMapping("/member/")
 @Log
 public class MemberClass {
+
     @Autowired
     PasswordEncoder passwordEncoder;
     @Autowired

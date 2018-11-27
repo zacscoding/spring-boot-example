@@ -87,9 +87,8 @@ public class RpcRequestTest {
         public void run() {
             JsonRpcResponse response = client.processRequest(request);
             try {
-                if(response == null
-                    || !response.getId().equals(request.getId())
-                    || !response.getResponseBody().equals(request.getRequestBody().toUpperCase())) {
+                if (response == null || !response.getId().equals(request.getId()) || !response.getResponseBody()
+                                                                                              .equals(request.getRequestBody().toUpperCase())) {
                     throw new Exception();
                 }
                 SUCCESS.incrementAndGet();

@@ -28,18 +28,19 @@ import static org.junit.Assert.assertTrue;
 @Log
 @Commit
 public class WebBoardRepositoryTest {
+
     @Autowired
     WebBoardRepository repo;
 
     @Test
     //@Ignore
     public void insertBoardDummies() {
-        IntStream.range(0,300).forEach( (int i) -> {
+        IntStream.range(0, 300).forEach((int i) -> {
             WebBoard board = new WebBoard();
 
             board.setTitle("Sample Board Title : " + i);
             board.setContent("Content Sample ... " + i + " of Board ");
-            board.setWriter("user0"+(i%10));
+            board.setWriter("user0" + (i % 10));
 
             repo.save(board);
         });
@@ -50,7 +51,7 @@ public class WebBoardRepositoryTest {
     public void testList1() {
         Pageable pageable = PageRequest.of(0, 20, Sort.Direction.DESC, "bno");
 
-        Page<WebBoard> result = repo.findAll(repo.makePredicate(null,null), pageable);
+        Page<WebBoard> result = repo.findAll(repo.makePredicate(null, null), pageable);
 
         log.info("## PAGE : " + result.getPageable());
 
@@ -62,7 +63,7 @@ public class WebBoardRepositoryTest {
     @Test
     @Ignore
     public void testList2() {
-        Pageable pageable = PageRequest.of(0,20, Sort.Direction.DESC, "bno");
+        Pageable pageable = PageRequest.of(0, 20, Sort.Direction.DESC, "bno");
         Page<WebBoard> result = repo.findAll(repo.makePredicate("t", "10"), pageable);
 
         log.info("## PAGE : " + result.getPageable());

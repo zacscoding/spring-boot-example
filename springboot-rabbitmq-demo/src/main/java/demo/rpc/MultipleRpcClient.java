@@ -49,9 +49,8 @@ public class MultipleRpcClient implements RpcClient {
                 fail++;
             }
         }
-        double average = (double)elapsed / tasks.length;
-        log.info("Request : {} | success : {} | fail : {} ==> elapsed : {} ms | average : {} ms"
-            , threadCount, (threadCount - fail), fail, elapsed, average);
+        double average = (double) elapsed / tasks.length;
+        log.info("Request : {} | success : {} | fail : {} ==> elapsed : {} ms | average : {} ms", threadCount, (threadCount - fail), fail, elapsed, average);
     }
 
     public static class RequestTask extends Thread {

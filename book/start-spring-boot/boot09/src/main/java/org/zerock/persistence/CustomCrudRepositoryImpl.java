@@ -21,7 +21,8 @@ import java.util.List;
  */
 @Log
 public class CustomCrudRepositoryImpl extends QuerydslRepositorySupport implements CustomWebBoard {
-    public CustomCrudRepositoryImpl () {
+
+    public CustomCrudRepositoryImpl() {
         super(WebBoard.class);
     }
 
@@ -45,15 +46,15 @@ public class CustomCrudRepositoryImpl extends QuerydslRepositorySupport implemen
         tuple.where(b.bno.gt(0));
 
         // search
-        if(type != null) {
-            switch(type.toLowerCase()) {
-                case "t" :
+        if (type != null) {
+            switch (type.toLowerCase()) {
+                case "t":
                     tuple.where(b.title.like("%" + keyword + "%"));
                     break;
-                case "c" :
+                case "c":
                     tuple.where(b.content.like("%" + keyword + "%"));
                     break;
-                case "w" :
+                case "w":
                     tuple.where(b.writer.like("%" + keyword + "%"));
                     break;
             }
@@ -66,13 +67,10 @@ public class CustomCrudRepositoryImpl extends QuerydslRepositorySupport implemen
         tuple.offset(pageable.getOffset());
         tuple.limit(pageable.getPageSize());
 
-
-
-
         // result
         List<Tuple> list = tuple.fetch();
         List<Object[]> resultList = new ArrayList<>();
-        list.forEach( t -> {
+        list.forEach(t -> {
             resultList.add(t.toArray());
         });
 

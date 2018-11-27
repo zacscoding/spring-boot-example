@@ -25,25 +25,24 @@ import java.util.stream.IntStream;
 @Log
 @Commit
 public class MemberRepositoryTest {
+
     @Autowired
     MemberRepository memberRepository;
 
     @Test
     public void insert() {
-        IntStream.range(0,101).forEach(i -> {
+        IntStream.range(0, 101).forEach(i -> {
             Member member = new Member();
             member.setUid("user" + i);
-            member.setUpw("pw"+i);
-            member.setName("사용자"+i);
+            member.setUpw("pw" + i);
+            member.setName("사용자" + i);
 
             MemberRole role = new MemberRole();
-            if(i <= 80) {
+            if (i <= 80) {
                 role.setRoleName("BASIC");
-            }
-            else if(i<=90) {
+            } else if (i <= 90) {
                 role.setRoleName("MANAGER");
-            }
-            else {
+            } else {
                 role.setRoleName("ADMIN");
             }
             member.setRoles(Arrays.asList(role));

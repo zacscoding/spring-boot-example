@@ -14,6 +14,7 @@ import java.util.Set;
  * @GitHub : https://github.com/zacscoding
  */
 public class SortedSetsTest extends AbstractTestRunner {
+
     @Resource(name = "redisTemplate")
     private ZSetOperations<String, String> zSetOperations;
 
@@ -25,9 +26,9 @@ public class SortedSetsTest extends AbstractTestRunner {
         zSetOperations.add(key, "reditmq", 0);
         zSetOperations.add(key, "reditmq", 0);
 
-        Set<String> result = zSetOperations.rangeByScore(key, 0 , 1000);
+        Set<String> result = zSetOperations.rangeByScore(key, 0, 1000);
         Iterator<String> itr = result.iterator();
-        while(itr.hasNext()) {
+        while (itr.hasNext()) {
             System.out.println(itr.next());
         }
     }

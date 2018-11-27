@@ -21,7 +21,8 @@ public class ReaderHandlerMethodArgumentResolver implements HandlerMethodArgumen
     }
 
     @Override
-    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest,
+        WebDataBinderFactory binderFactory) throws Exception {
         Authentication auth = (Authentication) webRequest.getUserPrincipal();
         Object principal = null;
 

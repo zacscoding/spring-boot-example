@@ -18,6 +18,7 @@ import java.util.List;
 @ToString(exclude = "pageList")
 @Log
 public class PageMaker<T> {
+
     private Page<T> result;
 
     // 페이지 목록 맨 앞인 '이전' == '<'
@@ -37,7 +38,7 @@ public class PageMaker<T> {
     public PageMaker(Page<T> result) {
         this.result = result;
         this.currentPage = result.getPageable();
-        this.currentPageNum = currentPage.getPageNumber() +1;
+        this.currentPageNum = currentPage.getPageNumber() + 1;
         this.totalPageNum = result.getTotalPages();
         this.pageList = new ArrayList<>();
         calcPages();
@@ -67,7 +68,6 @@ public class PageMaker<T> {
 
         this.nextPage = startPage.getPageNumber() + 1 < totalPageNum ? startPage : null;
     }
-
 
 
 }

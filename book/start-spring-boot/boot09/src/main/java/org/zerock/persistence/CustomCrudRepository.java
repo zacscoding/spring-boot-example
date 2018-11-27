@@ -8,6 +8,6 @@ import org.zerock.domain.WebBoard;
  * @Date 2017-12-23
  * @GitHub : https://github.com/zacscoding
  */
-public interface CustomCrudRepository extends CrudRepository<WebBoard,Long>, CustomWebBoard {
+public interface CustomCrudRepository extends CrudRepository<WebBoard, Long>, CustomWebBoard {
 
 }

@@ -17,17 +17,18 @@ import java.util.Map;
  * @GitHub : https://github.com/zacscoding
  */
 public class HashesTest extends AbstractTestRunner {
+
     @Resource(name = "redisTemplate")
     private HashOperations<String, String, String> hashOperations;
 
     @Test
     public void test() {
-        Map<String,String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         map.put("name", "zac");
         map.put("hobby", "codding");
         hashOperations.putAll("user", map);
-        hashOperations.entries("user").forEach((k,v) -> {
-            CustomPrinter.println("key : {}, value : {}", k ,v);
+        hashOperations.entries("user").forEach((k, v) -> {
+            CustomPrinter.println("key : {}, value : {}", k, v);
         });
     }
 }

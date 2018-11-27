@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class FrontController {
+
     private static final Logger logger = LoggerFactory.getLogger(FrontController.class);
-    @GetMapping(value="/echo/{message}")
+
+    @GetMapping(value = "/echo/{message}")
     public String echo(@PathVariable("message") String message) {
         logger.info("## [request echo] message : {}", message);
         return message;

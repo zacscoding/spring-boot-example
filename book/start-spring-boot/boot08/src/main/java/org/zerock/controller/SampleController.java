@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @Log
 public class SampleController {
+
     @GetMapping("/")
     public String index() {
         log.info("## request index page");

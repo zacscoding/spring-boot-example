@@ -26,11 +26,13 @@ public class RoutingReceiver2 {
 
     @RabbitHandler
     private void receiveMessage(DefaultMessage receiveMessage) {
-        StringBuilder sb = new StringBuilder("\n// ==================================================\n")
-            .append("[[ Routing Receiver2 ]]\n")
-            .append("Thread : ").append(Thread.currentThread().getName()).append("(").append(Thread.currentThread().getId()).append(")\n")
-            .append("Receive message : ").append(receiveMessage.toString()).append("\n")
-            .append("===================================================== //\n");
+        StringBuilder sb = new StringBuilder("\n// ==================================================\n").append("[[ Routing Receiver2 ]]\n")
+                                                                                                         .append("Thread : ")
+                                                                                                         .append(Thread.currentThread().getName()).append("(")
+                                                                                                         .append(Thread.currentThread().getId()).append(")\n")
+                                                                                                         .append("Receive message : ")
+                                                                                                         .append(receiveMessage.toString()).append("\n").append(
+                "===================================================== //\n");
 
         log.info(sb.toString());
     }

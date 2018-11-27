@@ -106,7 +106,9 @@ public class RpcKafkaConfiguration2 {
         return new KafkaMessageListenerContainer<>(requestConsumerFactory(), containerProperties);
     }
 
-    *//**
+    */
+
+    /**
      * Listener Container to be set up in ReplyingKafkaTemplate
      *//*
     @Bean
@@ -114,13 +116,13 @@ public class RpcKafkaConfiguration2 {
         ContainerProperties containerProperties = new ContainerProperties(requestReplyTopic);
         return new KafkaMessageListenerContainer<>(responseConsumerFactory(), containerProperties);
     }*/
-
     @Bean
     public ConcurrentMessageListenerContainer<String, RpcRequest> requestContainer(RpcReplyingKafkaConsumer2 consumer) {
         ContainerProperties containerProperties = new ContainerProperties(requestTopic);
         containerProperties.setMessageListener(consumer);
 
-        ConcurrentMessageListenerContainer<String, RpcRequest> container = new ConcurrentMessageListenerContainer<>(requestConsumerFactory(), containerProperties);
+        ConcurrentMessageListenerContainer<String, RpcRequest> container = new ConcurrentMessageListenerContainer<>(requestConsumerFactory(),
+            containerProperties);
         container.setConcurrency(Integer.valueOf(5));
 
         return container;
@@ -131,7 +133,8 @@ public class RpcKafkaConfiguration2 {
     public ConcurrentMessageListenerContainer<String, RpcResponse> replyContainer() {
         ContainerProperties containerProperties = new ContainerProperties(requestReplyTopic);
 
-        ConcurrentMessageListenerContainer<String, RpcResponse> container = new ConcurrentMessageListenerContainer<>(responseConsumerFactory(), containerProperties);
+        ConcurrentMessageListenerContainer<String, RpcResponse> container = new ConcurrentMessageListenerContainer<>(responseConsumerFactory(),
+            containerProperties);
         container.setConcurrency(Integer.valueOf(5));
 
         return container;
@@ -146,7 +149,6 @@ public class RpcKafkaConfiguration2 {
         template.setReplyTimeout(10000L);
         return template;
     }*/
-
     @Bean
     public ReplyingKafkaTemplate<String, RpcRequest, RpcResponse> replyKafkaTemplate(ConcurrentMessageListenerContainer<String, RpcResponse> replyContainer) {
         ReplyingKafkaTemplate<String, RpcRequest, RpcResponse> template = new ReplyingKafkaTemplate<>(rpcRequestProducerFactory(), replyContainer);

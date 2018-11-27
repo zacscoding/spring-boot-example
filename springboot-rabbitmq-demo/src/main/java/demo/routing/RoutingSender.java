@@ -30,13 +30,13 @@ public class RoutingSender {
         String key = keys[keyIdx];
         DefaultMessage sendMessage = new DefaultMessage(index, "Message-" + index + ":" + key);
 
-
-        StringBuilder sb = new StringBuilder("\n// ==================================================\n")
-            .append("[[ Routing Sender ]]")
-            .append("Thread : ").append(Thread.currentThread().getName()).append("(").append(Thread.currentThread().getId()).append(")\n")
-            .append("Key : ").append(key).append("\n")
-            .append("Send message : ").append(sendMessage.toString()).append("\n")
-            .append("===================================================== //\n");
+        StringBuilder sb = new StringBuilder("\n// ==================================================\n").append("[[ Routing Sender ]]").append("Thread : ")
+                                                                                                         .append(Thread.currentThread().getName()).append("(")
+                                                                                                         .append(Thread.currentThread().getId()).append(")\n")
+                                                                                                         .append("Key : ").append(key).append("\n")
+                                                                                                         .append("Send message : ")
+                                                                                                         .append(sendMessage.toString()).append("\n").append(
+                "===================================================== //\n");
         log.info(sb.toString());
 
         rabbitTemplate.convertAndSend(directExchange.getName(), key, sendMessage);

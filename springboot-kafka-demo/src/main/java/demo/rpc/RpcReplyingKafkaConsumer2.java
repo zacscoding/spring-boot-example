@@ -75,8 +75,7 @@ public class RpcReplyingKafkaConsumer2 implements MessageListener<String, RpcReq
                 return;
             }
 
-            MessageBuilder<RpcResponse> builder = MessageBuilder.withPayload(response)
-                                                                .setHeader(KafkaHeaders.TOPIC, replyTopicHeader.value())
+            MessageBuilder<RpcResponse> builder = MessageBuilder.withPayload(response).setHeader(KafkaHeaders.TOPIC, replyTopicHeader.value())
                                                                 .setHeader(KafkaHeaders.CORRELATION_ID, correlationId.value());
 
             try {
@@ -100,10 +99,9 @@ public class RpcReplyingKafkaConsumer2 implements MessageListener<String, RpcReq
         RpcRequest request = record.value();
 
         StringBuilder sb = new StringBuilder("//=============================================\n");
-        sb.append("<<<<<< Rpc Server >>>>>>\n")
-          .append("> Thread : ").append(Thread.currentThread().getName()).append("-").append(Thread.currentThread().getId()).append("\n")
-          .append("> request : ").append(request).append("\n")
-          .append("> response : ").append(response).append("\n");
+        sb.append("<<<<<< Rpc Server >>>>>>\n").append("> Thread : ").append(Thread.currentThread().getName()).append("-")
+          .append(Thread.currentThread().getId()).append("\n").append("> request : ").append(request).append("\n").append("> response : ").append(response)
+          .append("\n");
 
         Header[] headers = record.headers().toArray();
         if (headers == null || headers.length == 0) {

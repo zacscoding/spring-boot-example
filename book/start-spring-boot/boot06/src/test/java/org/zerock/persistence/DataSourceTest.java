@@ -17,21 +17,20 @@ import java.sql.Connection;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DataSourceTest {
+
     @Autowired
     DataSource ds;
 
     @Test
     public void test() {
         System.out.println(ds);
-        try(Connection conn = ds.getConnection()) {
+        try (Connection conn = ds.getConnection()) {
             System.out.println(conn);
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-
 
 
 }

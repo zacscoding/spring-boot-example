@@ -54,9 +54,7 @@ public class PersonController {
 
 
     @ApiOperation(value = "Get person all")
-    @ApiResponses({
-        @ApiResponse(code = 200, message = "", response = String.class)
-    })
+    @ApiResponses({@ApiResponse(code = 200, message = "", response = String.class)})
     @GetMapping(produces = "application/json")
     public String getAll() {
         logger.info("## request person all");
@@ -84,13 +82,8 @@ public class PersonController {
     }
 
     @ApiOperation(value = "Modify person info")
-    @ApiImplicitParams({
-        @ApiImplicitParam(name = "id", value = "Person`s id", required = true, dataType = "Integer", paramType = "path")
-    })
-    @ApiResponses({
-        @ApiResponse(code = 200, message = "Success to modify"),
-        @ApiResponse(code = 400, message = "Not exist id")
-    })
+    @ApiImplicitParams({@ApiImplicitParam(name = "id", value = "Person`s id", required = true, dataType = "Integer", paramType = "path")})
+    @ApiResponses({@ApiResponse(code = 200, message = "Success to modify"), @ApiResponse(code = 400, message = "Not exist id")})
     @PutMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<Void> modifyPerson(@PathVariable("id") Integer id, @RequestBody Person person) {
         person.setId(id);

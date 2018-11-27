@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Log
 public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+
     public LoginSuccessHandler() {
         log.info("## LoginSuccecssHandler()");
     }
@@ -23,15 +24,14 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         Object dest = request.getSession().getAttribute("dest");
 
         String nextUrl = null;
-        if(dest != null) {
+        if (dest != null) {
             request.getSession().removeAttribute("dest");
             nextUrl = (String) dest;
-        }
-        else {
-            nextUrl = super.determineTargetUrl(request,response);
+        } else {
+            nextUrl = super.determineTargetUrl(request, response);
         }
 
-        log.info("## --------------"+ nextUrl + "------------------------");
+        log.info("## --------------" + nextUrl + "------------------------");
 
         return nextUrl;
     }

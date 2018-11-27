@@ -29,6 +29,7 @@ import java.util.stream.IntStream;
 @Log
 @Commit
 public class FreeBoardTests {
+
     @Autowired
     FreeBoardRepository boardRepository;
     @Autowired
@@ -36,11 +37,11 @@ public class FreeBoardTests {
 
     @Test
     public void insertDummy() {
-        IntStream.range(1,200).forEach(i -> {
+        IntStream.range(1, 200).forEach(i -> {
             FreeBoard board = new FreeBoard();
             board.setTitle("Free Board ... " + i);
             board.setContent("Free Content .... " + i);
-            board.setWriter("user" + i%10);
+            board.setWriter("user" + i % 10);
 
             boardRepository.save(board);
         });
@@ -81,8 +82,8 @@ public class FreeBoardTests {
     @Test
     public void testList1() {
         // Spring boot 2.0 new PageRequest @Deprecated :: -> PageRequest.of
-        Pageable page = PageRequest.of(0,10, Sort.Direction.DESC, "bno");
-        boardRepository.findByBnoGreaterThan(0L,page).forEach(board -> {
+        Pageable page = PageRequest.of(0, 10, Sort.Direction.DESC, "bno");
+        boardRepository.findByBnoGreaterThan(0L, page).forEach(board -> {
             log.info(board.getBno() + " : " + board.getTitle());
         });
     }
@@ -90,18 +91,18 @@ public class FreeBoardTests {
     @Transactional
     @Test
     public void testList2() {
-        Pageable page = PageRequest.of(0,10, Sort.Direction.DESC, "bno");
-        boardRepository.findByBnoGreaterThan(0L,page).forEach(board -> {
+        Pageable page = PageRequest.of(0, 10, Sort.Direction.DESC, "bno");
+        boardRepository.findByBnoGreaterThan(0L, page).forEach(board -> {
             log.info(board.getBno() + " : " + board.getTitle() + " : " + board.getReplies().size());
         });
     }
 
     @Test
     public void testList3() {
-        Pageable page = PageRequest.of(0,10, Sort.Direction.DESC, "bno");
+        Pageable page = PageRequest.of(0, 10, Sort.Direction.DESC, "bno");
 
         boardRepository.getPage(page).forEach(arr -> {
-           log.info(Arrays.toString(arr));
+            log.info(Arrays.toString(arr));
         });
     }
 

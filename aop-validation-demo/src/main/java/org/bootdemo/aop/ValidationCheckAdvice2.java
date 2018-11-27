@@ -87,8 +87,8 @@ public class ValidationCheckAdvice2 {
 
         if (joinPoint.getArgs().length != method.getParameterCount()) {
             throw new RuntimeException(String
-                .format("Invalid @Prefilter rules value. Please match rules and args length. arg : %d, method param type : %d",
-                    joinPoint.getArgs().length, method.getParameterCount()));
+                .format("Invalid @Prefilter rules value. Please match rules and args length. arg : %d, method param type : %d", joinPoint.getArgs().length,
+                    method.getParameterCount()));
         }
 
         ParameterRule[][] rules = new ParameterRule[ruleBeans.length][];

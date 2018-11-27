@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Profile;
 @Profile("work-queues")
 @Slf4j
 public class WorkQueuesConfiguration {
+
     static final String queueName = "workqueues";
 
     @Bean

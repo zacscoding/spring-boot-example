@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/not-api/**")
 public class NotAPIController {
+
     @GetMapping("/test")
     public String test() {
         return "test";

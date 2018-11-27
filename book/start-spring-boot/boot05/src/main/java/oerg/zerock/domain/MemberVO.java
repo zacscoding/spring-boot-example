@@ -9,8 +9,10 @@ import java.sql.Timestamp;
  * @Date ${date}
  * @GitHub : https://github.com/zacscoding
  */
-@Data@AllArgsConstructor
+@Data
+@AllArgsConstructor
 public class MemberVO {
+
     private int mno;
     private String mid;
     private String mpw;

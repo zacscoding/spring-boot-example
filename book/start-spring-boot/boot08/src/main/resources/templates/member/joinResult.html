@@ -1,9 +1,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>Hello Spring Security</title>
-    <meta charset="utf-8" />
+  <title>Hello Spring Security</title>
+  <meta charset="utf-8"/>
 </head>
 <body>
 
@@ -25,28 +25,28 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <!-- Latest compiled and minified JavaScript -->
 <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
 
 <div class="panel panel-default">
-    <div class="panel-body">
-        <p>
-            <label>UID</label>
-            <input type="text" name="uid"	th:value="${member.uid}" readonly />
-        </p>
-        <p>
-            <label>UPW</label>
-            <input type="text" name="upw" th:value="${member.upw}" readonly />
-        </p>
-        <p>
-            <label>UNAME</label>
-            <input type="text" name="uname" th:value="${member.name}" readonly />
-        </p>
+  <div class="panel-body">
+    <p>
+      <label>UID</label>
+      <input type="text" name="uid" th:value="${member.uid}" readonly/>
+    </p>
+    <p>
+      <label>UPW</label>
+      <input type="text" name="upw" th:value="${member.upw}" readonly/>
+    </p>
+    <p>
+      <label>UNAME</label>
+      <input type="text" name="uname" th:value="${member.name}" readonly/>
+    </p>
 
-        <p>[[${member.roles}]]</p>
+    <p>[[${member.roles}]]</p>
 
-    </div>
+  </div>
 </div>
 </body>
 </html>

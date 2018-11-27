@@ -8,6 +8,6 @@ import org.zerock.domain.Profile;
  * @Date 2017-12-17
  * @GitHub : https://github.com/zacscoding
  */
-public interface ProfileRepository extends CrudRepository<Profile,Long>{
+public interface ProfileRepository extends CrudRepository<Profile, Long> {
 
 }

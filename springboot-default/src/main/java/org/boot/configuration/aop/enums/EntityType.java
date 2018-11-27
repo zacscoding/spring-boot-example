@@ -5,6 +5,4 @@ package org.boot.configuration.aop.enums;
  * @Date 2018-04-27
  * @GitHub : https://github.com/zacscoding
  */
-public enum EntityType {
-    PERSON, BOOk;
-}
+public enum EntityType {PERSON, BOOk;}
