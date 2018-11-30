@@ -1,0 +1,39 @@
+.gradle
+/build/
+!gradle/wrapper/gradle-wrapper.jar
+bitly.yml
+facebook.yml
+aws.yml
+telegram.yml
+*.log
+*.http
+logs
+out
+keystore.p12
+node_modules
+dist
+npm-debug.log
+yarn-error.log
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
