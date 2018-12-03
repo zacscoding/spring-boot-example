@@ -21,8 +21,9 @@ public class ScheduledTasks {
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd [HH:mm:ss]");
 
-    @Scheduled(fixedRate = 3000)
+    // @Scheduled(fixedRate = 3000)
+    @Scheduled(cron = "0 0 0/1 * * *")
     public void reportCurrentTime() {
-        //log.info("## ScheduledTasks::reportCurrentTime : " + sdf.format(new Date()));
+        log.info("## ScheduledTasks::reportCurrentTime : " + sdf.format(new Date()));
     }
 }
