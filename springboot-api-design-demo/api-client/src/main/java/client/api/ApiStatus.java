@@ -1,4 +1,4 @@
-package server.api;
+package client.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

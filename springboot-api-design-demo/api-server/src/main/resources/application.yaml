@@ -1,0 +1,10 @@
+## server
+server:
+  port: 8989
+
+## auth
+auth:
+  token:
+    enable: false
+
+

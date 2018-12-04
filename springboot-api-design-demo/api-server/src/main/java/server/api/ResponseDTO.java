@@ -14,19 +14,19 @@ public class ResponseDTO<T> {
     private T data;
 
     public static <T> ResponseDTO<T> createOK(T data) {
-        return new ResponseDTO<>(ApiStatus.OK, data);
+        return new ResponseDTO<>(new ApiStatus(ApiStatusCode.OK.getErrorCode(), ApiStatusCode.OK.getMessage()), data);
     }
 
-    public static <T> ResponseDTO<T> createException(ApiStatus status) {
-        return new ResponseDTO<>(status, null);
+    public static <T> ResponseDTO<T> createException(ApiStatusCode status) {
+        return createException(status, status.getMessage());
+    }
+
+    public static <T> ResponseDTO<T> createException(ApiStatusCode code, String message) {
+        return createException(code.getErrorCode(), message);
     }
 
     public static <T> ResponseDTO<T> createException(int errorCode, String message) {
         return new ResponseDTO<>(new ApiStatus(errorCode, message), null);
-    }
-
-    public static <T> ResponseDTO<T> createException(ApiStatus status, String message) {
-        return new ResponseDTO<>(new ApiStatus(status.getErrorCode(), message), null);
     }
 
     private ResponseDTO(ApiStatus status, T data) {

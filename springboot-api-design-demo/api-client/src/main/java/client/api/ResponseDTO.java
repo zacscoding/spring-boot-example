@@ -1,4 +1,4 @@
-package server.api;
+package client.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,8 +14,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApiStatus {
+public class ResponseDTO<T> {
 
-    private int errorCode;
-    private String message;
+    private ApiStatus status;
+    private T data;
 }

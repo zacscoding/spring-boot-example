@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import server.api.ApiStatus;
+import server.api.ApiStatusCode;
 import server.api.Person;
 import server.api.ResponseDTO;
 import server.api.exception.DuplicateValueException;
@@ -45,7 +45,7 @@ public class PersonController {
         Person person = personService.findOneById(id);
 
         if (person == null) {
-            return ResponseDTO.createException(ApiStatus.BAD_REQUEST);
+            return ResponseDTO.createException(ApiStatusCode.BAD_REQUEST, String.format("Not found person id : %s", id));
         }
 
         return ResponseDTO.createOK(person);
@@ -59,10 +59,14 @@ public class PersonController {
 
         try {
             String id = personService.save(person);
-
+            log.info("Success to save person. id : {}", id);
             return ResponseDTO.createOK(id);
         } catch (DuplicateValueException e) {
-            return ResponseDTO.createException(ApiStatus.BAD_REQUEST, e.getMessage());
+            log.error("Failed to save person", e);
+            return ResponseDTO.createException(ApiStatusCode.BAD_REQUEST, e.getMessage());
+        } catch (Exception e) {
+            log.error("Exception occur while saving person", e);
+            return ResponseDTO.createException(ApiStatusCode.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 
@@ -80,7 +84,7 @@ public class PersonController {
         int result = personService.deleteById(id);
 
         if (result < 1) {
-            return ResponseDTO.createException(ApiStatus.BAD_REQUEST, "Not exist id : " + id);
+            return ResponseDTO.createException(ApiStatusCode.BAD_REQUEST, "Not exist id : " + id);
         }
 
         return ResponseDTO.createOK(result);
