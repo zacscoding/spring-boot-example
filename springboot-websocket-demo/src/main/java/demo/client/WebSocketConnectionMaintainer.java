@@ -9,9 +9,11 @@ import org.java_websocket.client.WebSocketClient;
  */
 public interface WebSocketConnectionMaintainer {
 
-    boolean register(String url, WebSocketListener webSocketListener);
+    boolean register(String url, WebSocketListener webSocketListener) throws InterruptedException;
 
     void remove(String url);
 
-    WebSocketClient getActiveClient();
+    WebSocketClient getActiveClient() throws NoAvailableClientException;
+
+    int getActiveClientCount();
 }

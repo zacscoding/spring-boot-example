@@ -4,11 +4,13 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.framing.CloseFrame;
 import org.java_websocket.handshake.ServerHandshake;
 
 /**
@@ -16,7 +18,7 @@ import org.java_websocket.handshake.ServerHandshake;
  * @Date 2018-12-04
  * @GitHub : https://github.com/zacscoding
  */
-@Slf4j
+@Slf4j(topic = "[WS-MAINTAINER]")
 public class DefaultWebSocketConnectionMaintainer implements WebSocketConnectionMaintainer {
 
     private Map<String, CustomWebSocketClient> clients;
@@ -36,7 +38,7 @@ public class DefaultWebSocketConnectionMaintainer implements WebSocketConnection
 
         CustomWebSocketClient webSocketClient = new CustomWebSocketClient(URI.create(url), webSocketListener);
         clients.put(url, webSocketClient);
-        webSocketClient.startConnectTask();
+        webSocketClient.tryConnectUntilConnectionEstablished();
 
         return true;
     }
@@ -50,9 +52,9 @@ public class DefaultWebSocketConnectionMaintainer implements WebSocketConnection
     }
 
     @Override
-    public WebSocketClient getActiveClient() {
+    public WebSocketClient getActiveClient() throws NoAvailableClientException {
         if (clients.isEmpty()) {
-            return null;
+            throw new NoAvailableClientException("Not exist available client");
         }
 
         List<String> urls = new ArrayList<>(clients.keySet());
@@ -66,7 +68,24 @@ public class DefaultWebSocketConnectionMaintainer implements WebSocketConnection
             }
         }
 
-        return null;
+        throw new NoAvailableClientException("Not exist available client");
+    }
+
+    @Override
+    public int getActiveClientCount() {
+        if (clients.isEmpty()) {
+            return 0;
+        }
+
+        int activeCount = 0;
+
+        for (Entry<String, CustomWebSocketClient> entry : clients.entrySet()) {
+            if (entry.getValue().isOpen()) {
+                activeCount++;
+            }
+        }
+
+        return activeCount;
     }
 
     /**
@@ -96,6 +115,7 @@ public class DefaultWebSocketConnectionMaintainer implements WebSocketConnection
         private WebSocketListener webSocketListener;
         private boolean isFirstTry;
         private boolean dispose;
+        private Thread connectTask;
 
         public CustomWebSocketClient(URI serverUri, WebSocketListener webSocketListener) {
             super(serverUri);
@@ -116,8 +136,8 @@ public class DefaultWebSocketConnectionMaintainer implements WebSocketConnection
         @Override
         public void onClose(int code, String reason, boolean remote) {
             webSocketListener.onClose(code, reason, remote);
-            if (!dispose) {
-                startConnectTask();
+            if (!dispose && code != CloseFrame.NEVER_CONNECTED) {
+                tryConnectUntilConnectionEstablished();
             }
         }
 
@@ -126,8 +146,13 @@ public class DefaultWebSocketConnectionMaintainer implements WebSocketConnection
             webSocketListener.onError(ex);
         }
 
-        private void startConnectTask() {
-            Thread task = new Thread(() -> {
+        private void tryConnectUntilConnectionEstablished() {
+            if (connectTask != null && connectTask.isAlive()) {
+                log.info("Already started to connect task : {}", getURI());
+                return;
+            }
+
+            connectTask = new Thread(() -> {
                 try {
                     log.info("Start connect task. url : {}", getURI());
                     int tryCount = 0;
@@ -146,7 +171,8 @@ public class DefaultWebSocketConnectionMaintainer implements WebSocketConnection
                         }
 
                         log.info("Failed to connect {}", getURI());
-                        long sleep = Math.min(5000L, tryCount * 300);
+                        // long sleep = Math.min(5000L, tryCount * 300);
+                        long sleep = 2000L;
                         TimeUnit.MILLISECONDS.sleep(sleep);
                         tryCount++;
                     }
@@ -155,13 +181,21 @@ public class DefaultWebSocketConnectionMaintainer implements WebSocketConnection
                 }
             });
 
-            task.setDaemon(true);
-            task.start();
+            connectTask.setDaemon(true);
+            connectTask.start();
         }
 
         private void closeConnection() {
             this.dispose = true;
-            close();
+
+            if (connectTask != null && connectTask.isAlive()) {
+                connectTask.interrupt();
+                return;
+            }
+
+            if (isOpen()) {
+                close();
+            }
         }
     }
 }
