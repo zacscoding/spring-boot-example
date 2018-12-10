@@ -1,4 +1,4 @@
-package server.api;
+package server.api.v1;
 
 import lombok.Getter;
 
@@ -8,7 +8,7 @@ import lombok.Getter;
  * @GitHub : https://github.com/zacscoding
  */
 @Getter
-public enum ApiStatusCode {
+public enum ApiStatusCodeV1 {
 
     OK(0, "")
     , BAD_REQUEST(400, "Bad Request")
@@ -19,7 +19,7 @@ public enum ApiStatusCode {
     private int errorCode;
     private String message;
 
-    ApiStatusCode(int errorCode, String message) {
+    ApiStatusCodeV1(int errorCode, String message) {
         this.errorCode = errorCode;
         this.message = message;
     }

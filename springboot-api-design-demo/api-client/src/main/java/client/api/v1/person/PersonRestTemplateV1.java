@@ -1,6 +1,6 @@
-package client.api.person;
+package client.api.v1.person;
 
-import client.api.ResponseDTO;
+import client.api.v1.ResponseDTOV1;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +19,20 @@ import org.springframework.web.client.RestTemplate;
  */
 @Slf4j
 @Component
-public class PersonRestTemplate {
+public class PersonRestTemplateV1 {
 
     private RestTemplate restTemplate;
 
     @Autowired
-    private PersonRestTemplate(RestTemplate restTemplate) {
+    private PersonRestTemplateV1(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
-    public ResponseDTO<Person> getPersonById(String accessToken, String id) {
+    public ResponseDTOV1<PersonV1> getPersonById(String accessToken, String id) {
         HttpEntity request = new HttpEntity<>(createAuthHeaders(accessToken));
         try {
-            ResponseEntity<ResponseDTO<Person>> entity = restTemplate.exchange(
-                PersonApiUrl.getPersonURI(id), HttpMethod.GET, request, new ParameterizedTypeReference<ResponseDTO<Person>>() {});
+            ResponseEntity<ResponseDTOV1<PersonV1>> entity = restTemplate.exchange(
+                PersonApiUrlV1.getPersonURI(id), HttpMethod.GET, request, new ParameterizedTypeReference<ResponseDTOV1<PersonV1>>() {});
             log.debug("getPersonById() >> status code : " + entity.getStatusCodeValue());
             return entity.getBody();
         } catch(Exception e) {
@@ -41,11 +41,11 @@ public class PersonRestTemplate {
         }
     }
 
-    public ResponseDTO<Integer> deletePersonById(String accessToken, String id) {
+    public ResponseDTOV1<Integer> deletePersonById(String accessToken, String id) {
         HttpEntity request = new HttpEntity<>(createAuthHeaders(accessToken));
         try {
-            ResponseEntity<ResponseDTO<Integer>> entity = restTemplate.exchange(
-                PersonApiUrl.deletePersonURI(id), HttpMethod.DELETE, request, new ParameterizedTypeReference<ResponseDTO<Integer>>() {});
+            ResponseEntity<ResponseDTOV1<Integer>> entity = restTemplate.exchange(
+                PersonApiUrlV1.deletePersonURI(id), HttpMethod.DELETE, request, new ParameterizedTypeReference<ResponseDTOV1<Integer>>() {});
 
             log.debug("deletePersonById() >> status code : " + entity.getStatusCodeValue());
             return entity.getBody();
@@ -55,11 +55,11 @@ public class PersonRestTemplate {
         }
     }
 
-    public ResponseDTO<List<Person>> getPersonAll(String accessToken) {
+    public ResponseDTOV1<List<PersonV1>> getPersonAll(String accessToken) {
         HttpEntity request = new HttpEntity<>(createAuthHeaders(accessToken));
         try {
-            ResponseEntity<ResponseDTO<List<Person>>> entity = restTemplate.exchange(
-                PersonApiUrl.getPersonAllURI(), HttpMethod.GET, request, new ParameterizedTypeReference<ResponseDTO<List<Person>>>() {});
+            ResponseEntity<ResponseDTOV1<List<PersonV1>>> entity = restTemplate.exchange(
+                PersonApiUrlV1.getPersonAllURI(), HttpMethod.GET, request, new ParameterizedTypeReference<ResponseDTOV1<List<PersonV1>>>() {});
 
             log.debug("getPersonAll() >> status code : " + entity.getStatusCodeValue());
             return entity.getBody();
@@ -69,11 +69,11 @@ public class PersonRestTemplate {
         }
     }
 
-    public ResponseDTO<String> savePerson(String accessToken, Person person) {
+    public ResponseDTOV1<String> savePerson(String accessToken, PersonV1 person) {
         HttpEntity request = new HttpEntity<>(person, createAuthHeaders(accessToken));
         try {
-            ResponseEntity<ResponseDTO<String>> entity = restTemplate.exchange(
-                PersonApiUrl.savePersonURI(), HttpMethod.POST, request, new ParameterizedTypeReference<ResponseDTO<String>>() {});
+            ResponseEntity<ResponseDTOV1<String>> entity = restTemplate.exchange(
+                PersonApiUrlV1.savePersonURI(), HttpMethod.POST, request, new ParameterizedTypeReference<ResponseDTOV1<String>>() {});
 
             log.debug("savePerson() >> status code : " + entity.getStatusCodeValue());
             return entity.getBody();

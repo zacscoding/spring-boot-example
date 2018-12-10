@@ -91,7 +91,7 @@ public class OkHttpClientTestController {
     @GetMapping("/delay/{timeout}")
     public String delay(@PathVariable("timeout") long timeout) throws InterruptedException {
         log.info("## > /delay/{}", timeout);
-        TimeUnit.SECONDS.sleep(timeout);
+        TimeUnit.MILLISECONDS.sleep(timeout);
         return "SUCCESS";
     }
 

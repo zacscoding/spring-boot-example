@@ -39,13 +39,19 @@ public class WSClientTest {
                 log.warn("onError()", e);
             }
         };
+
         boolean result = webSocketClient.connectBlocking();
         log.info("result : " + result);
-
+        try {
+            result = webSocketClient.connectBlocking();
+            log.info("re connect : " + result);
+        } catch(IllegalStateException e) {
+            result = webSocketClient.reconnectBlocking();
+            log.info("re connect in catch : " + result);
+        }
         // TimeUnit.SECONDS.sleep(30L);
         // result = webSocketClient.reconnectBlocking();
         // log.info("again result : " + result);
-
         TimeUnit.SECONDS.sleep(5L);
     }
 }

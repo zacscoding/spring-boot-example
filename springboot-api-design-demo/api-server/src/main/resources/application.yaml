@@ -7,4 +7,8 @@ auth:
   token:
     enable: false
 
+## logging
+logging:
+  level:
+    server: debug
 

@@ -6,8 +6,8 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
-import server.api.ApiStatusCode;
-import server.api.ResponseDTO;
+import server.api.v1.ApiStatusCodeV1;
+import server.api.v1.ResponseDTOV1;
 import server.util.ServletUtil;
 
 /**
@@ -37,10 +37,10 @@ public class AuthTokenService {
 
         for (String forbiddenToken : forbiddenTokens) {
             if (forbiddenToken.equals(token)) {
-                return ResponseDTO.createException(ApiStatusCode.FORBIDDEN);
+                return ResponseDTOV1.createException(ApiStatusCodeV1.FORBIDDEN);
             }
         }
 
-        return ResponseDTO.createException(ApiStatusCode.UNAUTHORIZED);
+        return ResponseDTOV1.createException(ApiStatusCodeV1.UNAUTHORIZED);
     }
 }

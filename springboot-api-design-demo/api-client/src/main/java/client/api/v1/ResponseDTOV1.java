@@ -1,5 +1,6 @@
-package client.api;
+package client.api.v1;
 
+import client.api.v1.ApiStatusV1;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,8 +15,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApiStatus {
+public class ResponseDTOV1<T> {
 
-    private int errorCode;
-    private String message;
+    private ApiStatusV1 status;
+    private T data;
 }

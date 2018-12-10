@@ -1,4 +1,4 @@
-package client.api.person;
+package client.api.v1.person;
 
 import java.net.URI;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -8,7 +8,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @Date 2018-12-04
  * @GitHub : https://github.com/zacscoding
  */
-public class PersonApiUrl {
+public class PersonApiUrlV1 {
 
     public static URI getPersonURI(String id) {
         return createDefaultBuilder().pathSegment("{id}").build(id);

@@ -1,11 +1,9 @@
-package client.api.person;
+package client.api.v1;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * @author zacconding
@@ -14,13 +12,10 @@ import lombok.ToString;
  */
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Person {
+public class ApiStatusV1 {
 
-    private int age;
-    private String id;
-    private String name;
-    private List<String> hobbies;
+    private int errorCode;
+    private String message;
 }

@@ -1,7 +1,7 @@
 import client.ApiClientApplication;
-import client.api.ResponseDTO;
-import client.api.person.Person;
-import client.api.person.PersonRestTemplate;
+import client.api.v1.ResponseDTOV1;
+import client.api.v1.person.PersonV1;
+import client.api.v1.person.PersonRestTemplateV1;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +18,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class ApiClientApplicationTests {
 
     @Autowired
-    private PersonRestTemplate restTemplate;
+    private PersonRestTemplateV1 restTemplate;
     private String accessToken = "aa";
 
     @Test
     public void temp() {
-        ResponseDTO<Person> result = restTemplate.getPersonById(accessToken, "1");
+        ResponseDTOV1<PersonV1> result = restTemplate.getPersonById(accessToken, "1");
         System.out.println(result.getData());
     }
 }
