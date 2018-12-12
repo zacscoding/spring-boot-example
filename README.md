@@ -25,11 +25,12 @@
 - <a href="https://github.com/zacscoding/spring-boot-example/tree/master/springboot-websocket-demo">spring boot websocket demo</a>  
 ; spring boot stomp websocket demo
 - <a href="https://github.com/zacscoding/spring-boot-example/tree/master/springboot-kafka-demo">spring boot kafka demo</a>  
-; default producer & consumer, request-reply demo  
- + WebSocketClient connection maintainer demo
+; default producer & consumer, request-reply demo + WebSocketClient connection maintainer demo
 - <a href="https://github.com/zacscoding/spring-boot-example/tree/master/springboot-okhttp-demo">spring boot mock controller + okhttp demo</a>  
 ; okhttp client + mock controller demo  
 - <a href="https://github.com/zacscoding/spring-boot-example/tree/master/springboot-api-design-demo">api server + client design demo </a>  
 ; design api server + client  
 - <a href="https://github.com/zacscoding/spring-boot-example/tree/master/springboot-spock-demo">spock demo</a>  
-; spring spock demo(usage)
+; spring spock demo(usage)  
+- <a href="springboot-curator-demo"> zookeeper curator demo </a>  
+; basic usage & shared lock application test  
