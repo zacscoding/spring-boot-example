@@ -1,5 +1,6 @@
 package demo.lock;
 
+import demo.ZookeeperProperties;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import javax.annotation.PostConstruct;
@@ -7,11 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.locks.InterProcessSemaphoreMutex;
 import org.apache.curator.framework.recipes.shared.SharedCount;
-import org.apache.curator.framework.recipes.shared.VersionedValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,9 +35,10 @@ public class LockTaskController {
     private SharedCount sharedCount;
 
     @Autowired
-    public LockTaskController(CuratorFramework curatorFramework, LockConfiguration lockConfiguration) {
+    public LockTaskController(CuratorFramework curatorFramework,
+        ZookeeperProperties zookeeperProperties) {
         this.curatorFramework = curatorFramework;
-        this.clientId = lockConfiguration.getClientId();
+        this.clientId = zookeeperProperties.getClientId();
     }
 
     @PostConstruct
@@ -75,17 +75,23 @@ public class LockTaskController {
         log.info("## Receive task : {} at {}", taskNumber, clientId);
         log.info("## > Acquire lock. client : {}, taskNumber : {}", clientId, taskNumber);
         if (sharedCount.getCount() >= taskNumber) {
-            log.info("## >> Skip task. sharedCount : {} / taskNumber : {}", sharedCount.getCount(), taskNumber);
+            log.info("## >> Skip task. sharedCount : {} / taskNumber : {}"
+                , sharedCount.getCount(), taskNumber);
+
             return;
         }
 
         int sleep = random.nextInt(3) + 1;
-        log.info("## >> do something. task number : {} / sleep : {} / client : {}", taskNumber, sleep, clientId);
+        log.info("## >> do something. task number : {} / sleep : {} / client : {}"
+            , taskNumber, sleep, clientId);
+
         TimeUnit.SECONDS.sleep(sleep);
 
         sharedCount.setCount((int) taskNumber);
-        log.info("## >>> After set count : {} / task number : {}", sharedCount.getCount(), taskNumber);
-        log.info("## >>> Complete task. client : {} / task number : {} / sharedCount : {}", clientId,
-                taskNumber, sharedCount.getCount());
+        log.info("## >>> After set count : {} / task number : {}"
+            , sharedCount.getCount(), taskNumber);
+
+        log.info("## >>> Complete task. client : {} / task number : {} / sharedCount : {}"
+            , clientId, taskNumber, sharedCount.getCount());
     }
 }
