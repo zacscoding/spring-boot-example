@@ -31,13 +31,43 @@ public class LockTaskPushTest {
     @Before
     public void setUp() throws Exception {
         urls = Arrays.asList(
-                "http://127.0.0.1:8080"
-                ,"http://127.0.0.1:8081"
+            "http://127.0.0.1:8081"
+            , "http://127.0.0.1:8082"
         );
         restTemplate = new RestTemplate();
 
+        //clearSharedCount();
+    }
+
+    @Test
+    public void pushTaskTest() throws InterruptedException {
+        int startNumber = 1;
+        int lastNumber = 2;
+
+        //final CountDownLatch countDownLatch = new CountDownLatch(lastNumber - startNumber + 1);
+        for (int taskNumber = startNumber; taskNumber <= lastNumber; taskNumber += 1L) {
+            for (String url : urls) {
+                pushMasterSlaveTask(url, taskNumber);
+            }
+        }
+    }
+
+    // tag :: lock task
+
+    private void pushLockTask(String url, long taskNumber) {
+        URI uri = UriComponentsBuilder.fromHttpUrl(url)
+            .pathSegment("lock", "task", String.valueOf(taskNumber))
+            .build()
+            .toUri();
+
+        ResponseEntity<Boolean> result = restTemplate.getForEntity(uri, Boolean.class);
+        log.info("## push task : {} >> {}", uri, result.getBody());
+    }
+
+    private void clearSharedCount() throws Exception {
         RetryPolicy retryPolicy = new RetryNTimes(3, 100);
-        CuratorFramework client = CuratorFrameworkFactory.newClient("192.168.5.78:2181", retryPolicy);
+        CuratorFramework client = CuratorFrameworkFactory
+            .newClient("192.168.5.78:2181", retryPolicy);
         client.start();
 
         SharedCount sharedCount = new SharedCount(client, "/lock/counters/task", 1);
@@ -48,31 +78,20 @@ public class LockTaskPushTest {
         client.close();
     }
 
-    @Test
-    public void pushTaskTest() throws InterruptedException {
-        int startNumber = 1;
-        int lastNumber = 5;
+    // -- tag :: lock task
 
-        //final CountDownLatch countDownLatch = new CountDownLatch(lastNumber - startNumber + 1);
-        for (int taskNumber = startNumber; taskNumber <= lastNumber; taskNumber += 1L) {
-            for (String url : urls) {
-                pushTask(url, taskNumber);
-                /*final long requestTaskNumber = taskNumber;
-                Thread t = new Thread(() -> {
-                    pushTask(url, requestTaskNumber);
-                    countDownLatch.countDown();
-                });
-                t.setDaemon(true);
-                t.start();*/
-            }
-        }
-    }
+    // tag :: master slave task
 
+    private void pushMasterSlaveTask(String url, long taskNumber) {
+        URI uri = UriComponentsBuilder
+            .fromHttpUrl(url)
+            .pathSegment("master-slave", "push", "task", String.valueOf(taskNumber))
+            .build()
+            .toUri();
 
-    private void pushTask(String url, long taskNumber) {
-        URI uri = UriComponentsBuilder.fromHttpUrl(url).pathSegment("lock", "task", String.valueOf(taskNumber)).build().toUri();
         ResponseEntity<Boolean> result = restTemplate.getForEntity(uri, Boolean.class);
         log.info("## push task : {} >> {}", uri, result.getBody());
     }
 
+    // -- tag :: master slave task
 }
