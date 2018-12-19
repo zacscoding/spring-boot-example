@@ -8,6 +8,18 @@
 broker.id=0
 listeners=PLAINTEXT://192.168.116.128:9092
 log.dirs=/tmp/kafka-logs
+```  
+
+> zokeeper start  
+
+```aidl
+$ bin/zookeeper-server-start.sh config/zookeeper.properties
+```  
+
+> kafka start  
+
+```aidl
+$ bin/kafka-server-start.sh config/server.properties
 ```
 
 > Create topic  
