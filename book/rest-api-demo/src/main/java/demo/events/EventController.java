@@ -6,7 +6,9 @@ import java.net.URI;
 import javax.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -47,7 +49,14 @@ public class EventController {
         Event event = modelMapper.map(eventDto, Event.class);
         event.update();
         Event newEvent = eventRepository.save(event);
-        URI createdUri = linkTo(EventController.class).slash("{id}").toUri();
-        return ResponseEntity.created(createdUri).body(newEvent);
+        ControllerLinkBuilder selfLinkBuilder = linkTo(EventController.class).slash("{id}");
+        URI createdUri = selfLinkBuilder.toUri();
+
+        EventResource eventResource = new EventResource(newEvent);
+        eventResource.add(linkTo(EventController.class).withRel("query-events"));
+        eventResource.add(linkTo(EventController.class).withRel("update-event"));
+        eventResource.add(new Link("/docs/index.html#resources-events-create").withRel("profile"));
+
+        return ResponseEntity.created(createdUri).body(eventResource);
     }
 }

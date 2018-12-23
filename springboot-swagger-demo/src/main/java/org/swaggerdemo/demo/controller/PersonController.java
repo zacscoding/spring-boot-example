@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.swaggerdemo.demo.domain.Person;
+import org.swaggerdemo.demo.entity.Person;
 
 /**
  * @author zacconding
@@ -29,7 +30,7 @@ import org.swaggerdemo.demo.domain.Person;
  * @GitHub : https://github.com/zacscoding
  */
 @RestController
-@RequestMapping("/person/**")
+@RequestMapping(value = "/api/persons", produces = "application/json")
 public class PersonController {
 
     private static final Logger logger = LoggerFactory.getLogger(PersonController.class);
@@ -53,18 +54,19 @@ public class PersonController {
     }
 
 
+    @GetMapping
     @ApiOperation(value = "Get person all")
-    @ApiResponses({@ApiResponse(code = 200, message = "", response = String.class)})
-    @GetMapping(produces = "application/json")
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "", response = String.class)
+    })
     public String getAll() {
         logger.info("## request person all");
         return gson.toJson(persons);
     }
 
+    @GetMapping(value = "/{id}")
     @ApiOperation(value = "Get one person by id")
-    @ApiImplicitParam(name = "id", value = "Person`s id", required = true, dataType = "Integer")
-    @GetMapping(value = "/{id}", produces = "application/json")
-    public String getPersonById(@PathVariable("id") Integer id) {
+    public String getPersonById(@PathVariable("id") @ApiParam(name = "id", value = "person id") Integer id) {
         for (Person p : persons) {
             if (p.getId().equals(id)) {
                 return gson.toJson(p);
@@ -73,19 +75,23 @@ public class PersonController {
         return "NULL";
     }
 
+    @PostMapping()
     @ApiOperation(value = "Add person")
-    @PostMapping(produces = "application/json")
     public String registPerson(Person person) {
         person.setId(seq++);
         persons.add(person);
         return gson.toJson(person);
     }
 
+    @PutMapping(value = "/{id}")
     @ApiOperation(value = "Modify person info")
-    @ApiImplicitParams({@ApiImplicitParam(name = "id", value = "Person`s id", required = true, dataType = "Integer", paramType = "path")})
-    @ApiResponses({@ApiResponse(code = 200, message = "Success to modify"), @ApiResponse(code = 400, message = "Not exist id")})
-    @PutMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity<Void> modifyPerson(@PathVariable("id") Integer id, @RequestBody Person person) {
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "Success to modify"),
+        @ApiResponse(code = 400, message = "Not exist id")
+    })
+    public ResponseEntity<Void> modifyPerson(@PathVariable("id") @ApiParam(name = "id", value = "person id") Integer id,
+        @RequestBody Person person) {
+
         person.setId(id);
         int idx = persons.indexOf(person);
         if (idx < 0) {

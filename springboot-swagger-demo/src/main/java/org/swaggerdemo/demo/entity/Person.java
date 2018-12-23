@@ -1,4 +1,4 @@
-package org.swaggerdemo.demo.domain;
+package org.swaggerdemo.demo.entity;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;

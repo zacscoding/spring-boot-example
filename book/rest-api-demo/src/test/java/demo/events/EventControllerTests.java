@@ -1,5 +1,14 @@
 package demo.events;
 
+import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
+import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
+import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
+import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
+import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
@@ -7,14 +16,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import demo.common.RestDocsConfiguration;
 import demo.common.TestDescription;
 import java.time.LocalDateTime;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -27,6 +39,10 @@ import org.springframework.test.web.servlet.MockMvc;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@AutoConfigureRestDocs
+@Import({
+    RestDocsConfiguration.class
+})
 public class EventControllerTests {
 
     @Autowired
@@ -68,7 +84,59 @@ public class EventControllerTests {
             .andExpect(jsonPath("id").exists())
             .andExpect(jsonPath("free").value(false))
             .andExpect(jsonPath("offline").value(Matchers.not(true)))
-            .andExpect(jsonPath("eventStatus").value(EventStatus.DRAFT.name()));
+            .andExpect(jsonPath("eventStatus").value(EventStatus.DRAFT.name()))
+            .andExpect(jsonPath("_links.self").exists())
+            .andExpect(jsonPath("_links.query-events").exists())
+            .andExpect(jsonPath("_links.update-event").exists())
+            .andExpect(jsonPath("_links.profile").exists())
+            .andDo(document("create-event",
+                links(
+                    linkWithRel("self").description("link to self"),
+                    linkWithRel("query-events").description("link to query events"),
+                    linkWithRel("update-event").description("link to update event"),
+                    linkWithRel("profile").description("link to profile")
+                ),
+                requestHeaders(
+                    headerWithName(HttpHeaders.ACCEPT).description("accept header"),
+                    headerWithName(HttpHeaders.CONTENT_TYPE).description("content type header")
+                ),
+                requestFields(
+                    fieldWithPath("name").description("Name of new event"),
+                    fieldWithPath("description").description("description of new event"),
+                    fieldWithPath("beginEnrollmentDateTime").description("date time of begin of new event"),
+                    fieldWithPath("closeEnrollmentDateTime").description("date time of close of new event"),
+                    fieldWithPath("beginEventDateTime").description("date time of begin of new event"),
+                    fieldWithPath("endEventDateTime").description("date time of end of new event"),
+                    fieldWithPath("basePrice").description("base price of new event"),
+                    fieldWithPath("maxPrice").description("max price of new event"),
+                    fieldWithPath("limitOfEnrollment").description("limit of enrollment of new event"),
+                    fieldWithPath("location").description("location of new event")
+                ),
+                responseHeaders(
+                    headerWithName(HttpHeaders.LOCATION).description("Location header"),
+                    headerWithName(HttpHeaders.CONTENT_TYPE).description("Content type")
+                ),
+                responseFields( // relaxedResponseFields로 가능
+                    fieldWithPath("id").description("identifier of new event"),
+                    fieldWithPath("name").description("Name of new event"),
+                    fieldWithPath("description").description("description of new event"),
+                    fieldWithPath("beginEnrollmentDateTime").description("date time of begin of new event"),
+                    fieldWithPath("closeEnrollmentDateTime").description("date time of close of new event"),
+                    fieldWithPath("beginEventDateTime").description("date time of begin of new event"),
+                    fieldWithPath("endEventDateTime").description("date time of end of new event"),
+                    fieldWithPath("basePrice").description("base price of new event"),
+                    fieldWithPath("maxPrice").description("max price of new event"),
+                    fieldWithPath("limitOfEnrollment").description("limit of enrollment of new event"),
+                    fieldWithPath("location").description("location of new event"),
+                    fieldWithPath("free").description("it tells if this event is free or not"),
+                    fieldWithPath("offline").description("it tells if this event is offline event or not"),
+                    fieldWithPath("eventStatus").description("event status"),
+                    fieldWithPath("_links.self.href").description("link to self"),
+                    fieldWithPath("_links.query-events.href").description("link to query events"),
+                    fieldWithPath("_links.update-event.href").description("link to update event"),
+                    fieldWithPath("_links.profile.href").description("link to profile")
+                )
+            ));
     }
 
     @Test
