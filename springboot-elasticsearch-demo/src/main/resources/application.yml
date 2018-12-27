@@ -1,0 +1,25 @@
+############ Spring ############
+spring:
+  devtools:
+    livereload:
+      enabled: true
+
+############ Elastic ############
+elastic:
+  # cluster properties
+  cluster:
+    hosts: 192.168.79.130
+    port: 9200
+    schema: http
+
+  # documents
+  personsDocument:
+    index: persons
+    mappings: elasticsearch/persons/mappings.json
+    settings: elasticsearch/persons/settings.json
+
+############ Logging ############
+logging:
+  level:
+    demo: trace
+    root: info
