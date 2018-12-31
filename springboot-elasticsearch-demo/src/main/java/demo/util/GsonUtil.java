@@ -92,7 +92,7 @@ public class GsonUtil {
     public static class GsonFactory {
 
         public static GsonBuilder createDefaultGsonBuilder() {
-            return new GsonBuilder().serializeNulls();
+            return new GsonBuilder();
         }
 
         public static GsonBuilder createDefaultGsonBuilderWithNamingPolicy() {

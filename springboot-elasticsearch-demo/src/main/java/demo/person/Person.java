@@ -23,7 +23,7 @@ import lombok.ToString;
 @ToString
 public class Person {
 
-    private Long id;
+    private String id;
     private String name;
     private List<String> hobbies;
 }

@@ -1,10 +1,15 @@
 package demo.elasticsearch;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotNull;
 
+import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.ReadContext;
 import demo.common.EmbeddedElasticsearchTestRunner;
 import demo.configuration.properties.ElasticProperties;
 import demo.configuration.properties.ElasticProperties.PersonsDocument;
+import org.apache.http.util.EntityUtils;
+import org.elasticsearch.client.Response;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,8 +26,10 @@ public class ElasticsearchTemplateTests extends EmbeddedElasticsearchTestRunner 
     @Before
     public void setUp() throws Exception {
         ElasticProperties properties = new ElasticProperties();
+
         properties.setPersonsDocument(new PersonsDocument());
         properties.getPersonsDocument().setIndex("persons");
+
         elasticsearchTemplate = new ElasticsearchTemplate(properties, restHighLevelClient);
     }
 
@@ -32,7 +39,7 @@ public class ElasticsearchTemplateTests extends EmbeddedElasticsearchTestRunner 
     }
 
     @Test
-    public void createIndex() throws Exception {
+    public void createIndexAndMapping() throws Exception {
         // Given
         Document document = new Document() {
             @Override
@@ -42,12 +49,12 @@ public class ElasticsearchTemplateTests extends EmbeddedElasticsearchTestRunner 
 
             @Override
             public String getSettings() {
-                return null;
+                return "settings.json";
             }
 
             @Override
             public String getMappings() {
-                return null;
+                return "mappings.json";
             }
         };
 
@@ -56,5 +63,14 @@ public class ElasticsearchTemplateTests extends EmbeddedElasticsearchTestRunner 
 
         // Then
         assertThat(createdIndex).isEqualTo(document.getIndex());
+
+        Response res = restHighLevelClient.getLowLevelClient()
+            .performRequest("GET", "/" + document.getIndex());
+        String responseBody = EntityUtils.toString(res.getEntity());
+        ReadContext responseCtx = JsonPath.parse(responseBody);
+
+        assertNotNull(responseCtx.read("persons.mappings._doc"));
+        String numOfShards = responseCtx.read("persons.settings.index.number_of_shards");
+        assertThat(numOfShards).isEqualTo("3");
     }
 }

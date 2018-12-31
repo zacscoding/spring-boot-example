@@ -1,11 +1,21 @@
 package demo.elasticsearch;
 
 import demo.configuration.properties.ElasticProperties;
+import demo.util.GsonUtil;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.get.GetIndexRequest;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.io.FileSystemUtils;
+import org.elasticsearch.common.xcontent.XContentType;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.StringUtils;
 
 /**
@@ -15,6 +25,8 @@ import org.springframework.util.StringUtils;
  */
 @Slf4j
 public class ElasticsearchTemplate {
+
+    private final String defaultType = "_doc";
 
     private ElasticProperties elasticProperties;
     private RestHighLevelClient client;
@@ -34,6 +46,10 @@ public class ElasticsearchTemplate {
         return personsIndex;
     }
 
+    public String getPersonsType() {
+        return defaultType;
+    }
+
     public String createIndexAndMapping(Document document) throws IOException {
         if (existIndices(document.getIndex())) {
             log.debug("Already exist index : {}", document.getIndex());
@@ -44,8 +60,16 @@ public class ElasticsearchTemplate {
 
         indexRequest.index(document.getIndex());
 
-        if (StringUtils.hasText(document.getSettings())) {
+        String settingsPath = document.getSettings();
 
+        if (StringUtils.hasText(settingsPath)) {
+            indexRequest.settings(readFile(settingsPath), XContentType.JSON);
+        }
+
+        String mappingsPath = document.getMappings();
+
+        if (StringUtils.hasText(mappingsPath)) {
+            indexRequest.mapping("_doc", readFile(mappingsPath), XContentType.JSON);
         }
 
         return client.indices().create(indexRequest).index();
@@ -57,5 +81,17 @@ public class ElasticsearchTemplate {
         request.indices(indices);
 
         return client.indices().exists(request);
+    }
+
+    private String readFile(String pathVal) throws IOException {
+        Path path = null;
+
+        if (pathVal.startsWith(File.separator)) {
+            path = new File(pathVal).toPath();
+        } else {
+            path = new ClassPathResource(pathVal).getFile().toPath();
+        }
+
+        return Files.readAllLines(path).stream().collect(Collectors.joining(""));
     }
 }
