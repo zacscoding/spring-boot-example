@@ -84,7 +84,6 @@
                             <doctype>book</doctype>
                             <attributes>
                                 <snippets>${snippetsDirectory}</snippets>
-                                5
                             </attributes>
                         </configuration>
                     </execution>

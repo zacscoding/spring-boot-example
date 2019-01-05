@@ -7,12 +7,16 @@ $ mvn clean install
 $ mvn spring-boot:run
 ```  
 
-> Docs  
+http://127.0.0.1:8080/docs/index.html  
+
+---  
+
+> Docs results  
 
 ![rest docs1](./assets/docs1.png)  
 
 
-![rest docs2](./assets/docs1.png)
+![rest docs2](./assets/docs2.png)
 
 
 > maven  
@@ -38,8 +42,7 @@ $ mvn spring-boot:run
                             <backend>html</backend>
                             <doctype>book</doctype>
                             <attributes>
-                                <snippets>${snippetsDirectory}</snippets>
-                                5
+                                <snippets>${snippetsDirectory}</snippets>                                
                             </attributes>
                         </configuration>
                     </execution>
@@ -80,6 +83,8 @@ $ mvn spring-boot:run
 > Testing code  
 
 ```aidl
+	...
+	
     @Test
     public void test_getPersons() throws Exception {
         // given
@@ -133,5 +138,6 @@ $ mvn spring-boot:run
                 )
             );
     }
+	
+	...
 ```
-
