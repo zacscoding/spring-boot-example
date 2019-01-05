@@ -50,7 +50,6 @@ public class ElasticsearchConfiguration implements ContextListener {
     @Override
     public void afterContextLoaded() throws Exception {
         ElasticsearchTemplate elasticsearchTemplate = elasticsearchTemplate();
-
         elasticsearchTemplate.createIndexAndMapping(elasticProperties.getPersonsDocument());
     }
 

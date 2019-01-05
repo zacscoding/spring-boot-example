@@ -31,6 +31,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.hamcrest.Matchers;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
@@ -270,17 +271,16 @@ public class EventControllerTests extends BaseControllerTest {
     @TestDescription("기존의 이벤트를 하나 조회하기")
     public void getEvent() throws Exception {
         // Given
-        Event event = generateEvent(1);
+        Event event = this.generateEvent(100);
 
         // When & Then
-        mockMvc.perform(get("/api/events/{id}", event.getId()))
+        this.mockMvc.perform(get("/api/events/{id}", event.getId()))
             .andExpect(status().isOk())
             .andExpect(jsonPath("name").exists())
             .andExpect(jsonPath("id").exists())
             .andExpect(jsonPath("_links.self").exists())
             .andExpect(jsonPath("_links.profile").exists())
-            .andDo(document("get-an-event"))
-        ;
+            .andDo(document("get-an-event"));
     }
 
     @Test
@@ -295,23 +295,22 @@ public class EventControllerTests extends BaseControllerTest {
     @TestDescription("이벤트를 정상적으로 수정하기")
     public void updateEvent() throws Exception {
         // Given
-        Event event = generateEvent(200);
-        EventDto eventDto = modelMapper.map(event, EventDto.class);
-        eventDto.setName("Updated-" + eventDto.getName());
+        Event event = this.generateEvent(200);
+
+        EventDto eventDto = this.modelMapper.map(event, EventDto.class);
+        String eventName = "Updated Event";
+        eventDto.setName(eventName);
 
         // When & Then
-        mockMvc.perform(
-            put("/api/events/{id}", event.getId())
-                .header(HttpHeaders.AUTHORIZATION, getBearerToken())
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(objectMapper.writeValueAsString(eventDto)))
+        this.mockMvc.perform(put("/api/events/{id}", event.getId())
+            .header(HttpHeaders.AUTHORIZATION, getBearerToken())
+            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .content(this.objectMapper.writeValueAsString(eventDto)))
             .andDo(print())
             .andExpect(status().isOk())
-            .andExpect(jsonPath("name").value(eventDto.getName()))
+            .andExpect(jsonPath("name").value(eventName))
             .andExpect(jsonPath("_links.self").exists())
-            .andDo(document("update-event"))
-        // TODO :: 문서화
-        ;
+            .andDo(document("update-event"));
     }
 
     @Test
@@ -331,6 +330,7 @@ public class EventControllerTests extends BaseControllerTest {
             .andExpect(status().isBadRequest());
     }
 
+    @Ignore
     @Test
     @TestDescription("입력값이 잘못된 경우에 이벤트 수정 실패")
     public void updateEvent400Wrong() throws Exception {
