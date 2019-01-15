@@ -33,4 +33,8 @@
 - <a href="https://github.com/zacscoding/spring-boot-example/tree/master/springboot-spock-demo">spock demo</a>  
 ; spring spock demo(usage)  
 - <a href="springboot-curator-demo"> zookeeper curator demo </a>  
-; basic usage, shared lock application test, leader election
+; basic usage, shared lock application test, leader election  
+- <a href="springboot-elk-demo"> spring boot + filebeat + logstash + elasticsearch + kibana</a>  
+; spring boot server -> elk demo
+- <a href="springboot-rest-docs-demo"> spring rest docs demo </a>  
+; generate rest docs  

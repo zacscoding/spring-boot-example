@@ -3,11 +3,7 @@
 
 > ### Basic usage  
 
-<<<<<<< HEAD
-<a href="src/test/java/demo/curator.CuratorBasicUsageTest.java">See</a>
-=======
 <a href="src/test/java/demo/curator/CuratorBasicUsageTest.java">See</a>
->>>>>>> 002563b7770a84f6688053d5255f03b09ac31adf
 
 ```
 usage_retryPolicies()     / usage_retryPoliciesAsync()
@@ -21,16 +17,7 @@ usage_sharedLock()        / usage_counter()
 > ### Shared lock demo  
 
 - <a href="src/main/java/demo/lock">Server side (receive tasks)</a>  
-- <a href="src/test/java/demo/LockTaskPushTest.java">Client side (push
-<<<<<<< HEAD
-tasks) </a>
-
-> Master slave demo  
-
-- working..
-~~~~
-=======
-tasks) </a>  
+- <a href="src/test/java/demo/LockTaskPushTest.java">Client side (push tasks) </a>  
 
 ---  
 
@@ -67,4 +54,3 @@ $ java -Dlock.client.id=0003 -Dserver.port=8083 -Dspring.profiles.active=master-
 ```  
 
 ---
->>>>>>> 002563b7770a84f6688053d5255f03b09ac31adf
