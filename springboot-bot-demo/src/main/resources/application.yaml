@@ -2,7 +2,20 @@
 server:
   port: 8080
 
+spring:
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+logging:
+  level:
+    demo: debug
+    root: info
+    
 ## Bot settings
 slack:
   enabled: true
 
+slackApi: https://slack.com/api
+slackBotToken: <paste your slack bot token>
+slashCommandToken: <paste your slash command token>
+slackIncomingWebhookUrl: <paste your webhook url>
