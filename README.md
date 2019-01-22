@@ -38,3 +38,7 @@
 ; spring boot server -> elk demo
 - <a href="springboot-rest-docs-demo"> spring rest docs demo </a>  
 ; generate rest docs  
+- <a href="springboot-bot-demo">bot demo</a>  
+; slack /
+- <a href="springboot-crawler4j-demo">crawler4j demo </a>  
+; crawler4j example
