@@ -1,10 +1,7 @@
 package demo.master;
 
 import demo.ZookeeperProperties;
-<<<<<<< HEAD
 import java.util.Arrays;
-=======
->>>>>>> 002563b7770a84f6688053d5255f03b09ac31adf
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import javax.annotation.PostConstruct;
@@ -33,7 +30,6 @@ public class MasterSlaveTaskController {
     private ZookeeperProperties zookeeperProperties;
     private CuratorFramework curatorFramework;
     private String mutexPath = "/mutex/select/leader/job/";
-<<<<<<< HEAD
     private String fixedTaskMutexPath = "/mutex/select/leader/job/A";
     private LeaderSelector leaderSelector;
 
@@ -43,23 +39,10 @@ public class MasterSlaveTaskController {
 
         this.curatorFramework = curatorFramework;
         this.zookeeperProperties = zookeeperProperties;
-=======
-    private LeaderListener leaderListener;
-
-    @Autowired
-    public MasterSlaveTaskController(CuratorFramework curatorFramework,
-        ZookeeperProperties zookeeperProperties,
-        LeaderListener leaderListener) {
-
-        this.curatorFramework = curatorFramework;
-        this.zookeeperProperties = zookeeperProperties;
-        this.leaderListener = leaderListener;
->>>>>>> 002563b7770a84f6688053d5255f03b09ac31adf
     }
 
     @PostConstruct
     private void setUp() {
-<<<<<<< HEAD
         leaderSelector = new LeaderSelector(
             curatorFramework,
             fixedTaskMutexPath,
@@ -101,18 +84,6 @@ public class MasterSlaveTaskController {
                         Arrays.toString(leaderSelector.getParticipants().toArray())
                     );
 
-=======
-        leaderListener.start();
-
-        // check leadership
-        Thread leaderChecker = new Thread(() -> {
-            try {
-                while (!Thread.currentThread().isInterrupted()) {
-                    log.info("[Check leader - {}] is leader : {}"
-                        , zookeeperProperties.getClientId()
-                        , leaderListener.isLeader()
-                    );
->>>>>>> 002563b7770a84f6688053d5255f03b09ac31adf
                     TimeUnit.SECONDS.sleep(1L);
                 }
             } catch (Exception e) {
@@ -133,10 +104,6 @@ public class MasterSlaveTaskController {
                 @Override
                 public void takeLeadership(CuratorFramework internalCuratorFramework)
                     throws Exception {
-<<<<<<< HEAD
-=======
-
->>>>>>> 002563b7770a84f6688053d5255f03b09ac31adf
                     log.info("## [{}] - taskLeadership at client : {} - {}"
                         , zookeeperProperties.getClientId(), taskNumber, internalCuratorFramework);
 
@@ -150,10 +117,6 @@ public class MasterSlaveTaskController {
                 @Override
                 public void stateChanged(CuratorFramework curatorFramework,
                     ConnectionState connectionState) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 002563b7770a84f6688053d5255f03b09ac31adf
                     log.info("## [{}] stateChanged at client >> {}"
                         , zookeeperProperties.getClientId(), connectionState);
                 }
