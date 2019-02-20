@@ -1,4 +1,4 @@
-package statemachine.simple;
+package statemachine.demo.simple;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.statemachine.config.EnableStateMachine;

@@ -1,4 +1,4 @@
-package statemachine.simple;
+package statemachine.demo.simple;
 
 /**
  * https://projects.spring.io/spring-statemachine/

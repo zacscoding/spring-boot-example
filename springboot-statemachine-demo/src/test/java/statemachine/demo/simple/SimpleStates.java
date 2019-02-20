@@ -1,4 +1,4 @@
-package statemachine.simple;
+package statemachine.demo.simple;
 
 /**
  * @GitHub : https://github.com/zacscoding

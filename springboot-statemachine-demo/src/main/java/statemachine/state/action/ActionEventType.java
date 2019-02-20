@@ -1,4 +1,4 @@
-package statemachine.action;
+package statemachine.state.action;
 
 /**
  * @GitHub : https://github.com/zacscoding

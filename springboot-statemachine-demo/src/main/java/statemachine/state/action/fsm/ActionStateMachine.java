@@ -1,13 +1,12 @@
-package statemachine.action.fsm;
+package statemachine.state.action.fsm;
 
 import java.util.EnumSet;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.config.StateMachineBuilder;
 import org.springframework.statemachine.config.StateMachineBuilder.Builder;
-import statemachine.action.ActionEvent;
-import statemachine.action.ActionEventType;
-import statemachine.action.ActionState;
+import statemachine.state.action.ActionEvent;
+import statemachine.state.action.ActionState;
 
 /**
  * @GitHub : https://github.com/zacscoding
@@ -48,5 +47,4 @@ public class ActionStateMachine {
             logger.warn("Failed to initialize state machine", e);
         }
     }
-
 }

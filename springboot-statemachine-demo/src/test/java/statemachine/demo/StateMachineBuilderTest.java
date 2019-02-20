@@ -3,15 +3,14 @@ package statemachine.demo;
 import java.util.EnumSet;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
-import org.springframework.statemachine.StateContext;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.action.Action;
 import org.springframework.statemachine.config.StateMachineBuilder;
 import org.springframework.statemachine.config.StateMachineBuilder.Builder;
 import org.springframework.statemachine.listener.StateMachineListenerAdapter;
 import org.springframework.statemachine.state.State;
-import statemachine.simple.SimpleEvents;
-import statemachine.simple.SimpleStates;
+import statemachine.demo.simple.SimpleEvents;
+import statemachine.demo.simple.SimpleStates;
 
 /**
  * @GitHub : https://github.com/zacscoding
@@ -21,6 +20,7 @@ public class StateMachineBuilderTest {
 
     @Test
     public void buildMachine() throws Exception {
+
         Builder<SimpleStates, SimpleEvents> builder = StateMachineBuilder.builder();
 
         builder.configureStates()
@@ -36,7 +36,6 @@ public class StateMachineBuilderTest {
             .withExternal()
             .source(SimpleStates.STATE2).target(SimpleStates.STATE1)
             .event(SimpleEvents.EVENT2);
-
         StateMachine<SimpleStates, SimpleEvents> machine = builder.build();
         machine.addStateListener(createListener());
 
@@ -71,7 +70,6 @@ public class StateMachineBuilderTest {
 
         machine.start();
         machine.sendEvent(SimpleEvents.EVENT1);
-
         System.out.println("Finally :: " + machine.getState().getId());
     }
 
