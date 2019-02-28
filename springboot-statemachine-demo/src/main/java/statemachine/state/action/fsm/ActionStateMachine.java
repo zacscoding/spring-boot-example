@@ -9,6 +9,8 @@ import statemachine.state.action.ActionEvent;
 import statemachine.state.action.ActionState;
 
 /**
+ * TODO :: will change to config
+ *
  * @GitHub : https://github.com/zacscoding
  */
 @Slf4j
@@ -35,8 +37,8 @@ public class ActionStateMachine {
 
             builder.configureTransitions()
                 .withExternal()
-                    .source(ActionState.INIT).target(ActionState.IN_PROGRESS).event(null)
-                    .source(null).target(null).event(null)
+                .source(ActionState.INIT).target(ActionState.IN_PROGRESS).event(null)
+                .source(null).target(null).event(null)
                 .and()
                 .withExternal()
             ;

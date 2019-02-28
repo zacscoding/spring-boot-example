@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.test.context.junit4.SpringRunner;
-import statemachine.state.component.ComponentEvent;
-import statemachine.state.component.ComponentState;
+import statemachine.state.component.HostComponentEvent;
+import statemachine.state.component.HostComponentState;
 
 /**
  * @GitHub : https://github.com/zacscoding
@@ -17,7 +17,7 @@ import statemachine.state.component.ComponentState;
 public class ComponentStatePersisTest {
 
     @Autowired
-    private StateMachine<ComponentState, ComponentEvent> machine;
+    private StateMachine<HostComponentState, HostComponentEvent> machine;
 
     @Test
     public void temp() {

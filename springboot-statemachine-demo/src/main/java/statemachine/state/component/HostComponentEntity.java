@@ -1,4 +1,4 @@
-package statemachine.orm;
+package statemachine.state.component;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +12,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import statemachine.state.component.ComponentState;
 
 /**
  * @GitHub : https://github.com/zacscoding
@@ -24,16 +23,16 @@ import statemachine.state.component.ComponentState;
 @Builder
 @ToString
 @Entity
-public class ComponentEntity {
+public class HostComponentEntity {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
 
     @Column(name = "name", unique = true)
     private String name;
 
     @Column(name = "state")
     @Enumerated(value = EnumType.STRING)
-    private ComponentState state;
+    private HostComponentState state;
 }

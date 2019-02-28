@@ -5,19 +5,17 @@ import java.util.Set;
 import org.springframework.util.StringUtils;
 
 /**
- * Component state
- *
  * @GitHub : https://github.com/zacscoding
  */
-public enum ComponentState {
+public enum HostComponentEvent {
 
-    IDLE, ACTIVE, DELETED, UNKNOWN;
+    IDLE, ACTIVATE, DELETE, UNKNOWN;
 
-    public static Set<ComponentState> ENUMS = EnumSet.allOf(ComponentState.class);
+    private static Set<HostComponentEvent> ENUMS = EnumSet.allOf(HostComponentEvent.class);
 
-    public static ComponentState getType(String type) {
+    public static HostComponentEvent getType(String type) {
         if (StringUtils.hasText(type)) {
-            for (ComponentState state : ENUMS) {
+            for (HostComponentEvent state : ENUMS) {
                 if (type.equalsIgnoreCase(state.name())) {
                     return state;
                 }
@@ -26,4 +24,5 @@ public enum ComponentState {
 
         return UNKNOWN;
     }
+
 }
