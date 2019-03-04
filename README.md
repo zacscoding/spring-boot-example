@@ -41,4 +41,6 @@
 - <a href="springboot-bot-demo">bot demo</a>  
 ; slack /
 - <a href="springboot-crawler4j-demo">crawler4j demo </a>  
-; crawler4j example
+; crawler4j example  
+- <a href="springboot-statemachine-demo">spring statemachine demo </a>  
+; handle state machine with persist  

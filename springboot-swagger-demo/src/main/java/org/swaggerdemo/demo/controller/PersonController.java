@@ -2,8 +2,6 @@ package org.swaggerdemo.demo.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -37,7 +35,6 @@ public class PersonController {
     private List<Person> persons;
     private int seq = 0;
     private Gson gson;
-
 
     @PostConstruct
     public void setUp() {
