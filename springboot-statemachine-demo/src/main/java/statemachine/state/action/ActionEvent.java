@@ -1,24 +1,9 @@
 package statemachine.state.action;
 
-import lombok.Getter;
-
 /**
  * @GitHub : https://github.com/zacscoding
  */
-@Getter
-public abstract class ActionEvent {
+public enum ActionEvent {
 
-    private final long actionId;
-    private final ActionEventType actionEventType;
-    private long timestamp;
-
-    public ActionEvent(long actionId, ActionEventType actionEventType) {
-        this(actionId, actionEventType, -1L);
-    }
-
-    public ActionEvent(long actionId, ActionEventType actionEventType, long timestamp) {
-        this.actionId = actionId;
-        this.actionEventType = actionEventType;
-        this.timestamp = timestamp;
-    }
+    ACTION_INIT, ACTION_IN_PROGRESS, ACTION_COMPLETE, ACTION_FAILED;
 }
