@@ -28,7 +28,7 @@ public class JobLauncherScheduler {
     @Autowired
     private JobLauncher jobLauncher;
 
-    @Scheduled(fixedRate = 3000L)
+    @Scheduled(fixedRate = 15000L)
     public void importUserScheduleTask() {
         try {
             jobLauncher.run(job, newExecution());

@@ -32,8 +32,8 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
         logger.info("@@ after job is called..  status : {}", jobExecution.getStatus());
         if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
             logger.info("@@ Job finished ! Time to verity the results");
-            jdbcTemplate.query("SELECT first_name, last_name FROM people", (rs, row) -> new Person(rs.getString(1), rs.getString(2)))
-                        .forEach(person -> logger.info("Found <{}> in the database", person));
+            /*jdbcTemplate.query("SELECT first_name, last_name FROM people", (rs, row) -> new Person(rs.getString(1), rs.getString(2)))
+                        .forEach(person -> logger.info("Found <{}> in the database", person));*/
         }
     }
 
