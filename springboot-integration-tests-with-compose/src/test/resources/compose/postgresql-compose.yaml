@@ -1,0 +1,11 @@
+version: '3.1'
+
+services:
+  postgres_test_db:
+    image: postgres
+    container_name: postgres_test_db
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=pass
+    ports:
+      - "5432:5432"

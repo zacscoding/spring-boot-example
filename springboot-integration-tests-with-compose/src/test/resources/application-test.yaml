@@ -1,0 +1,10 @@
+# for test configs
+spring:
+  datasource:
+    username: postgres
+    password: pass
+    url: jdbc:postgresql://localhost:5432/postgres
+    driver-class-name: org.postgresql.Driver
+  hikari:
+    connection-timeout: 1000
+    validation-timeout: 1000

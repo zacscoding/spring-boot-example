@@ -1,0 +1,28 @@
+# spring configs
+spring:
+  datasource:
+    username: postgres
+    password: pass
+    url: jdbc:postgresql://192.168.79.128:5432/postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        format_sql: true
+
+  logging:
+    level:
+      org:
+        hibernate:
+          SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+      root: INFO

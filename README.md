@@ -44,3 +44,5 @@
 ; crawler4j example  
 - <a href="springboot-statemachine-demo">spring statemachine demo </a>  
 ; handle state machine with persist  
+- <a href="springboot-integration-tests-with-compose">integration tests with jUnit and Docker-compose</a>
+; integration tests as container is loaded before tests
