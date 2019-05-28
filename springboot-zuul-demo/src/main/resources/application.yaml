@@ -1,0 +1,12 @@
+server:
+  port: 8081
+
+zuul:
+  sensitive-headers:
+  host:
+    connect-timeout-millis: 60000
+    socket-timeout-millis: 60000
+  routes:
+    dynamic:
+      path: /dynamic/**
+      url: http://localhost:8081/dynamic-foo

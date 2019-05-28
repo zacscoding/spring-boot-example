@@ -46,3 +46,5 @@
 ; handle state machine with persist  
 - <a href="springboot-integration-tests-with-compose">integration tests with jUnit and Docker-compose</a>
 ; integration tests as container is loaded before tests
+- <a href="springboot-zuul-demo">spring cloud zuul demo</a>
+; default usage, change route url,
