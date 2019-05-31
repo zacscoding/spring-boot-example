@@ -5,10 +5,13 @@ import demo.validator.annotations.Birth;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 /**
  * http://jojoldu.tistory.com/129
  */
+@NoArgsConstructor
 public class MemberRequest {
 
     private Long id;
@@ -26,6 +29,17 @@ public class MemberRequest {
 
     @Birth // custom validator
     private String birth;
+
+    @Builder
+    public MemberRequest(@NotBlank(message = "Must be not null name") String name,
+        @NotBlank(message = "Must be not null phone") @Pattern(regexp = "[0-9]{10,11}", message = "Invalid phone format") String phoneNumber,
+        @NotBlank(message = "Must be not null email") @Email(message = "Invalid email format") String email,
+        String birth) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.birth = birth;
+    }
 
     public Member toEntity() {
         String[] parsedPhone = parsePhone();
