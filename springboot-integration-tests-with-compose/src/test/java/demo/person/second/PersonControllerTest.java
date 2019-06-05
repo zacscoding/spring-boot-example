@@ -1,4 +1,4 @@
-package demo.person;
+package demo.person.second;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -10,6 +10,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.palantir.docker.compose.DockerComposeRule;
 import com.palantir.docker.compose.connection.waiting.HealthChecks;
+import demo.person.Person;
+import demo.person.PersonRepository;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +31,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 /**
- * Person integration tests
+ * Person integration tests with docker-compose-rule-junit4
  *
  * @GitHub : https://github.com/zacscoding
  */

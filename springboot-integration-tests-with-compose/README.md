@@ -1,5 +1,25 @@
 # Spring integration tests with maven and docker compose  
 
+this projects is demo for integration tests.  
+
+<a href="#docker-compose-rule-junit4">first tests</a> is using docker-compose-rule-junit4 but dead projects  
+(https://github.com/palantir/docker-compose-rule/issues/255)  
+
+<a href="#docker-compose-rule-junit4">second tests</a> is using testcontainers library.
+
+---  
+
+## Integration tests with testcontainers  
+
+
+   
+
+---  
+
+<div id="docker-compose-rule-junit4"></div>
+
+## Integration tests with docker-compose-rule-junit4
+
 > ## Getting started  
 
 ```aidl
@@ -77,7 +97,6 @@ public class PersonControllerTest {
             .andDo(print())
         // TODO : assertion of response
         ;
-    }
-    
+    }    
     ...
 ```  
