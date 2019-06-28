@@ -19,7 +19,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * @GitHub : https://github.com/zacscoding
+ *
  */
 @Getter
 @Setter
