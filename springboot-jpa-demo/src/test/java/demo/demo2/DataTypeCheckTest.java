@@ -26,7 +26,7 @@ public class DataTypeCheckTest {
 
     @Test
     public void insertBytes() throws Exception {
-        try (Connection conn = dataSource.getConnection()) {
+        /*try (Connection conn = dataSource.getConnection()) {
             DatabaseMetaData metaData = conn.getMetaData();
             System.out.println(metaData);
             System.out.println("l");
@@ -50,5 +50,6 @@ public class DataTypeCheckTest {
         System.out.println("Saved :: " + saved.getId());
         System.out.println(find.getByteValues().length);
         System.out.println(find.getByteStringValues().length());
+        }*/
     }
 }

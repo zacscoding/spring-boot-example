@@ -1,0 +1,17 @@
+##########################
+# local key-value database
+##########################
+db:
+  # database type ["leveldb", ... ]
+  type: leveldb
+
+##########################
+# level db properties
+##########################
+leveldb:
+  name: my-leveldb
+  dir: /home/zaccoding/test-leveldb
+  # blockSize: 4096
+  # writeBufferSize: 4194304
+  # cacheSize: 0
+  # maxOpenFiles: 20

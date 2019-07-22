@@ -29,7 +29,7 @@ public class DataTypeCheckEntity {
     @Column(name = "BOOK_ID")
     private Long id;
 
-    @Column(name = "BYTE_VALUES", length = 4096)
+    @Column(name = "BYTE_VALUES", length = 65536)
     private byte[] byteValues;
 
     @Column(name = "STRING_VALUES", length = 4096 * 2)
@@ -39,11 +39,11 @@ public class DataTypeCheckEntity {
     private byte[] byteDefaults;
 
     @Lob
-    @Column(name = "LOB_BYTES")
+    @Column(name = "LOB_BYTES", columnDefinition = "BLOB")
     private byte[] lobBytes;
 
     @Lob
-    @Column(name = "LOB_STRING")
+    @Column(name = "LOB_STRING", columnDefinition = "CLOB")
     private String lobString;
 
 }
