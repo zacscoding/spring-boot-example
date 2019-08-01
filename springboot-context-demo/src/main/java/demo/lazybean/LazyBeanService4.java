@@ -13,7 +13,7 @@ public class LazyBeanService4 {
 
     @PostConstruct
     private void setUp() {
-        log.info("## Create LazyBeanService4 in PostContruct");
+        logger.info("## Create LazyBeanService4 in PostContruct");
     }
 
     public String getName() {

@@ -18,6 +18,6 @@ public class UpperCaseMultipleBean implements IMultipleBean {
 
     @Override
     public void onString(String message) {
-        log.info("[UppercaseListener] message : {}", message == null ? "NULL" : message.toUpperCase());
+        logger.info("[UppercaseListener] message : {}", message == null ? "NULL" : message.toUpperCase());
     }
 }

@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author zacconding
- * @Date 2018-08-29
- * @GitHub : https://github.com/zacscoding
  */
 @Slf4j
 @Component
@@ -17,7 +15,7 @@ public class AppCtxBean1 implements DaemonMaker {
 
     @PostConstruct
     private void setUp() {
-        log.info("AppCtxBean1 is called");
+        logger.info("AppCtxBean1 is called");
     }
 
     @Override

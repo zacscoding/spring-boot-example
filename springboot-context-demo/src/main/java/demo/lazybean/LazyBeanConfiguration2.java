@@ -17,18 +17,18 @@ import org.springframework.context.annotation.Lazy;
 public class LazyBeanConfiguration2 {
 
     public LazyBeanConfiguration2() {
-        log.info("## LazyBeanConfiguration2() is called");
+        logger.info("## LazyBeanConfiguration2() is called");
     }
 
     @Bean
     public LazyBeanService3 lazyBeanService3() {
-        log.info("## lazyBeanService3() is called in LazyBeanConfiguration");
+        logger.info("## lazyBeanService3() is called in LazyBeanConfiguration");
         return new LazyBeanService3();
     }
 
     @Bean
     public LazyBeanService4 lazyBeanService4() {
-        log.info("## lazyBeanService4() is called in LazyBeanConfiguration");
+        logger.info("## lazyBeanService4() is called in LazyBeanConfiguration");
         return new LazyBeanService4();
     }
 }

@@ -1,7 +1,8 @@
 ## Spring Context test
 
-- <a href="lazy-bean">@Lazy</a>  
-- <a href="ApplicationContext">ApplicationContext</a>
+- <a href="#lazy-bean">@Lazy</a>  
+- <a href="#ApplicationContext">ApplicationContext</a>
+- <a href="#Prototype">Prototype</a>
 
 
 ---  
@@ -26,3 +27,17 @@
  
 
 ---  
+
+<div id="Prototype"></div>  
+
+## Tests prototype
+
+- Profile : prototype  
+- Test url : 
+[GET]    : http://localhost:8080/prototypes
+[GET]    : http://localhost:8080/prototypes/ctx
+[GET]    : http://localhost:8080/prototype/{id}
+[POST]   : http://localhost:8080/prototype
+[DELETE] : http://localhost:8080/prototype/{id}
+
+---

@@ -18,7 +18,7 @@ public class LazyBeanController2 {
 
     @PostConstruct
     public void setUp() {
-        log.info("## LazyBeanController2 is called in LazyBeanController2::setUp()");
+        logger.info("## LazyBeanController2 is called in LazyBeanController2::setUp()");
     }
 
     @GetMapping("/lazybean2")

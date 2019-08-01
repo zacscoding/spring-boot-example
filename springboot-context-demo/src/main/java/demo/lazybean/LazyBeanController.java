@@ -27,20 +27,20 @@ public class LazyBeanController {
 
     @GetMapping("/lazybean/bean1")
     public String call() {
-        log.info("## /lazybean/test1 is called in LazyBeanController");
+        logger.info("## /lazybean/test1 is called in LazyBeanController");
         return lazyBeanService1.getName();
     }
 
     @GetMapping("/lazybean/bean2")
     public String call2() {
-        log.info("## /lazybean/test2 is called in LazyBeanController");
+        logger.info("## /lazybean/test2 is called in LazyBeanController");
         LazyBeanService2 bean = context.getBean(LazyBeanService2.class);
         return bean.getName();
     }
 
     @GetMapping("/lazybean/bean3")
     public String call3() {
-        log.info("## /lazybean/test3 is called in LazyBeanController");
+        logger.info("## /lazybean/test3 is called in LazyBeanController");
         LazyBeanService3 bean = context.getBean(LazyBeanService3.class);
         return bean.getName();
     }

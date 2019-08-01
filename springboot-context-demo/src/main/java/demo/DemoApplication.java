@@ -11,11 +11,11 @@ public class DemoApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext ctx = SpringApplication.run(DemoApplication.class, args);
         System.out.println(">>>> Complete to load");
+
         String displayBeanNames = ctx.getEnvironment().getProperty("display.beans.enabled", "false");
         if ("true".equalsIgnoreCase(displayBeanNames)) {
             displayBeanNames(ctx);
         }
-        ctx.close();
     }
 
     private static void displayBeanNames(ConfigurableApplicationContext ctx) {

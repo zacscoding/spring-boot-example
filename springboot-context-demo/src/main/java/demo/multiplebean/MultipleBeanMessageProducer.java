@@ -39,7 +39,7 @@ public class MultipleBeanMessageProducer {
         Iterator<String> itr = beans.keySet().iterator();
         while (itr.hasNext()) {
             String beanName = itr.next();
-            log.info("IMultipleBean : {}", beanName);
+            logger.info("IMultipleBean : {}", beanName);
             listeners.add(beans.get(beanName));
         }
 

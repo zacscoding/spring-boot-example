@@ -16,6 +16,6 @@ public class LowerCaseMultipleBean implements IMultipleBean {
 
     @Override
     public void onString(String message) {
-        log.info("[LowerCaseListener] message : {}", message == null ? "NULL" : message.toLowerCase());
+        logger.info("[LowerCaseListener] message : {}", message == null ? "NULL" : message.toLowerCase());
     }
 }

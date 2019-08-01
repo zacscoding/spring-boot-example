@@ -12,8 +12,6 @@ import org.springframework.context.annotation.Profile;
 
 /**
  * @author zacconding
- * @Date 2018-08-29
- * @GitHub : https://github.com/zacscoding
  */
 @Slf4j
 @ComponentScan(basePackages = "demo.appctx")
@@ -26,12 +24,12 @@ public class GetBeansConfiguration {
 
     @PostConstruct
     private void setUp() {
-        log.info("## GetBeansConfiguration() is called");
+        logger.info("## GetBeansConfiguration() is called");
         Map<String, DaemonMaker> beans = ctx.getBeansOfType(DaemonMaker.class);
-        log.info(">>>>>>>>>>>>>>>>>>>>> Check daemon... size : " + beans.size());
+        logger.info(">>>>>>>>>>>>>>>>>>>>> Check daemon... size : " + beans.size());
 
         for (Entry<String, DaemonMaker> entry : beans.entrySet()) {
-            log.info("> Key : {} ==> Name : {}", entry.getKey(), entry.getValue().getName());
+            logger.info("> Key : {} ==> Name : {}", entry.getKey(), entry.getValue().getName());
         }
     }
 }

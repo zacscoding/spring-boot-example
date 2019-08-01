@@ -22,14 +22,14 @@ public class LazyBeanConfiguration {
     @Bean
     @Lazy
     public LazyBeanService1 lazyBeanService1() {
-        log.info("## lazyBeanService1() is called in LazyBeanConfiguration");
+        logger.info("## lazyBeanService1() is called in LazyBeanConfiguration");
         return new LazyBeanService1();
     }
 
     @Bean
     @Lazy
     public LazyBeanService2 lazyBeanService2() {
-        log.info("##  lazyBeanService2() is called in LazyBeanConfiguration");
+        logger.info("##  lazyBeanService2() is called in LazyBeanConfiguration");
         return new LazyBeanService2();
     }
 }
