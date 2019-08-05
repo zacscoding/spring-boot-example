@@ -45,7 +45,7 @@ public class PrototypeBeanController {
     }
 
     @GetMapping("/prototypes/ctx")
-    public ResponseEntity getBeansFromCtx() {
+    public ResponseEntity getPrototypeBeansFromCtx() {
         // 매번 새로운 PrototypeBean1 이 생성되어 Map::size() == 1 인 맵을 반환
         StringBuilder result = new StringBuilder("Getting PrototypeBeans1 from ctx\n");
 
@@ -58,6 +58,25 @@ public class PrototypeBeanController {
         }
 
         return ResponseEntity.ok(result);
+    }
+
+
+    @GetMapping("/prototypes/beans")
+    public ResponseEntity getBeansFromCtx() {
+        StringBuilder result = new StringBuilder();
+
+        String[] beanNames = ctx.getBeanDefinitionNames();
+        for (String beanName : beanNames) {
+            Object bean = ctx.getBean(beanName);
+            if (!bean.getClass().getName().startsWith("demo")) {
+                continue;
+            }
+            String display = String.format("%-30s : %-40s [%s]", beanName, bean.getClass().getName(), bean.toString());
+            result.append(display)
+                .append("\n");
+        }
+
+        return ResponseEntity.ok(result.toString());
     }
 
     @GetMapping("/prototype/{id}")
@@ -98,20 +117,11 @@ public class PrototypeBeanController {
             return ResponseEntity.notFound().build();
         }
 
-        String result = null;
+        bean = null;
 
-        try {
-            result = bean.toString();
+        System.gc();
+        System.runFinalization();
 
-            if (bean instanceof DisposableBean) {
-                logger.info("Can cast DisposableBean");
-                DisposableBean disposable = (DisposableBean) bean;
-                disposable.destroy();
-            }
-        } catch (Exception e) {
-            result = e.getMessage();
-        }
-
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok().build();
     }
 }

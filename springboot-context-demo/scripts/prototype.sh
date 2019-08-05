@@ -12,8 +12,10 @@ function printHelp() {
   echo "commands :"
   echo "  get       getting bean all or one"
   echo "    e.g : ${SCRIPT_NAME} get 1 or ${SCRIPT_NAME} get"
-  echo "  getctx    getting bean all from context"
+  echo "  getctx    getting prototype bean all from context"
   echo "    e.g : ${SCRIPT_NAME} getctx"
+  echo "  getbeans  getting beans all from context"
+  echo "    e.g : ${SCRIPT_NAME} getbeans"
   echo "  create    create prototype bean"
   echo "    e.g : ${SCRIPT_NAME} create "
   echo "  delete    destroy prototype bean"
@@ -35,6 +37,11 @@ function getctx() {
   echo ""
 }
 
+function getBeans() {
+  curl -X GET -H "Content-Type: application/json; charset=utf-8" ${URL}/prototypes/beans
+  echo ""
+}
+
 function create() {
   curl -X POST -H "Content-Type: application/json; charset=utf-8" ${URL}/prototype
   echo ""
@@ -47,7 +54,7 @@ function delete() {
 
 # command
 case "${1}" in
-  get | getctx | create | delete )
+  get | getctx | getbeans | create | delete )
     COMMAND=${1}
     ;;
   * )
@@ -63,6 +70,9 @@ case "${COMMAND}" in
   ;;
   getctx )
     getctx
+  ;;
+  getbeans )
+    getBeans
   ;;
   create )
     create

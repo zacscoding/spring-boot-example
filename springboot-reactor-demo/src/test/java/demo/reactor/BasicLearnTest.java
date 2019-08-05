@@ -7,19 +7,24 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import org.junit.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.GroupedFlux;
 import reactor.core.publisher.Mono;
 
 /**
- * @GitHub : https://github.com/zacscoding
+ *
  */
 public class BasicLearnTest {
 
     @Test
     public void flux() throws Exception {
         Flux<String> just = Flux.just("1", "2", "3");
+        Consumer<String> consumer1 = (value) -> System.out.println("[Consumer1] " + value);
+        Consumer<String> consumer2 = (value) -> System.out.println("[Consumer2] " + value);
+        just.subscribe(consumer1);
+        just.subscribe(consumer2);
     }
 
     @Test
