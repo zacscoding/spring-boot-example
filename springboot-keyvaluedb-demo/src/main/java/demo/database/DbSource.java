@@ -1,6 +1,7 @@
 package demo.database;
 
 import demo.exception.DatabaseException;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -40,6 +41,11 @@ public interface DbSource<V> {
     void put(byte[] key, V value);
 
     /**
+     * put multiple key values
+     */
+    void updateBatch(Map<byte[], V> rows);
+
+    /**
      * getting value about key
      */
     V get(byte[] key);
@@ -53,4 +59,9 @@ public interface DbSource<V> {
      * reset database
      */
     void reset();
+
+    /**
+     * close database
+     */
+    void close();
 }
