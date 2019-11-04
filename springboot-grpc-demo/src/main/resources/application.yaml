@@ -1,0 +1,4 @@
+hello:
+  enable: true
+  server:
+    port: 18989

@@ -1,0 +1,36 @@
+## Servers
+server:
+  port: 8080
+
+## Spring
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:13306/testdb?useSSL=false&useUnicode=true&characterEncoding=utf8&seLegacyDatetimeCode=false
+    username: tester
+    password: tester
+    #username: sa
+    #password:
+    #url: jdbc:h2:mem:testdb
+    #driver-class-name: org.h2.Driver
+    driver-class-name: org.mariadb.jdbc.Driver
+    hikari:
+      jdbc-url: jdbc:mariadb://localhost:13306/testdb?useSSL=false&useUnicode=true&characterEncoding=utf8&seLegacyDatetimeCode=false
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: update
+
+## logging
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        type:
+          descriptor:
+            sql:
+              BasicBinder: trace
+    demo: debug
+    root: info

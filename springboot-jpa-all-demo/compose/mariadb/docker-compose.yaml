@@ -1,0 +1,15 @@
+version: '3.4'
+services:
+  mariadb:
+    image: mariadb:10.3
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: maria
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: tester
+      MYSQL_PASSWORD: tester
+    ports:
+      - 13306:3306
+    restart: on-failure
+    volumes:
+      - ./custom.cnf:/etc/mysql/conf.d/custom.cnf
