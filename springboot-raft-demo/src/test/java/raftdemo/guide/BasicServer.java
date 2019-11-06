@@ -134,6 +134,12 @@ public class BasicServer {
 
         TimeUnit.SECONDS.sleep(30L);
         servers[1].terminate();
+        TimeUnit.SECONDS.sleep(5L);
+        PeerId peerId = new PeerId();
+        if (!peerId.parse(serverIds[0])) {
+            throw new IllegalArgumentException("Fail to parse serverId:" + serverIds[0]);
+        }
+        servers[0].getNode().transferLeadershipTo(peerId);
         System.out.println(">> after terminate <<");
         TimeUnit.SECONDS.sleep(30L);
     }
