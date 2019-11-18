@@ -38,6 +38,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.restdocs.payload.JsonFieldType;
+import org.springframework.restdocs.snippet.Attributes.Attribute;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -138,6 +139,7 @@ public class PersonControllerTest {
 
         // when then
         mockMvc.perform(get("/api/person")
+            .param("q", "name Person1")
             .param("page", "1")
             .param("size", "5")
             .param("sort", "name,DESC"))
@@ -145,6 +147,11 @@ public class PersonControllerTest {
             .andDo(
                 document("get-persons",
                     requestParameters(
+                        parameterWithName("q").description("search field and value")
+                            .attributes(
+                                    new Attribute("key1", "value1"),
+                                    new Attribute("key2", "value2")
+                            ),
                         parameterWithName("page").description("page of search"),
                         parameterWithName("size").description("size of search"),
                         parameterWithName("sort").description("sort of search")
@@ -255,7 +262,7 @@ public class PersonControllerTest {
 
     private Person savePersons(int index) {
         Person person = Person.builder()
-            .name("Person" + index)
+            .name("Person" + (index % 5))
             .age(10 * index + 5)
             .hobbies(randomHobbies())
             .build();

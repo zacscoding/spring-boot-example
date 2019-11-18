@@ -1,9 +1,9 @@
 package demo.person;
 
-import demo.DemoApplication;
 import java.util.Optional;
+import java.util.StringTokenizer;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
@@ -14,13 +14,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import ch.qos.logback.classic.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author zacconding
  * @Date 2019-01-05
  * @GitHub : https://github.com/zacscoding
  */
+@Slf4j
 @RestController
 @RequestMapping("/api/person")
 public class PersonController {
@@ -44,9 +49,39 @@ public class PersonController {
         return ResponseEntity.ok(personOptional.get());
     }
 
+    // q=name+name1&page=0&size=3&sort=id,DESC
     @GetMapping
-    public ResponseEntity getPersons(Pageable pageable) {
-        return ResponseEntity.ok(personRepository.findAll(pageable));
+    public ResponseEntity getPersons(@RequestParam(value = "q", required = false) String query,
+                                     Pageable pageable) {
+        // has no query
+        if (!StringUtils.hasText(query)) {
+            return ResponseEntity.ok(personRepository.findAll(pageable));
+        }
+
+        // has query
+        StringTokenizer tokenizer = new StringTokenizer(query, " ");
+        if (tokenizer.countTokens() != 2) {
+            logger.warn("invalid query {}. expected pair but {}", query, tokenizer.countTokens());
+            return ResponseEntity.badRequest().build();
+        }
+
+        String field = tokenizer.nextToken();
+
+        if ("name".equals(field)) {
+            return ResponseEntity.ok(personRepository.findAllByName(tokenizer.nextToken(), pageable));
+        }
+
+        if ("age".equals(field)) {
+            try {
+                int age = Integer.parseInt(tokenizer.nextToken());
+                return ResponseEntity.ok(personRepository.findAllByAge(age, pageable));
+            } catch (NumberFormatException e) {
+                return ResponseEntity.badRequest().build();
+            }
+        }
+
+        logger.warn("invalid query {}. has no matching field name.", query);
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping
@@ -82,5 +117,4 @@ public class PersonController {
         personRepository.deleteById(id);
         return ResponseEntity.ok(personOptional.get());
     }
-
 }

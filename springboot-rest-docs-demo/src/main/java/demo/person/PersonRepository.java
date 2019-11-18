@@ -1,5 +1,7 @@
 package demo.person;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -9,4 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
+    Page<Person> findAllByName(String name, Pageable pageable);
+
+    Page<Person> findAllByAge(int age, Pageable pageable);
 }
