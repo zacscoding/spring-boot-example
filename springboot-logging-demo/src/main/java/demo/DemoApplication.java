@@ -21,7 +21,7 @@ public class DemoApplication {
     }
 
     public static void main(String[] args) {
-        String activeProfile = "dev";
+        String activeProfile = "local";
         System.setProperty("spring.profiles.active", activeProfile);
         SpringApplication.run(DemoApplication.class, args);
         logger.trace("this is trace..");
