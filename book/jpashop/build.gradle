@@ -27,7 +27,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-devtools'
-    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
+
+
+    compile('com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.8')
+
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2'
