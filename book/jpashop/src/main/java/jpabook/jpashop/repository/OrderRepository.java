@@ -1,9 +1,8 @@
 package jpabook.jpashop.repository;
 
-import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -12,12 +11,17 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
+
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.domain.QMember;
 import jpabook.jpashop.domain.QOrder;
-import org.springframework.stereotype.Repository;
-import org.springframework.util.StringUtils;
 
 @Repository
 public class OrderRepository {
@@ -40,20 +44,20 @@ public class OrderRepository {
 
     public List<Order> findAll(OrderSearch orderSearch) {
         // return findAllByString(orderSearch);
-        // return findAllByCriteria(orderSearch);
+        //return findAllByCriteria(orderSearch);
 
         final QOrder order = QOrder.order;
         final QMember member = QMember.member;
 
         return queryFactory.select(order)
-            .from(order)
-            .join(order.member, member)
-            .where(
-                statusEq(orderSearch.getOrderStatus()),
-                nameLike(orderSearch.getMemberName())
-            )
-            .limit(1000)
-            .fetch();
+                           .from(order)
+                           .join(order.member, member)
+                           .where(
+                                   statusEq(orderSearch.getOrderStatus()),
+                                   nameLike(orderSearch.getMemberName())
+                           )
+                           .limit(1000)
+                           .fetch();
     }
 
     private BooleanExpression statusEq(OrderStatus statusCondition) {
@@ -95,8 +99,8 @@ public class OrderRepository {
         cq.where(cb.and(criteria.toArray(new Predicate[criteria.size()])));
 
         return em.createQuery(cq)
-            .setMaxResults(1000)
-            .getResultList();
+                 .setMaxResults(1000)
+                 .getResultList();
     }
 
     // jpql 문자열 조합

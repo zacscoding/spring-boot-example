@@ -44,6 +44,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.webjars:webjars-locator-core'
 
 
     compile('com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.8')
@@ -53,13 +55,21 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+
     //querydsl 추가
     compile("com.querydsl:querydsl-jpa") // querydsl
     compile("com.querydsl:querydsl-apt") // querydsl
+
+    // webjars
+    // https://mvnrepository.com/artifact/org.webjars/bootstrap
+    compile group: 'org.webjars', name: 'bootstrap', version: '4.4.1'
+
+    // https://mvnrepository.com/artifact/org.modelmapper/modelmapper
+    compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.5'
 }
 
 //querydsl 추가
-def querydslDir = 'src/main/generated'
+def querydslDir = 'src/main/generated/java'
 
 querydsl {
     library = "com.querydsl:querydsl-apt"
