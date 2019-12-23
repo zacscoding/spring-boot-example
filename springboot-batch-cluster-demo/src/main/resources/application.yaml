@@ -1,0 +1,28 @@
+server:
+  port: 3000
+
+
+spring:
+  batch:
+    table-prefix: MY_BATCH_
+  datasource:
+    url: jdbc:mariadb://192.168.79.130:3306/testdb?useSSL=false&useUnicode=true&characterEncoding=utf8&seLegacyDatetimeCode=false
+    username: tester
+    password: tester
+    driver-class-name: org.mariadb.jdbc.Driver
+    hikari:
+      jdbc-url: jdbc:mariadb://192.168.79.130:3306/testdb?useSSL=false&useUnicode=true&characterEncoding=utf8&seLegacyDatetimeCode=false
+    platform: batch
+    initialization-mode: always
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        # show_sql: true
+        format_sql: true
+
+logging.level:
+  root: info
+  org.hibernate.SQL: info

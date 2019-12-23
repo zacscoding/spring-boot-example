@@ -20,8 +20,10 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderStatus;
+import jpabook.jpashop.domain.QDelivery;
 import jpabook.jpashop.domain.QMember;
 import jpabook.jpashop.domain.QOrder;
+import jpabook.jpashop.domain.QOrderItem;
 
 @Repository
 public class OrderRepository {
@@ -156,6 +158,14 @@ public class OrderRepository {
         ).getResultList();
     }
 
+    public List<Order> findAllWithMemberDelivery2() {
+        return queryFactory.select(QOrder.order)
+                           .from(QOrder.order)
+                           .leftJoin(QOrder.order.member, QMember.member).fetchJoin()
+                           .leftJoin(QOrder.order.delivery, QDelivery.delivery).fetchJoin()
+                           .fetch();
+    }
+
     public List<Order> findAllWithMemberDelivery(int offset, int limit) {
         // fetch를 100% 이해 해야 함
         return em.createQuery(
@@ -165,6 +175,16 @@ public class OrderRepository {
                  .setFirstResult(offset)
                  .setMaxResults(limit)
                  .getResultList();
+    }
+
+    public List<Order> findAllWithMemberDelivery2(int offset, int limit) {
+        return queryFactory.select(QOrder.order)
+                           .from(QOrder.order)
+                           .leftJoin(QOrder.order.member, QMember.member).fetchJoin()
+                           .leftJoin(QOrder.order.delivery, QDelivery.delivery).fetchJoin()
+                           .offset(offset)
+                           .limit(limit)
+                           .fetch();
     }
 
     public List<Order> findAllWithItems() {
@@ -178,5 +198,15 @@ public class OrderRepository {
                  //.setFirstResult(1)
                  //.setMaxResults(100)
                  .getResultList();
+    }
+
+    public List<Order> findAllWithItems2() {
+//        return queryFactory.selectDistinct(QOrder.order).from(QOrder.order)
+//                           .leftJoin(QOrder.order.member, QMember.member).fetchJoin()
+//                           .leftJoin(QOrder.order.delivery, QDelivery.delivery).fetchJoin()
+//                           .leftJoin(QOrder.order.orderItems, QOrderItem.orderItem).fetchJoin()
+//                           .leftJoin(QOrderItem.orderItem.item, QOrderItem.orderItem.item).fetchJoin()
+//                           .fetch();
+        return findAllWithItems();
     }
 }
