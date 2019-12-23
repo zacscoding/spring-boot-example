@@ -44,20 +44,20 @@ public class OrderRepository {
 
     public List<Order> findAll(OrderSearch orderSearch) {
         // return findAllByString(orderSearch);
-        //return findAllByCriteria(orderSearch);
+        return findAllByCriteria(orderSearch);
 
-        final QOrder order = QOrder.order;
-        final QMember member = QMember.member;
-
-        return queryFactory.select(order)
-                           .from(order)
-                           .join(order.member, member)
-                           .where(
-                                   statusEq(orderSearch.getOrderStatus()),
-                                   nameLike(orderSearch.getMemberName())
-                           )
-                           .limit(1000)
-                           .fetch();
+//        final QOrder order = QOrder.order;
+//        final QMember member = QMember.member;
+//
+//        return queryFactory.select(order)
+//                           .from(order)
+//                           .join(order.member, member)
+//                           .where(
+//                                   statusEq(orderSearch.getOrderStatus()),
+//                                   nameLike(orderSearch.getMemberName())
+//                           )
+//                           .limit(1000)
+//                           .fetch();
     }
 
     private BooleanExpression statusEq(OrderStatus statusCondition) {
@@ -145,5 +145,38 @@ public class OrderRepository {
         }
 
         return query.getResultList();
+    }
+
+    public List<Order> findAllWithMemberDelivery() {
+        // fetch를 100% 이해 해야 함
+        return em.createQuery(
+                "select o from Order o" +
+                " join fetch o.member m" +
+                " join fetch o.delivery d", Order.class
+        ).getResultList();
+    }
+
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        // fetch를 100% 이해 해야 함
+        return em.createQuery(
+                "select o from Order o" +
+                " join fetch o.member m" +
+                " join fetch o.delivery d", Order.class)
+                 .setFirstResult(offset)
+                 .setMaxResults(limit)
+                 .getResultList();
+    }
+
+    public List<Order> findAllWithItems() {
+        return em.createQuery(
+                "select distinct o from Order o" +
+                " join fetch o.member m" +
+                " join fetch o.delivery d" +
+                " join fetch o.orderItems oi" +
+                " join fetch oi.item i", Order.class)
+                 // HHH000104: firstResult/maxResults specified with collection fetch; applying in memory!
+                 //.setFirstResult(1)
+                 //.setMaxResults(100)
+                 .getResultList();
     }
 }
