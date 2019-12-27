@@ -1,0 +1,23 @@
+{
+  "groups": [
+    {
+      "name": "starter",
+      "type": "demo.starter.spring.StarterProperties",
+      "sourceType": "demo.starter.spring.StarterProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "starter.max-size",
+      "type": "java.lang.Integer",
+      "sourceType": "demo.starter.spring.StarterProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "starter.max-time",
+      "type": "java.time.Duration",
+      "sourceType": "demo.starter.spring.StarterProperties"
+    }
+  ],
+  "hints": []
+}

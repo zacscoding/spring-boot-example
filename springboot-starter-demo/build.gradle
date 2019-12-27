@@ -1,0 +1,52 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.8.RELEASE"
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply from: "${rootDir}/versions.gradle"
+
+    version = rootProject.version
+
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    configurations {
+        developmentOnly
+        runtimeClasspath {
+            extendsFrom developmentOnly
+        }
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    dependencies {
+        annotationProcessor 'org.projectlombok:lombok'
+        compileOnly 'org.projectlombok:lombok'
+        testImplementation('org.springframework.boot:spring-boot-starter-test') {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}

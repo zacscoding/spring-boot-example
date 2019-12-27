@@ -1,0 +1,12 @@
+e02:09:31.687 [Test worker] DEBUG reactor.util.Loggers$LoggerFactory - Using Slf4j logging framework
+…02:09:31.710 [Test worker] INFO demo.starter.core.RandomValueBuffer - Start random value buffer with max size : 5 / max time : PT1S
+>> Flux random id buffer
+%ab123dd4-d327-4a1d-8fe1-97d257c2d5cd
+%4072ec46-f0f3-4b71-aaae-14fe43e5f803
+%8f26eefb-f1d7-4ff9-92f7-fd821f761449
+%4a7675e3-003d-4b74-a27c-0bbe06ecda79
+&e2af145f-281d-474d-99e0-c954069a8215
+‡02:09:31.769 [Test worker] INFO demo.starter.core.RandomValueBuffer - Start random value buffer with max size : 5 / max time : PT0.5S
+>> Flux random id buffer
+%43ec854d-039c-4a59-9282-acdb4b6566f2
+&d7713f37-e17c-4e4b-8361-1a819358bd3b

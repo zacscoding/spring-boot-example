@@ -1,0 +1,9 @@
+rootProject.name = 'springboot-starter-demo'
+
+// core module
+include 'starter-core'
+
+// spring boot starter module
+include 'starter'
+include 'starter-server'
+

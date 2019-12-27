@@ -47,4 +47,10 @@
 - <a href="springboot-integration-tests-with-compose">integration tests with jUnit and Docker-compose</a>
 ; integration tests as container is loaded before tests
 - <a href="springboot-zuul-demo">spring cloud zuul demo</a>
-; default usage, change route url,
+; default usage, change route url
+- <a href="springboot-raft-demo">springboot-raft-demo</a>
+; test leader election by using raft jsofa library  
+- <a href="springboot-raft-demo">springboot-raft-demo</a>
+; test leader election by using raft jsofa library. and remain more processing  
+- <a href="springboot-starter-demo">springboot-starter-demo</a>
+; how to autoconfigure by using `spring.factories` with `AutoConfiguration`

@@ -1,0 +1,6 @@
+dependencyManagement {
+    dependencies {
+        dependency "io.projectreactor:reactor-core:3.2.5.RELEASE"
+        dependency "io.projectreactor:reactor-test:3.2.5.RELEASE"
+    }
+}
