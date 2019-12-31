@@ -1,6 +1,7 @@
 package raftdemo.guide;
 
 import ch.qos.logback.classic.Level;
+
 import com.alipay.remoting.rpc.RpcServer;
 import com.alipay.sofa.jraft.Closure;
 import com.alipay.sofa.jraft.Iterator;
@@ -17,19 +18,20 @@ import com.alipay.sofa.jraft.option.NodeOptions;
 import com.alipay.sofa.jraft.rpc.RaftRpcServerFactory;
 import com.alipay.sofa.jraft.storage.snapshot.SnapshotReader;
 import com.alipay.sofa.jraft.storage.snapshot.SnapshotWriter;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.tomcat.jni.Time;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 /**
  * Tests for raft basic server
@@ -39,7 +41,7 @@ public class BasicServer {
     @BeforeEach
     public void setUp() {
         ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger)
-            LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+                LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
         root.setLevel(Level.INFO);
     }
 
@@ -47,101 +49,114 @@ public class BasicServer {
     public void runNodes() throws Exception {
         final int electionTimeoutMs = 3000;
         final String[] serverIds = {
-            "127.0.0.1:8081"
-            , "127.0.0.1:8082"
-            //, "127.0.0.1:8083"
+                "127.0.0.1:8081"
+                , "127.0.0.1:8082"
+                //, "127.0.0.1:8083"
         };
         final String serverIdsStr = Arrays.asList(serverIds).stream().collect(Collectors.joining(","));
         final ClusterServer[] servers = new ClusterServer[serverIds.length];
 
-        for (int i = 0; i < serverIds.length; i++) {
-            final String dataPath = "/tmp/raft/server" + i;
-            final String groupId = "cluster";
-            final String serverId = serverIds[i];
-            final NodeOptions nodeOptions = new NodeOptions();
+        try {
+            for (int i = 0; i < serverIds.length; i++) {
+                final String dataPath = "/tmp/raft/server" + i;
+                final String groupId = "cluster";
+                final String serverId = serverIds[i];
+                final NodeOptions nodeOptions = new NodeOptions();
 
-            final File dataFile = new File(dataPath);
-            if (dataFile.exists()) {
-                FileUtils.forceDelete(dataFile);
-            }
+                final File dataFile = new File(dataPath);
+                if (dataFile.exists()) {
+                    FileUtils.forceDelete(dataFile);
+                }
 
-            // Adjust arguments such as the snapshot interval for testing.
-            nodeOptions.setElectionTimeoutMs(electionTimeoutMs);
-            nodeOptions.setDisableCli(false);
-            nodeOptions.setSnapshotIntervalSecs(30);
+                // Adjust arguments such as the snapshot interval for testing.
+                nodeOptions.setElectionTimeoutMs(electionTimeoutMs);
+                nodeOptions.setDisableCli(false);
+                nodeOptions.setSnapshotIntervalSecs(30);
 
-            // Parse the parameter.
-            PeerId peerId = new PeerId();
-            if (!peerId.parse(serverId)) {
-                throw new IllegalArgumentException("Fail to parse serverId:" + serverId);
-            }
-            final Configuration initConf = new Configuration();
-            if (!initConf.parse(serverIdsStr)) {
-                throw new IllegalArgumentException("Fail to parse initConf:" + serverIdsStr);
-            }
-            // Set the initial cluster configuration.
-            nodeOptions.setInitialConf(initConf);
+                // Parse the parameter.
+                PeerId peerId = new PeerId();
+                if (!peerId.parse(serverId)) {
+                    throw new IllegalArgumentException("Fail to parse serverId:" + serverId);
+                }
+                final Configuration initConf = new Configuration();
+                if (!initConf.parse(serverIdsStr)) {
+                    throw new IllegalArgumentException("Fail to parse initConf:" + serverIdsStr);
+                }
+                // Set the initial cluster configuration.
+                nodeOptions.setInitialConf(initConf);
 
-            // Startup
-            servers[i] = new ClusterServer(dataPath, groupId, peerId, nodeOptions);
+                // Startup
+                servers[i] = new ClusterServer(dataPath, groupId, peerId, nodeOptions);
 
-            // if started first cluster, start to console reporter
-            if (i == 0) {
-                Thread nodeCheckTask = new Thread(() -> {
-                    try {
-                        while (!Thread.currentThread().isInterrupted()) {
-                            StringBuilder result = new StringBuilder("// #############################################################\n");
-                            for (int j = 0; j < servers.length; j++) {
-                                ClusterServer s = servers[j];
+                // if started first cluster, start to console reporter
+                if (i == 0) {
+                    Thread nodeCheckTask = new Thread(() -> {
+                        try {
+                            while (!Thread.currentThread().isInterrupted()) {
+                                StringBuilder result = new StringBuilder(
+                                        "// #############################################################\n");
+                                for (int j = 0; j < servers.length; j++) {
+                                    ClusterServer s = servers[j];
 
-                                if (s == null) {
-                                    continue;
-                                }
+                                    if (s == null) {
+                                        continue;
+                                    }
 
-                                Node node = s.getNode();
-                                result.append(String.format("## >>> check nodes in %s <<<\n", node.getNodeId()));
-                                result.append("> is started : " + s.isStarted()).append("\n");
-                                if (s.isStarted()) {
-                                    result.append("> is leader : " + node.isLeader()).append("\n");
-                                    result.append("> leader id : " + node.getLeaderId()).append("\n");
-                                    if (node.isLeader()) {
-                                        result.append("> peers :")
-                                            .append(
-                                                node.listPeers().stream().map(p -> p.toString()).collect(Collectors.joining(","))
-                                            ).append("\n> active peers : ")
-                                            .append(
-                                                node.listAlivePeers().stream().map(p -> p.toString()).collect(Collectors.joining(","))
-                                            ).append("\n");
+                                    Node node = s.getNode();
+                                    result.append(
+                                            String.format("## >>> check nodes in %s <<<\n", node.getNodeId()));
+                                    result.append("> is started : " + s.isStarted()).append("\n");
+                                    if (s.isStarted()) {
+                                        result.append("> is leader : " + node.isLeader()).append("\n");
+                                        result.append("> leader id : " + node.getLeaderId()).append("\n");
+                                        if (node.isLeader()) {
+                                            result.append("> peers :")
+                                                  .append(
+                                                          node.listPeers().stream().map(p -> p.toString())
+                                                              .collect(Collectors.joining(","))
+                                                  ).append("\n> active peers : ")
+                                                  .append(
+                                                          node.listAlivePeers().stream().map(p -> p.toString())
+                                                              .collect(Collectors.joining(","))
+                                                  ).append("\n");
+                                        }
                                     }
                                 }
+                                result.append(
+                                        "################################################################ //");
+                                System.out.println(result);
+                                TimeUnit.SECONDS.sleep(5L);
+                                // Output
+                                /*
+                                 */
                             }
-                            result.append("################################################################ //");
-                            System.out.println(result);
-                            TimeUnit.SECONDS.sleep(5L);
-                            // Output
-                            /*
-                             */
+                        } catch (Exception e) {
+                            e.printStackTrace(System.err);
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace(System.err);
-                    }
-                });
-                nodeCheckTask.setDaemon(true);
-                nodeCheckTask.start();
+                    });
+                    nodeCheckTask.setDaemon(true);
+                    nodeCheckTask.start();
+                }
+                TimeUnit.MILLISECONDS.sleep(electionTimeoutMs + 1000);
             }
-            TimeUnit.MILLISECONDS.sleep(electionTimeoutMs + 1000);
+
+            TimeUnit.SECONDS.sleep(30L);
+            servers[0].terminate();
+            TimeUnit.SECONDS.sleep(5L);
+            PeerId peerId = PeerId.ANY_PEER;
+            servers[1].getNode().transferLeadershipTo(peerId);
+            System.out.println(">> after terminate <<");
+            TimeUnit.SECONDS.sleep(30L);
+        } catch (InterruptedException e) {
+            if (servers != null) {
+                for (ClusterServer server : servers) {
+                    if (server != null && server.isStarted()) {
+                        server.terminate();
+                    }
+                }
+            }
         }
 
-        TimeUnit.SECONDS.sleep(30L);
-        servers[1].terminate();
-        TimeUnit.SECONDS.sleep(5L);
-        PeerId peerId = new PeerId();
-        if (!peerId.parse(serverIds[0])) {
-            throw new IllegalArgumentException("Fail to parse serverId:" + serverIds[0]);
-        }
-        servers[0].getNode().transferLeadershipTo(peerId);
-        System.out.println(">> after terminate <<");
-        TimeUnit.SECONDS.sleep(30L);
     }
 
     public static class ClusterServer {
@@ -152,7 +167,8 @@ public class BasicServer {
         private Node node;
         private ConsoleStateMachine fsm;
 
-        public ClusterServer(String dataPath, String groupId, PeerId peerId, NodeOptions nodeOptions) throws IOException {
+        public ClusterServer(String dataPath, String groupId, PeerId peerId, NodeOptions nodeOptions)
+                throws IOException {
             // Initialize the path.
             FileUtils.forceMkdir(new File(dataPath));
 

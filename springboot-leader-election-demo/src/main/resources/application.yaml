@@ -1,0 +1,22 @@
+cluster:
+  id: server1
+  leadership:
+    enabled: true
+    lockName: leader-lock
+    # types of leadership in ["redis", "zookeeper"]
+    type: zookeeper
+
+    ##############################################
+    # redis properties
+    ##############################################
+    redis:
+      # comma separated list of node addresses
+      address: "redis://192.168.79.130:6379"
+      idleConnectionTimeout: 10000
+    ##############################################
+    # redis properties
+    ##############################################
+    zookeeper:
+      connectString: 192.168.79.130:2181
+      maxRetries: 3
+      sleepMsBetweenRetries: 100
