@@ -74,8 +74,11 @@
 - <a href="springboot-raft-demo">springboot-raft-demo</a>  
 ; test leader election by using raft jsofa library. and remain more processing  
 
-- <a href="springboot-starter-demo">springboot-starter-demo</a>
+- <a href="springboot-starter-demo">springboot-starter-demo</a>  
 ; how to autoconfigure by using `spring.factories` with `AutoConfiguration`  
 
 - <a href="springboot-leader-election-demo">springboot-leader-election-demo</a>  
 ; leader election based on redis, zookeeper  
+
+- <a href="springboot-graceful-shuwdown-demo">springboot-graceful-shuwdown-demo</a>  
+; spring boot graceful shutdown about `TaskExecutor` bean, not bean and Tomecat's protocol handler `TaskExecutor`  
