@@ -1,7 +1,13 @@
 # Books Index
 
 - <a href="https://github.com/zacscoding/spring-boot-example/tree/master/book/start-spring-boot">start spring boot</a>
-- <a href="https://github.com/zacscoding/spring-boot-example/tree/master/book/spring-boot-inaction">spring boot in action (working)</a>
+- <a href="https://github.com/zacscoding/spring-boot-example/tree/master/book/spring-boot-inaction">spring boot in action (working)</a>  
+
+# Lecture Index  
+
+- <a href="book/jpashop">Jpa + Hibernate + Spring data jpa</a>  
+- <a href="book/rest-api-demo">Spring boot rest api</a>  
+
 
 # Example Index
 
@@ -82,3 +88,6 @@
 
 - <a href="springboot-graceful-shuwdown-demo">springboot-graceful-shuwdown-demo</a>  
 ; spring boot graceful shutdown about `TaskExecutor` bean, not bean and Tomecat's protocol handler `TaskExecutor`  
+
+- <a href="springboot-cloud-loadbalancer-demo">springboot-cloud-loadbalancer-demo</a>  
+; client side loadbalancer with spring cloud loadbalancer  
