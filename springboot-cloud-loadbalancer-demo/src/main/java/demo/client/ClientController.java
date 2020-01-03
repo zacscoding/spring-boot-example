@@ -33,7 +33,7 @@ public class ClientController {
 
     @GetMapping("/hello")
     public Mono<String> hello(@RequestParam(value = "name", defaultValue = "John") String name) {
-        return WebClient.builder()
+        return loadBalancedWebClientBuilder
                         .filter(lbFunction)
                         .build()
                         .get()
