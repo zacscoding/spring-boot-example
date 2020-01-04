@@ -44,11 +44,17 @@ public class SayHelloConfiguration {
 
         @Override
         public Flux<List<ServiceInstance>> get() {
+            //final String host = "192.168.79.130";
+            final String host = "localhost";
             logger.info("DemoServiceInstanceListSuppler::get() is called");
-            return Flux.just(Arrays.asList(
-                    new DefaultServiceInstance(serviceId + "1", serviceId, "localhost", 3000, false),
-                    new DefaultServiceInstance(serviceId + "2", serviceId, "localhost", 3001, false),
-                    new DefaultServiceInstance(serviceId + "3", serviceId, "localhost", 3002, false)));
+
+            final List<ServiceInstance> servers = Arrays.asList(
+                    new DefaultServiceInstance(serviceId + "1", serviceId, host, 3000, false)
+                    , new DefaultServiceInstance(serviceId + "2", serviceId, host, 3001, false)
+                    , new DefaultServiceInstance(serviceId + "3", serviceId, host, 3002, false)
+            );
+
+            return Flux.just(servers);
         }
     }
 }

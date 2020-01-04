@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: say-hello
+
+say-hello:
+  ribbon:
+    eureka:
+      enabled: false
+    listOfServers: 192.168.79.130:3000,192.168.79.130:3001,192.168.79.130:3002
+    ServerListRefreshInterval: 15000
+
+logging:
+  level:
+    root: info
+    demo: trace
+    org:
+      springframework:
+        cloud: trace

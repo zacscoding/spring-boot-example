@@ -32,7 +32,7 @@ public class DemoApplication {
             final Object beanObj = ctx.getBean(beanName);
 
             if (isDisplayBean(beanObj.getClass().getName())) {
-                builder.append("- ").append(beanName).append("\n    : ")
+                builder.append('[').append(beanName).append("] : ")
                        .append(beanObj.getClass().getName()).append('\n');
             }
         }
@@ -42,6 +42,17 @@ public class DemoApplication {
     }
 
     private static boolean isDisplayBean(String className) {
-        return className.startsWith("org.springframework.cloud");
+        String[] startsWiths = {
+                "com.netflix.ribbon",
+                "org.springframework.cloud.netflix.ribbon"
+        };
+
+        for (String startsWith : startsWiths) {
+            if (className.startsWith(startsWith)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

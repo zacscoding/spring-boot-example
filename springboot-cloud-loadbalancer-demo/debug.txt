@@ -1,0 +1,610 @@
+>> Trace method call stack from : org.springframework.web.reactive.function.client.ExchangeFilterFunction.lambda$andThen$1(ExchangeFilterFunction.java:57)
++--o.s.c.c.l.r.DeferringLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[1 ms] : MonoFlatMap
+ -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+ -- arg2 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@7040d4c7
+| +--o.s.c.c.l.r.DeferringLoadBalancerExchangeFilterFunction::tryResolveDelegate()V[0 ms] : void
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[1 ms] : MonoFlatMap
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+|  -- arg2 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@7040d4c7
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::choose(Ljava/lang/String;)Lreactor/core/publisher/Mono;[1 ms] : MonoMapFuseable
+| |  -- arg1 : say-hello
+| | | +--o.s.c.l.s.LoadBalancerClientFactory::getInstance(Ljava/lang/String;)Lorg/springframework/cloud/client/loadbalancer/reactive/ReactiveLoadBalancer;[0 ms] : org.springframework.cloud.loadbalancer.core.RoundRobinLoadBalancer@3c525a1
+| | |  -- arg1 : say-hello
+| | | +--o.s.c.l.c.RoundRobinLoadBalancer::choose(Lorg/springframework/cloud/client/loadbalancer/reactive/Request;)Lreactor/core/publisher/Mono;[1 ms] : MonoMapFuseable
+| | |  -- arg1 : org.springframework.cloud.client.loadbalancer.reactive.DefaultRequest@4b20d068
+
+
+
+>> Trace method call stack from : reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:107)
++--o.s.c.c.l.r.DeferringLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[1 ms] : MonoFlatMap
+ -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+ -- arg2 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@7040d4c7
+| +--o.s.c.c.l.r.DeferringLoadBalancerExchangeFilterFunction::tryResolveDelegate()V[0 ms] : void
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[1 ms] : MonoFlatMap
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+|  -- arg2 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@7040d4c7
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::choose(Ljava/lang/String;)Lreactor/core/publisher/Mono;[1 ms] : MonoMapFuseable
+| |  -- arg1 : say-hello
+| | | +--o.s.c.l.s.LoadBalancerClientFactory::getInstance(Ljava/lang/String;)Lorg/springframework/cloud/client/loadbalancer/reactive/ReactiveLoadBalancer;[0 ms] : org.springframework.cloud.loadbalancer.core.RoundRobinLoadBalancer@3c525a1
+| | |  -- arg1 : say-hello
+| | | +--o.s.c.l.c.RoundRobinLoadBalancer::choose(Lorg/springframework/cloud/client/loadbalancer/reactive/Request;)Lreactor/core/publisher/Mono;[1 ms] : MonoMapFuseable
+| | |  -- arg1 : org.springframework.cloud.client.loadbalancer.reactive.DefaultRequest@4b20d068
++--o.s.c.l.c.RoundRobinLoadBalancer::getInstanceResponse(Ljava/util/List;)Lorg/springframework/cloud/client/loadbalancer/reactive/Response;[0 ms] : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@747f4e17
+ -- arg1 : [DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}]
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+
+
+2020-01-03 21:11:48.235  INFO 6128 --- [nio-8080-exec-3] demo.config.SayHelloConfiguration        : DemoServiceInstanceListSuppler::get() is called
+
+>> Trace method call stack from : reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:118)
++--o.s.c.c.l.r.DeferringLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[1 ms] : MonoFlatMap
+ -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+ -- arg2 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@7040d4c7
+| +--o.s.c.c.l.r.DeferringLoadBalancerExchangeFilterFunction::tryResolveDelegate()V[0 ms] : void
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[1 ms] : MonoFlatMap
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+|  -- arg2 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@7040d4c7
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::choose(Ljava/lang/String;)Lreactor/core/publisher/Mono;[1 ms] : MonoMapFuseable
+| |  -- arg1 : say-hello
+| | | +--o.s.c.l.s.LoadBalancerClientFactory::getInstance(Ljava/lang/String;)Lorg/springframework/cloud/client/loadbalancer/reactive/ReactiveLoadBalancer;[0 ms] : org.springframework.cloud.loadbalancer.core.RoundRobinLoadBalancer@3c525a1
+| | |  -- arg1 : say-hello
+| | | +--o.s.c.l.c.RoundRobinLoadBalancer::choose(Lorg/springframework/cloud/client/loadbalancer/reactive/Request;)Lreactor/core/publisher/Mono;[1 ms] : MonoMapFuseable
+| | |  -- arg1 : org.springframework.cloud.client.loadbalancer.reactive.DefaultRequest@4b20d068
++--o.s.c.l.c.RoundRobinLoadBalancer::getInstanceResponse(Ljava/util/List;)Lorg/springframework/cloud/client/loadbalancer/reactive/Response;[0 ms] : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@747f4e17
+ -- arg1 : [DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}]
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
++--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$filter$0(Ljava/lang/String;Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/net/URI;Lorg/springframework/web/reactive/function/client/ExchangeFunction;Lorg/springframework/cloud/client/loadbalancer/reactive/Response;)Lreactor/core/publisher/Mono;[0 ms] : MonoFlatMap
+ -- arg1 : say-hello
+ -- arg2 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+ -- arg3 : http://say-hello/greeting
+ -- arg4 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@7040d4c7
+ -- arg5 : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@747f4e17
+| +--o.s.c.c.l.r.DefaultResponse::getServer()Ljava/lang/Object;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | +--o.s.c.c.l.r.DefaultResponse::getServer()Lorg/springframework/cloud/client/ServiceInstance;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| +--o.s.c.c.l.LoadBalancerUriTools::reconstructURI(Lorg/springframework/cloud/client/ServiceInstance;Ljava/net/URI;)Ljava/net/URI;[0 ms] : http://localhost:3001/greeting
+|  -- arg1 : http://say-hello/greeting
+|  -- arg2 : null
+| | +--o.s.c.c.l.LoadBalancerUriTools::doReconstructURI(Lorg/springframework/cloud/client/ServiceInstance;Ljava/net/URI;)Ljava/net/URI;[0 ms] : http://localhost:3001/greeting
+| |  -- arg1 : http://say-hello/greeting
+| |  -- arg2 : null
+| | | +--o.s.c.c.DefaultServiceInstance::getHost()Ljava/lang/String;[0 ms] : localhost
+| | | +--o.s.c.c.l.LoadBalancerUriTools::computeScheme(Ljava/net/URI;Lorg/springframework/cloud/client/ServiceInstance;)Ljava/lang/String;[0 ms] : http
+| | |  -- arg1 : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | |  -- arg2 : null
+| | | | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | | | +--o.s.c.c.DefaultServiceInstance::isSecure()Z[0 ms] : false
+| | | +--o.s.c.c.DefaultServiceInstance::getPort()I[0 ms] : 3001
+| | | +--o.s.c.c.l.LoadBalancerUriTools::computePort(ILjava/lang/String;)I[0 ms] : 3001
+| | |  -- arg1 : -615012568
+| | |  -- arg2 : null
+| | | +--o.s.c.c.l.LoadBalancerUriTools::containsEncodedParts(Ljava/net/URI;)Z[0 ms] : false
+| | |  -- arg1 : null
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::buildClientRequest(Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/net/URI;)Lorg/springframework/web/reactive/function/client/ClientRequest;[0 ms] : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@317ddefc
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+|  -- arg2 : http://localhost:3001/greeting
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$1(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/http/HttpHeaders;)V[0 ms] : void
+| |  -- arg1 : []
+| |  -- arg2 : null
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$2(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/util/MultiValueMap;)V[0 ms] : void
+| |  -- arg1 : {}
+| |  -- arg2 : null
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$3(Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/util/Map;)V[0 ms] : void
+| |  -- arg1 : {}
+| |  -- arg2 : null
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[0 ms] : MonoFlatMap
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@317ddefc
+|  -- arg2 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@769679a9
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::choose(Ljava/lang/String;)Lreactor/core/publisher/Mono;[0 ms] : MonoMapFuseable
+| |  -- arg1 : localhost
+| | | +--o.s.c.l.s.LoadBalancerClientFactory::getInstance(Ljava/lang/String;)Lorg/springframework/cloud/client/loadbalancer/reactive/ReactiveLoadBalancer;[0 ms] : org.springframework.cloud.loadbalancer.core.RoundRobinLoadBalancer@4c88683a
+| | |  -- arg1 : localhost
+| | | +--o.s.c.l.c.RoundRobinLoadBalancer::choose(Lorg/springframework/cloud/client/loadbalancer/reactive/Request;)Lreactor/core/publisher/Mono;[0 ms] : MonoMapFuseable
+| | |  -- arg1 : org.springframework.cloud.client.loadbalancer.reactive.DefaultRequest@4b20d068
+
+
+
+>> Trace method call stack from : reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:107)
++--o.s.c.c.l.r.DeferringLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[1 ms] : MonoFlatMap
+ -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+ -- arg2 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@7040d4c7
+| +--o.s.c.c.l.r.DeferringLoadBalancerExchangeFilterFunction::tryResolveDelegate()V[0 ms] : void
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[1 ms] : MonoFlatMap
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+|  -- arg2 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@7040d4c7
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::choose(Ljava/lang/String;)Lreactor/core/publisher/Mono;[1 ms] : MonoMapFuseable
+| |  -- arg1 : say-hello
+| | | +--o.s.c.l.s.LoadBalancerClientFactory::getInstance(Ljava/lang/String;)Lorg/springframework/cloud/client/loadbalancer/reactive/ReactiveLoadBalancer;[0 ms] : org.springframework.cloud.loadbalancer.core.RoundRobinLoadBalancer@3c525a1
+| | |  -- arg1 : say-hello
+| | | +--o.s.c.l.c.RoundRobinLoadBalancer::choose(Lorg/springframework/cloud/client/loadbalancer/reactive/Request;)Lreactor/core/publisher/Mono;[1 ms] : MonoMapFuseable
+| | |  -- arg1 : org.springframework.cloud.client.loadbalancer.reactive.DefaultRequest@4b20d068
++--o.s.c.l.c.RoundRobinLoadBalancer::getInstanceResponse(Ljava/util/List;)Lorg/springframework/cloud/client/loadbalancer/reactive/Response;[0 ms] : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@747f4e17
+ -- arg1 : [DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}]
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
++--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$filter$0(Ljava/lang/String;Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/net/URI;Lorg/springframework/web/reactive/function/client/ExchangeFunction;Lorg/springframework/cloud/client/loadbalancer/reactive/Response;)Lreactor/core/publisher/Mono;[0 ms] : MonoFlatMap
+ -- arg1 : say-hello
+ -- arg2 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+ -- arg3 : http://say-hello/greeting
+ -- arg4 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@7040d4c7
+ -- arg5 : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@747f4e17
+| +--o.s.c.c.l.r.DefaultResponse::getServer()Ljava/lang/Object;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | +--o.s.c.c.l.r.DefaultResponse::getServer()Lorg/springframework/cloud/client/ServiceInstance;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| +--o.s.c.c.l.LoadBalancerUriTools::reconstructURI(Lorg/springframework/cloud/client/ServiceInstance;Ljava/net/URI;)Ljava/net/URI;[0 ms] : http://localhost:3001/greeting
+|  -- arg1 : http://say-hello/greeting
+|  -- arg2 : null
+| | +--o.s.c.c.l.LoadBalancerUriTools::doReconstructURI(Lorg/springframework/cloud/client/ServiceInstance;Ljava/net/URI;)Ljava/net/URI;[0 ms] : http://localhost:3001/greeting
+| |  -- arg1 : http://say-hello/greeting
+| |  -- arg2 : null
+| | | +--o.s.c.c.DefaultServiceInstance::getHost()Ljava/lang/String;[0 ms] : localhost
+| | | +--o.s.c.c.l.LoadBalancerUriTools::computeScheme(Ljava/net/URI;Lorg/springframework/cloud/client/ServiceInstance;)Ljava/lang/String;[0 ms] : http
+| | |  -- arg1 : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | |  -- arg2 : null
+| | | | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | | | +--o.s.c.c.DefaultServiceInstance::isSecure()Z[0 ms] : false
+| | | +--o.s.c.c.DefaultServiceInstance::getPort()I[0 ms] : 3001
+| | | +--o.s.c.c.l.LoadBalancerUriTools::computePort(ILjava/lang/String;)I[0 ms] : 3001
+| | |  -- arg1 : -615012568
+| | |  -- arg2 : null
+| | | +--o.s.c.c.l.LoadBalancerUriTools::containsEncodedParts(Ljava/net/URI;)Z[0 ms] : false
+| | |  -- arg1 : null
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::buildClientRequest(Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/net/URI;)Lorg/springframework/web/reactive/function/client/ClientRequest;[0 ms] : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@317ddefc
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+|  -- arg2 : http://localhost:3001/greeting
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$1(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/http/HttpHeaders;)V[0 ms] : void
+| |  -- arg1 : []
+| |  -- arg2 : null
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$2(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/util/MultiValueMap;)V[0 ms] : void
+| |  -- arg1 : {}
+| |  -- arg2 : null
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$3(Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/util/Map;)V[0 ms] : void
+| |  -- arg1 : {}
+| |  -- arg2 : null
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[0 ms] : MonoFlatMap
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@317ddefc
+|  -- arg2 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@769679a9
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::choose(Ljava/lang/String;)Lreactor/core/publisher/Mono;[0 ms] : MonoMapFuseable
+| |  -- arg1 : localhost
+| | | +--o.s.c.l.s.LoadBalancerClientFactory::getInstance(Ljava/lang/String;)Lorg/springframework/cloud/client/loadbalancer/reactive/ReactiveLoadBalancer;[0 ms] : org.springframework.cloud.loadbalancer.core.RoundRobinLoadBalancer@4c88683a
+| | |  -- arg1 : localhost
+| | | +--o.s.c.l.c.RoundRobinLoadBalancer::choose(Lorg/springframework/cloud/client/loadbalancer/reactive/Request;)Lreactor/core/publisher/Mono;[0 ms] : MonoMapFuseable
+| | |  -- arg1 : org.springframework.cloud.client.loadbalancer.reactive.DefaultRequest@4b20d068
++--o.s.c.l.c.RoundRobinLoadBalancer::getInstanceResponse(Ljava/util/List;)Lorg/springframework/cloud/client/loadbalancer/reactive/Response;[0 ms] : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@866d50
+ -- arg1 : [DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}]
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+
+
+2020-01-03 21:11:48.236  INFO 6128 --- [nio-8080-exec-3] demo.config.SayHelloConfiguration        : DemoServiceInstanceListSuppler::get() is called
+
+>> Trace method call stack from : reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:118)
++--o.s.c.c.l.r.DeferringLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[1 ms] : MonoFlatMap
+ -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+ -- arg2 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@7040d4c7
+| +--o.s.c.c.l.r.DeferringLoadBalancerExchangeFilterFunction::tryResolveDelegate()V[0 ms] : void
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[1 ms] : MonoFlatMap
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+|  -- arg2 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@7040d4c7
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::choose(Ljava/lang/String;)Lreactor/core/publisher/Mono;[1 ms] : MonoMapFuseable
+| |  -- arg1 : say-hello
+| | | +--o.s.c.l.s.LoadBalancerClientFactory::getInstance(Ljava/lang/String;)Lorg/springframework/cloud/client/loadbalancer/reactive/ReactiveLoadBalancer;[0 ms] : org.springframework.cloud.loadbalancer.core.RoundRobinLoadBalancer@3c525a1
+| | |  -- arg1 : say-hello
+| | | +--o.s.c.l.c.RoundRobinLoadBalancer::choose(Lorg/springframework/cloud/client/loadbalancer/reactive/Request;)Lreactor/core/publisher/Mono;[1 ms] : MonoMapFuseable
+| | |  -- arg1 : org.springframework.cloud.client.loadbalancer.reactive.DefaultRequest@4b20d068
++--o.s.c.l.c.RoundRobinLoadBalancer::getInstanceResponse(Ljava/util/List;)Lorg/springframework/cloud/client/loadbalancer/reactive/Response;[0 ms] : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@747f4e17
+ -- arg1 : [DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}]
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
++--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$filter$0(Ljava/lang/String;Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/net/URI;Lorg/springframework/web/reactive/function/client/ExchangeFunction;Lorg/springframework/cloud/client/loadbalancer/reactive/Response;)Lreactor/core/publisher/Mono;[0 ms] : MonoFlatMap
+ -- arg1 : say-hello
+ -- arg2 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+ -- arg3 : http://say-hello/greeting
+ -- arg4 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@7040d4c7
+ -- arg5 : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@747f4e17
+| +--o.s.c.c.l.r.DefaultResponse::getServer()Ljava/lang/Object;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | +--o.s.c.c.l.r.DefaultResponse::getServer()Lorg/springframework/cloud/client/ServiceInstance;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| +--o.s.c.c.l.LoadBalancerUriTools::reconstructURI(Lorg/springframework/cloud/client/ServiceInstance;Ljava/net/URI;)Ljava/net/URI;[0 ms] : http://localhost:3001/greeting
+|  -- arg1 : http://say-hello/greeting
+|  -- arg2 : null
+| | +--o.s.c.c.l.LoadBalancerUriTools::doReconstructURI(Lorg/springframework/cloud/client/ServiceInstance;Ljava/net/URI;)Ljava/net/URI;[0 ms] : http://localhost:3001/greeting
+| |  -- arg1 : http://say-hello/greeting
+| |  -- arg2 : null
+| | | +--o.s.c.c.DefaultServiceInstance::getHost()Ljava/lang/String;[0 ms] : localhost
+| | | +--o.s.c.c.l.LoadBalancerUriTools::computeScheme(Ljava/net/URI;Lorg/springframework/cloud/client/ServiceInstance;)Ljava/lang/String;[0 ms] : http
+| | |  -- arg1 : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | |  -- arg2 : null
+| | | | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | | | +--o.s.c.c.DefaultServiceInstance::isSecure()Z[0 ms] : false
+| | | +--o.s.c.c.DefaultServiceInstance::getPort()I[0 ms] : 3001
+| | | +--o.s.c.c.l.LoadBalancerUriTools::computePort(ILjava/lang/String;)I[0 ms] : 3001
+| | |  -- arg1 : -615012568
+| | |  -- arg2 : null
+| | | +--o.s.c.c.l.LoadBalancerUriTools::containsEncodedParts(Ljava/net/URI;)Z[0 ms] : false
+| | |  -- arg1 : null
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::buildClientRequest(Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/net/URI;)Lorg/springframework/web/reactive/function/client/ClientRequest;[0 ms] : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@317ddefc
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+|  -- arg2 : http://localhost:3001/greeting
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$1(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/http/HttpHeaders;)V[0 ms] : void
+| |  -- arg1 : []
+| |  -- arg2 : null
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$2(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/util/MultiValueMap;)V[0 ms] : void
+| |  -- arg1 : {}
+| |  -- arg2 : null
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$3(Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/util/Map;)V[0 ms] : void
+| |  -- arg1 : {}
+| |  -- arg2 : null
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[0 ms] : MonoFlatMap
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@317ddefc
+|  -- arg2 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@769679a9
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::choose(Ljava/lang/String;)Lreactor/core/publisher/Mono;[0 ms] : MonoMapFuseable
+| |  -- arg1 : localhost
+| | | +--o.s.c.l.s.LoadBalancerClientFactory::getInstance(Ljava/lang/String;)Lorg/springframework/cloud/client/loadbalancer/reactive/ReactiveLoadBalancer;[0 ms] : org.springframework.cloud.loadbalancer.core.RoundRobinLoadBalancer@4c88683a
+| | |  -- arg1 : localhost
+| | | +--o.s.c.l.c.RoundRobinLoadBalancer::choose(Lorg/springframework/cloud/client/loadbalancer/reactive/Request;)Lreactor/core/publisher/Mono;[0 ms] : MonoMapFuseable
+| | |  -- arg1 : org.springframework.cloud.client.loadbalancer.reactive.DefaultRequest@4b20d068
++--o.s.c.l.c.RoundRobinLoadBalancer::getInstanceResponse(Ljava/util/List;)Lorg/springframework/cloud/client/loadbalancer/reactive/Response;[0 ms] : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@866d50
+ -- arg1 : [DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}]
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
++--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$filter$0(Ljava/lang/String;Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/net/URI;Lorg/springframework/web/reactive/function/client/ExchangeFunction;Lorg/springframework/cloud/client/loadbalancer/reactive/Response;)Lreactor/core/publisher/Mono;[0 ms] : MonoFlatMap
+ -- arg1 : localhost
+ -- arg2 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@317ddefc
+ -- arg3 : http://localhost:3001/greeting
+ -- arg4 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@769679a9
+ -- arg5 : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@866d50
+| +--o.s.c.c.l.r.DefaultResponse::getServer()Ljava/lang/Object;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+| | +--o.s.c.c.l.r.DefaultResponse::getServer()Lorg/springframework/cloud/client/ServiceInstance;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+| | | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+| | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+| +--o.s.c.c.l.LoadBalancerUriTools::reconstructURI(Lorg/springframework/cloud/client/ServiceInstance;Ljava/net/URI;)Ljava/net/URI;[0 ms] : http://localhost:3002/greeting
+|  -- arg1 : http://localhost:3001/greeting
+|  -- arg2 : null
+| | +--o.s.c.c.l.LoadBalancerUriTools::doReconstructURI(Lorg/springframework/cloud/client/ServiceInstance;Ljava/net/URI;)Ljava/net/URI;[0 ms] : http://localhost:3002/greeting
+| |  -- arg1 : http://localhost:3001/greeting
+| |  -- arg2 : null
+| | | +--o.s.c.c.DefaultServiceInstance::getHost()Ljava/lang/String;[0 ms] : localhost
+| | | +--o.s.c.c.l.LoadBalancerUriTools::computeScheme(Ljava/net/URI;Lorg/springframework/cloud/client/ServiceInstance;)Ljava/lang/String;[0 ms] : http
+| | |  -- arg1 : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+| | |  -- arg2 : null
+| | | | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+| | | | +--o.s.c.c.DefaultServiceInstance::isSecure()Z[0 ms] : false
+| | | +--o.s.c.c.DefaultServiceInstance::getPort()I[0 ms] : 3002
+| | | +--o.s.c.c.l.LoadBalancerUriTools::computePort(ILjava/lang/String;)I[0 ms] : 3002
+| | |  -- arg1 : -614922808
+| | |  -- arg2 : null
+| | | +--o.s.c.c.l.LoadBalancerUriTools::containsEncodedParts(Ljava/net/URI;)Z[0 ms] : false
+| | |  -- arg1 : null
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::buildClientRequest(Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/net/URI;)Lorg/springframework/web/reactive/function/client/ClientRequest;[0 ms] : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@e8794a1
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@317ddefc
+|  -- arg2 : http://localhost:3002/greeting
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$1(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/http/HttpHeaders;)V[0 ms] : void
+| |  -- arg1 : []
+| |  -- arg2 : null
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$2(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/util/MultiValueMap;)V[0 ms] : void
+| |  -- arg1 : {}
+| |  -- arg2 : null
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$3(Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/util/Map;)V[0 ms] : void
+| |  -- arg1 : {}
+| |  -- arg2 : null
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[0 ms] : MonoFlatMap
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@e8794a1
+|  -- arg2 : org.springframework.web.reactive.function.client.ExchangeFunctions$DefaultExchangeFunction@515221b3
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::choose(Ljava/lang/String;)Lreactor/core/publisher/Mono;[0 ms] : MonoMapFuseable
+| |  -- arg1 : localhost
+| | | +--o.s.c.l.s.LoadBalancerClientFactory::getInstance(Ljava/lang/String;)Lorg/springframework/cloud/client/loadbalancer/reactive/ReactiveLoadBalancer;[0 ms] : org.springframework.cloud.loadbalancer.core.RoundRobinLoadBalancer@4c88683a
+| | |  -- arg1 : localhost
+| | | +--o.s.c.l.c.RoundRobinLoadBalancer::choose(Lorg/springframework/cloud/client/loadbalancer/reactive/Request;)Lreactor/core/publisher/Mono;[0 ms] : MonoMapFuseable
+| | |  -- arg1 : org.springframework.cloud.client.loadbalancer.reactive.DefaultRequest@4b20d068
+
+
+
+>> Trace method call stack from : reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:107)
++--o.s.c.c.l.r.DeferringLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[1 ms] : MonoFlatMap
+ -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+ -- arg2 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@7040d4c7
+| +--o.s.c.c.l.r.DeferringLoadBalancerExchangeFilterFunction::tryResolveDelegate()V[0 ms] : void
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[1 ms] : MonoFlatMap
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+|  -- arg2 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@7040d4c7
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::choose(Ljava/lang/String;)Lreactor/core/publisher/Mono;[1 ms] : MonoMapFuseable
+| |  -- arg1 : say-hello
+| | | +--o.s.c.l.s.LoadBalancerClientFactory::getInstance(Ljava/lang/String;)Lorg/springframework/cloud/client/loadbalancer/reactive/ReactiveLoadBalancer;[0 ms] : org.springframework.cloud.loadbalancer.core.RoundRobinLoadBalancer@3c525a1
+| | |  -- arg1 : say-hello
+| | | +--o.s.c.l.c.RoundRobinLoadBalancer::choose(Lorg/springframework/cloud/client/loadbalancer/reactive/Request;)Lreactor/core/publisher/Mono;[1 ms] : MonoMapFuseable
+| | |  -- arg1 : org.springframework.cloud.client.loadbalancer.reactive.DefaultRequest@4b20d068
++--o.s.c.l.c.RoundRobinLoadBalancer::getInstanceResponse(Ljava/util/List;)Lorg/springframework/cloud/client/loadbalancer/reactive/Response;[0 ms] : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@747f4e17
+ -- arg1 : [DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}]
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
++--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$filter$0(Ljava/lang/String;Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/net/URI;Lorg/springframework/web/reactive/function/client/ExchangeFunction;Lorg/springframework/cloud/client/loadbalancer/reactive/Response;)Lreactor/core/publisher/Mono;[0 ms] : MonoFlatMap
+ -- arg1 : say-hello
+ -- arg2 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+ -- arg3 : http://say-hello/greeting
+ -- arg4 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@7040d4c7
+ -- arg5 : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@747f4e17
+| +--o.s.c.c.l.r.DefaultResponse::getServer()Ljava/lang/Object;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | +--o.s.c.c.l.r.DefaultResponse::getServer()Lorg/springframework/cloud/client/ServiceInstance;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| +--o.s.c.c.l.LoadBalancerUriTools::reconstructURI(Lorg/springframework/cloud/client/ServiceInstance;Ljava/net/URI;)Ljava/net/URI;[0 ms] : http://localhost:3001/greeting
+|  -- arg1 : http://say-hello/greeting
+|  -- arg2 : null
+| | +--o.s.c.c.l.LoadBalancerUriTools::doReconstructURI(Lorg/springframework/cloud/client/ServiceInstance;Ljava/net/URI;)Ljava/net/URI;[0 ms] : http://localhost:3001/greeting
+| |  -- arg1 : http://say-hello/greeting
+| |  -- arg2 : null
+| | | +--o.s.c.c.DefaultServiceInstance::getHost()Ljava/lang/String;[0 ms] : localhost
+| | | +--o.s.c.c.l.LoadBalancerUriTools::computeScheme(Ljava/net/URI;Lorg/springframework/cloud/client/ServiceInstance;)Ljava/lang/String;[0 ms] : http
+| | |  -- arg1 : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | |  -- arg2 : null
+| | | | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | | | +--o.s.c.c.DefaultServiceInstance::isSecure()Z[0 ms] : false
+| | | +--o.s.c.c.DefaultServiceInstance::getPort()I[0 ms] : 3001
+| | | +--o.s.c.c.l.LoadBalancerUriTools::computePort(ILjava/lang/String;)I[0 ms] : 3001
+| | |  -- arg1 : -615012568
+| | |  -- arg2 : null
+| | | +--o.s.c.c.l.LoadBalancerUriTools::containsEncodedParts(Ljava/net/URI;)Z[0 ms] : false
+| | |  -- arg1 : null
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::buildClientRequest(Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/net/URI;)Lorg/springframework/web/reactive/function/client/ClientRequest;[0 ms] : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@317ddefc
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+|  -- arg2 : http://localhost:3001/greeting
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$1(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/http/HttpHeaders;)V[0 ms] : void
+| |  -- arg1 : []
+| |  -- arg2 : null
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$2(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/util/MultiValueMap;)V[0 ms] : void
+| |  -- arg1 : {}
+| |  -- arg2 : null
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$3(Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/util/Map;)V[0 ms] : void
+| |  -- arg1 : {}
+| |  -- arg2 : null
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[0 ms] : MonoFlatMap
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@317ddefc
+|  -- arg2 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@769679a9
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::choose(Ljava/lang/String;)Lreactor/core/publisher/Mono;[0 ms] : MonoMapFuseable
+| |  -- arg1 : localhost
+| | | +--o.s.c.l.s.LoadBalancerClientFactory::getInstance(Ljava/lang/String;)Lorg/springframework/cloud/client/loadbalancer/reactive/ReactiveLoadBalancer;[0 ms] : org.springframework.cloud.loadbalancer.core.RoundRobinLoadBalancer@4c88683a
+| | |  -- arg1 : localhost
+| | | +--o.s.c.l.c.RoundRobinLoadBalancer::choose(Lorg/springframework/cloud/client/loadbalancer/reactive/Request;)Lreactor/core/publisher/Mono;[0 ms] : MonoMapFuseable
+| | |  -- arg1 : org.springframework.cloud.client.loadbalancer.reactive.DefaultRequest@4b20d068
++--o.s.c.l.c.RoundRobinLoadBalancer::getInstanceResponse(Ljava/util/List;)Lorg/springframework/cloud/client/loadbalancer/reactive/Response;[0 ms] : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@866d50
+ -- arg1 : [DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}]
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
++--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$filter$0(Ljava/lang/String;Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/net/URI;Lorg/springframework/web/reactive/function/client/ExchangeFunction;Lorg/springframework/cloud/client/loadbalancer/reactive/Response;)Lreactor/core/publisher/Mono;[0 ms] : MonoFlatMap
+ -- arg1 : localhost
+ -- arg2 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@317ddefc
+ -- arg3 : http://localhost:3001/greeting
+ -- arg4 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@769679a9
+ -- arg5 : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@866d50
+| +--o.s.c.c.l.r.DefaultResponse::getServer()Ljava/lang/Object;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+| | +--o.s.c.c.l.r.DefaultResponse::getServer()Lorg/springframework/cloud/client/ServiceInstance;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+| | | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+| | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+| +--o.s.c.c.l.LoadBalancerUriTools::reconstructURI(Lorg/springframework/cloud/client/ServiceInstance;Ljava/net/URI;)Ljava/net/URI;[0 ms] : http://localhost:3002/greeting
+|  -- arg1 : http://localhost:3001/greeting
+|  -- arg2 : null
+| | +--o.s.c.c.l.LoadBalancerUriTools::doReconstructURI(Lorg/springframework/cloud/client/ServiceInstance;Ljava/net/URI;)Ljava/net/URI;[0 ms] : http://localhost:3002/greeting
+| |  -- arg1 : http://localhost:3001/greeting
+| |  -- arg2 : null
+| | | +--o.s.c.c.DefaultServiceInstance::getHost()Ljava/lang/String;[0 ms] : localhost
+| | | +--o.s.c.c.l.LoadBalancerUriTools::computeScheme(Ljava/net/URI;Lorg/springframework/cloud/client/ServiceInstance;)Ljava/lang/String;[0 ms] : http
+| | |  -- arg1 : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+| | |  -- arg2 : null
+| | | | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+| | | | +--o.s.c.c.DefaultServiceInstance::isSecure()Z[0 ms] : false
+| | | +--o.s.c.c.DefaultServiceInstance::getPort()I[0 ms] : 3002
+| | | +--o.s.c.c.l.LoadBalancerUriTools::computePort(ILjava/lang/String;)I[0 ms] : 3002
+| | |  -- arg1 : -614922808
+| | |  -- arg2 : null
+| | | +--o.s.c.c.l.LoadBalancerUriTools::containsEncodedParts(Ljava/net/URI;)Z[0 ms] : false
+| | |  -- arg1 : null
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::buildClientRequest(Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/net/URI;)Lorg/springframework/web/reactive/function/client/ClientRequest;[0 ms] : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@e8794a1
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@317ddefc
+|  -- arg2 : http://localhost:3002/greeting
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$1(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/http/HttpHeaders;)V[0 ms] : void
+| |  -- arg1 : []
+| |  -- arg2 : null
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$2(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/util/MultiValueMap;)V[0 ms] : void
+| |  -- arg1 : {}
+| |  -- arg2 : null
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$3(Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/util/Map;)V[0 ms] : void
+| |  -- arg1 : {}
+| |  -- arg2 : null
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[0 ms] : MonoFlatMap
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@e8794a1
+|  -- arg2 : org.springframework.web.reactive.function.client.ExchangeFunctions$DefaultExchangeFunction@515221b3
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::choose(Ljava/lang/String;)Lreactor/core/publisher/Mono;[0 ms] : MonoMapFuseable
+| |  -- arg1 : localhost
+| | | +--o.s.c.l.s.LoadBalancerClientFactory::getInstance(Ljava/lang/String;)Lorg/springframework/cloud/client/loadbalancer/reactive/ReactiveLoadBalancer;[0 ms] : org.springframework.cloud.loadbalancer.core.RoundRobinLoadBalancer@4c88683a
+| | |  -- arg1 : localhost
+| | | +--o.s.c.l.c.RoundRobinLoadBalancer::choose(Lorg/springframework/cloud/client/loadbalancer/reactive/Request;)Lreactor/core/publisher/Mono;[0 ms] : MonoMapFuseable
+| | |  -- arg1 : org.springframework.cloud.client.loadbalancer.reactive.DefaultRequest@4b20d068
++--o.s.c.l.c.RoundRobinLoadBalancer::getInstanceResponse(Ljava/util/List;)Lorg/springframework/cloud/client/loadbalancer/reactive/Response;[0 ms] : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@144c4101
+ -- arg1 : [DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}]
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+
+
+
+>> Trace method call stack from : reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:118)
++--o.s.c.c.l.r.DeferringLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[1 ms] : MonoFlatMap
+ -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+ -- arg2 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@7040d4c7
+| +--o.s.c.c.l.r.DeferringLoadBalancerExchangeFilterFunction::tryResolveDelegate()V[0 ms] : void
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[1 ms] : MonoFlatMap
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+|  -- arg2 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@7040d4c7
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::choose(Ljava/lang/String;)Lreactor/core/publisher/Mono;[1 ms] : MonoMapFuseable
+| |  -- arg1 : say-hello
+| | | +--o.s.c.l.s.LoadBalancerClientFactory::getInstance(Ljava/lang/String;)Lorg/springframework/cloud/client/loadbalancer/reactive/ReactiveLoadBalancer;[0 ms] : org.springframework.cloud.loadbalancer.core.RoundRobinLoadBalancer@3c525a1
+| | |  -- arg1 : say-hello
+| | | +--o.s.c.l.c.RoundRobinLoadBalancer::choose(Lorg/springframework/cloud/client/loadbalancer/reactive/Request;)Lreactor/core/publisher/Mono;[1 ms] : MonoMapFuseable
+| | |  -- arg1 : org.springframework.cloud.client.loadbalancer.reactive.DefaultRequest@4b20d068
++--o.s.c.l.c.RoundRobinLoadBalancer::getInstanceResponse(Ljava/util/List;)Lorg/springframework/cloud/client/loadbalancer/reactive/Response;[0 ms] : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@747f4e17
+ -- arg1 : [DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}]
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
++--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$filter$0(Ljava/lang/String;Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/net/URI;Lorg/springframework/web/reactive/function/client/ExchangeFunction;Lorg/springframework/cloud/client/loadbalancer/reactive/Response;)Lreactor/core/publisher/Mono;[0 ms] : MonoFlatMap
+ -- arg1 : say-hello
+ -- arg2 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+ -- arg3 : http://say-hello/greeting
+ -- arg4 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@7040d4c7
+ -- arg5 : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@747f4e17
+| +--o.s.c.c.l.r.DefaultResponse::getServer()Ljava/lang/Object;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | +--o.s.c.c.l.r.DefaultResponse::getServer()Lorg/springframework/cloud/client/ServiceInstance;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| +--o.s.c.c.l.LoadBalancerUriTools::reconstructURI(Lorg/springframework/cloud/client/ServiceInstance;Ljava/net/URI;)Ljava/net/URI;[0 ms] : http://localhost:3001/greeting
+|  -- arg1 : http://say-hello/greeting
+|  -- arg2 : null
+| | +--o.s.c.c.l.LoadBalancerUriTools::doReconstructURI(Lorg/springframework/cloud/client/ServiceInstance;Ljava/net/URI;)Ljava/net/URI;[0 ms] : http://localhost:3001/greeting
+| |  -- arg1 : http://say-hello/greeting
+| |  -- arg2 : null
+| | | +--o.s.c.c.DefaultServiceInstance::getHost()Ljava/lang/String;[0 ms] : localhost
+| | | +--o.s.c.c.l.LoadBalancerUriTools::computeScheme(Ljava/net/URI;Lorg/springframework/cloud/client/ServiceInstance;)Ljava/lang/String;[0 ms] : http
+| | |  -- arg1 : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | |  -- arg2 : null
+| | | | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| | | | +--o.s.c.c.DefaultServiceInstance::isSecure()Z[0 ms] : false
+| | | +--o.s.c.c.DefaultServiceInstance::getPort()I[0 ms] : 3001
+| | | +--o.s.c.c.l.LoadBalancerUriTools::computePort(ILjava/lang/String;)I[0 ms] : 3001
+| | |  -- arg1 : -615012568
+| | |  -- arg2 : null
+| | | +--o.s.c.c.l.LoadBalancerUriTools::containsEncodedParts(Ljava/net/URI;)Z[0 ms] : false
+| | |  -- arg1 : null
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::buildClientRequest(Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/net/URI;)Lorg/springframework/web/reactive/function/client/ClientRequest;[0 ms] : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@317ddefc
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@7e872567
+|  -- arg2 : http://localhost:3001/greeting
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$1(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/http/HttpHeaders;)V[0 ms] : void
+| |  -- arg1 : []
+| |  -- arg2 : null
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$2(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/util/MultiValueMap;)V[0 ms] : void
+| |  -- arg1 : {}
+| |  -- arg2 : null
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$3(Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/util/Map;)V[0 ms] : void
+| |  -- arg1 : {}
+| |  -- arg2 : null
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[0 ms] : MonoFlatMap
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@317ddefc
+|  -- arg2 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@769679a9
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::choose(Ljava/lang/String;)Lreactor/core/publisher/Mono;[0 ms] : MonoMapFuseable
+| |  -- arg1 : localhost
+| | | +--o.s.c.l.s.LoadBalancerClientFactory::getInstance(Ljava/lang/String;)Lorg/springframework/cloud/client/loadbalancer/reactive/ReactiveLoadBalancer;[0 ms] : org.springframework.cloud.loadbalancer.core.RoundRobinLoadBalancer@4c88683a
+| | |  -- arg1 : localhost
+| | | +--o.s.c.l.c.RoundRobinLoadBalancer::choose(Lorg/springframework/cloud/client/loadbalancer/reactive/Request;)Lreactor/core/publisher/Mono;[0 ms] : MonoMapFuseable
+| | |  -- arg1 : org.springframework.cloud.client.loadbalancer.reactive.DefaultRequest@4b20d068
++--o.s.c.l.c.RoundRobinLoadBalancer::getInstanceResponse(Ljava/util/List;)Lorg/springframework/cloud/client/loadbalancer/reactive/Response;[0 ms] : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@866d50
+ -- arg1 : [DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}]
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
++--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$filter$0(Ljava/lang/String;Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/net/URI;Lorg/springframework/web/reactive/function/client/ExchangeFunction;Lorg/springframework/cloud/client/loadbalancer/reactive/Response;)Lreactor/core/publisher/Mono;[0 ms] : MonoFlatMap
+ -- arg1 : localhost
+ -- arg2 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@317ddefc
+ -- arg3 : http://localhost:3001/greeting
+ -- arg4 : org.springframework.web.reactive.function.client.ExchangeFilterFunction$$Lambda$570/1760237865@769679a9
+ -- arg5 : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@866d50
+| +--o.s.c.c.l.r.DefaultResponse::getServer()Ljava/lang/Object;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+| | +--o.s.c.c.l.r.DefaultResponse::getServer()Lorg/springframework/cloud/client/ServiceInstance;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+| | | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+| | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+| +--o.s.c.c.l.LoadBalancerUriTools::reconstructURI(Lorg/springframework/cloud/client/ServiceInstance;Ljava/net/URI;)Ljava/net/URI;[0 ms] : http://localhost:3002/greeting
+|  -- arg1 : http://localhost:3001/greeting
+|  -- arg2 : null
+| | +--o.s.c.c.l.LoadBalancerUriTools::doReconstructURI(Lorg/springframework/cloud/client/ServiceInstance;Ljava/net/URI;)Ljava/net/URI;[0 ms] : http://localhost:3002/greeting
+| |  -- arg1 : http://localhost:3001/greeting
+| |  -- arg2 : null
+| | | +--o.s.c.c.DefaultServiceInstance::getHost()Ljava/lang/String;[0 ms] : localhost
+| | | +--o.s.c.c.l.LoadBalancerUriTools::computeScheme(Ljava/net/URI;Lorg/springframework/cloud/client/ServiceInstance;)Ljava/lang/String;[0 ms] : http
+| | |  -- arg1 : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+| | |  -- arg2 : null
+| | | | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
+| | | | +--o.s.c.c.DefaultServiceInstance::isSecure()Z[0 ms] : false
+| | | +--o.s.c.c.DefaultServiceInstance::getPort()I[0 ms] : 3002
+| | | +--o.s.c.c.l.LoadBalancerUriTools::computePort(ILjava/lang/String;)I[0 ms] : 3002
+| | |  -- arg1 : -614922808
+| | |  -- arg2 : null
+| | | +--o.s.c.c.l.LoadBalancerUriTools::containsEncodedParts(Ljava/net/URI;)Z[0 ms] : false
+| | |  -- arg1 : null
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::buildClientRequest(Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/net/URI;)Lorg/springframework/web/reactive/function/client/ClientRequest;[0 ms] : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@e8794a1
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@317ddefc
+|  -- arg2 : http://localhost:3002/greeting
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$1(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/http/HttpHeaders;)V[0 ms] : void
+| |  -- arg1 : []
+| |  -- arg2 : null
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$2(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/util/MultiValueMap;)V[0 ms] : void
+| |  -- arg1 : {}
+| |  -- arg2 : null
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$3(Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/util/Map;)V[0 ms] : void
+| |  -- arg1 : {}
+| |  -- arg2 : null
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::filter(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/web/reactive/function/client/ExchangeFunction;)Lreactor/core/publisher/Mono;[0 ms] : MonoFlatMap
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@e8794a1
+|  -- arg2 : org.springframework.web.reactive.function.client.ExchangeFunctions$DefaultExchangeFunction@515221b3
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::choose(Ljava/lang/String;)Lreactor/core/publisher/Mono;[0 ms] : MonoMapFuseable
+| |  -- arg1 : localhost
+| | | +--o.s.c.l.s.LoadBalancerClientFactory::getInstance(Ljava/lang/String;)Lorg/springframework/cloud/client/loadbalancer/reactive/ReactiveLoadBalancer;[0 ms] : org.springframework.cloud.loadbalancer.core.RoundRobinLoadBalancer@4c88683a
+| | |  -- arg1 : localhost
+| | | +--o.s.c.l.c.RoundRobinLoadBalancer::choose(Lorg/springframework/cloud/client/loadbalancer/reactive/Request;)Lreactor/core/publisher/Mono;[0 ms] : MonoMapFuseable
+| | |  -- arg1 : org.springframework.cloud.client.loadbalancer.reactive.DefaultRequest@4b20d068
++--o.s.c.l.c.RoundRobinLoadBalancer::getInstanceResponse(Ljava/util/List;)Lorg/springframework/cloud/client/loadbalancer/reactive/Response;[0 ms] : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@144c4101
+ -- arg1 : [DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}, DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}]
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello2', serviceId='say-hello', host='localhost', port=3001, secure=false, metadata={}}
+| +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello3', serviceId='say-hello', host='localhost', port=3002, secure=false, metadata={}}
++--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$filter$0(Ljava/lang/String;Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/net/URI;Lorg/springframework/web/reactive/function/client/ExchangeFunction;Lorg/springframework/cloud/client/loadbalancer/reactive/Response;)Lreactor/core/publisher/Mono;[0 ms] : MonoMap
+ -- arg1 : localhost
+ -- arg2 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@e8794a1
+ -- arg3 : http://localhost:3002/greeting
+ -- arg4 : org.springframework.web.reactive.function.client.ExchangeFunctions$DefaultExchangeFunction@515221b3
+ -- arg5 : org.springframework.cloud.client.loadbalancer.reactive.DefaultResponse@144c4101
+| +--o.s.c.c.l.r.DefaultResponse::getServer()Ljava/lang/Object;[0 ms] : DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}
+| | +--o.s.c.c.l.r.DefaultResponse::getServer()Lorg/springframework/cloud/client/ServiceInstance;[0 ms] : DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}
+| | | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}
+| | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}
+| +--o.s.c.c.l.LoadBalancerUriTools::reconstructURI(Lorg/springframework/cloud/client/ServiceInstance;Ljava/net/URI;)Ljava/net/URI;[0 ms] : http://localhost:3000/greeting
+|  -- arg1 : http://localhost:3002/greeting
+|  -- arg2 : null
+| | +--o.s.c.c.l.LoadBalancerUriTools::doReconstructURI(Lorg/springframework/cloud/client/ServiceInstance;Ljava/net/URI;)Ljava/net/URI;[0 ms] : http://localhost:3000/greeting
+| |  -- arg1 : http://localhost:3002/greeting
+| |  -- arg2 : null
+| | | +--o.s.c.c.DefaultServiceInstance::getHost()Ljava/lang/String;[0 ms] : localhost
+| | | +--o.s.c.c.l.LoadBalancerUriTools::computeScheme(Ljava/net/URI;Lorg/springframework/cloud/client/ServiceInstance;)Ljava/lang/String;[0 ms] : http
+| | |  -- arg1 : DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}
+| | |  -- arg2 : null
+| | | | +--o.s.c.c.DefaultServiceInstance::toString()Ljava/lang/String;[0 ms] : DefaultServiceInstance{instanceId='say-hello1', serviceId='say-hello', host='localhost', port=3000, secure=false, metadata={}}
+| | | | +--o.s.c.c.DefaultServiceInstance::isSecure()Z[0 ms] : false
+| | | +--o.s.c.c.DefaultServiceInstance::getPort()I[0 ms] : 3000
+| | | +--o.s.c.c.l.LoadBalancerUriTools::computePort(ILjava/lang/String;)I[0 ms] : 3000
+| | |  -- arg1 : -614702600
+| | |  -- arg2 : null
+| | | +--o.s.c.c.l.LoadBalancerUriTools::containsEncodedParts(Ljava/net/URI;)Z[0 ms] : false
+| | |  -- arg1 : null
+| +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::buildClientRequest(Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/net/URI;)Lorg/springframework/web/reactive/function/client/ClientRequest;[0 ms] : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@27934235
+|  -- arg1 : org.springframework.web.reactive.function.client.DefaultClientRequestBuilder$BodyInserterRequest@e8794a1
+|  -- arg2 : http://localhost:3000/greeting
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$1(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/http/HttpHeaders;)V[0 ms] : void
+| |  -- arg1 : []
+| |  -- arg2 : null
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$2(Lorg/springframework/web/reactive/function/client/ClientRequest;Lorg/springframework/util/MultiValueMap;)V[0 ms] : void
+| |  -- arg1 : {}
+| |  -- arg2 : null
+| | +--o.s.c.c.l.r.ReactorLoadBalancerExchangeFilterFunction::lambda$buildClientRequest$3(Lorg/springframework/web/reactive/function/client/ClientRequest;Ljava/util/Map;)V[0 ms] : void
+| |  -- arg1 : {}
+| |  -- arg2 : null

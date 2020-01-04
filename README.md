@@ -91,3 +91,8 @@
 
 - <a href="springboot-cloud-loadbalancer-demo">springboot-cloud-loadbalancer-demo</a>  
 ; client side loadbalancer with spring cloud loadbalancer  
+
+- <a href="springboot-cloud-ribbon-demo">springboot-cloud-ribbon-demo</a>  
+; client side loadbalancer with spring cloud ribbon  
+
+  

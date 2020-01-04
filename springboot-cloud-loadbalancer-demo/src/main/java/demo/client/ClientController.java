@@ -20,26 +20,32 @@ public class ClientController {
 
     private final WebClient.Builder loadBalancedWebClientBuilder;
     private final ReactorLoadBalancerExchangeFilterFunction lbFunction;
+    private final LogExchangeFilterFunction logFilter = new LogExchangeFilterFunction();
 
     @GetMapping("/hi")
     public Mono<String> hi(@RequestParam(value = "name", defaultValue = "Mary") String name) {
-        return loadBalancedWebClientBuilder.build()
-                                           .get()
-                                           .uri("http://say-hello/greeting")
-                                           .retrieve()
-                                           .bodyToMono(String.class)
-                                           .map(greeting -> String.format("%s, %s!", greeting, name));
+        WebClient webClient = loadBalancedWebClientBuilder.build();
+        return webClient
+                .get()
+                .uri("http://say-hello/greeting")
+                .retrieve()
+                .bodyToMono(String.class)
+                .map(greeting -> String.format("%s, %s!", greeting, name));
     }
 
     @GetMapping("/hello")
     public Mono<String> hello(@RequestParam(value = "name", defaultValue = "John") String name) {
-        return loadBalancedWebClientBuilder
-                        .filter(lbFunction)
-                        .build()
-                        .get()
-                        .uri("http://say-hello/greeting")
-                        .retrieve()
-                        .bodyToMono(String.class)
-                        .map(greeting -> String.format("%s, %s!", greeting, name));
+        WebClient webClient = loadBalancedWebClientBuilder
+                .filter(logFilter)
+//                .filter(lbFunction)
+//                .filter(logFilter)
+                .build();
+
+        return webClient
+                .get()
+                .uri("http://say-hello/greeting")
+                .retrieve()
+                .bodyToMono(String.class)
+                .map(greeting -> String.format("%s, %s!", greeting, name));
     }
 }

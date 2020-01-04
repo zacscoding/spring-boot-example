@@ -4,3 +4,11 @@ server:
 spring:
   application:
     name: say-hello
+
+logging:
+  level:
+    root: warn
+    demo: trace
+    org:
+      springframework:
+        cloud: debug
