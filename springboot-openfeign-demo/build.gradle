@@ -23,24 +23,36 @@ repositories {
 }
 
 ext {
-    set('springCloudVersion', "Hoxton.RELEASE")
+    set('springCloudVersion', "Hoxton.SR1")
+    set('feignVersion', "10.7.0")
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'com.h2database:h2'
+
+    // https://mvnrepository.com/artifact/com.netflix.ribbon/ribbon
+    // implementation group: 'com.netflix.ribbon', name: 'ribbon', version: '2.7.17'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-ribbon'
+
+    implementation "io.github.openfeign:feign-core:${feignVersion}"
+    implementation "io.github.openfeign:feign-gson:${feignVersion}"
+    implementation "io.github.openfeign:feign-slf4j:${feignVersion}"
+    implementation "io.github.openfeign:feign-ribbon:${feignVersion}"
+    implementation "io.github.openfeign:feign-annotation-error-decoder:1.1.2"
+
+    // https://mvnrepository.com/artifact/com.google.guava/guava
+    implementation 'com.google.guava:guava:28.1-jre'
+
+
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
+
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
-
-    // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
-    compile 'com.squareup.okhttp3:okhttp:4.2.2'
-
-    // https://mvnrepository.com/artifact/com.google.code.gson/gson
-    //compile group: 'com.google.code.gson:gson:2.8.6'
 }
 
 dependencyManagement {
@@ -51,6 +63,10 @@ dependencyManagement {
 
 test {
     useJUnitPlatform()
+}
+
+bootJar {
+    archiveName = 'demo.jar'
 }
 
 bootRun {

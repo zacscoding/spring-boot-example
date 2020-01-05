@@ -26,8 +26,8 @@ public class SayHelloConfiguration {
 
     @Bean
     public IPing ribbonPing(IClientConfig config) {
-        // return new PingUrl(false, "alive");
-        return new PingUrl();
+        return new PingUrl(false, "alive");
+        //return new PingUrl();
     }
 
     @Bean

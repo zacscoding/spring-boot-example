@@ -24,7 +24,6 @@ public class ClientController {
     public void setUp() {
         System.out.println("## Check rest template");
         System.out.println(restTemplate.getClass().getName());
-
     }
 
     @GetMapping("/hi")
