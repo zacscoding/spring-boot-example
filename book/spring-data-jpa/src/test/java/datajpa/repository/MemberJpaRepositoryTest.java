@@ -7,6 +7,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,5 +65,53 @@ class MemberJpaRepositoryTest {
         repository.delete(member2);
 
         assertThat(repository.count()).isEqualTo(0);
+    }
+
+    @Test
+    public void testFindByUsernameAndAgeGreaterThan() {
+        Member m1 = new Member("AAA", 10);
+        Member m2 = new Member("AAA", 20);
+        Member m3 = new Member("BBB", 20);
+        repository.save(m1);
+        repository.save(m2);
+        repository.save(m3);
+
+        List<Member> finds = repository.findByUsernameAndAgeGreaterThan("AAA", 15);
+        assertThat(finds.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void testNamedQuery() {
+        Member m1 = new Member("AAA", 10);
+        Member m2 = new Member("AAA", 20);
+        Member m3 = new Member("BBB", 20);
+        repository.save(m1);
+        repository.save(m2);
+        repository.save(m3);
+
+        List<Member> finds = repository.findWithNamedQuery("BBB");
+        assertThat(finds.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void paging() {
+        // given
+        repository.save(new Member("member1", 10));
+        repository.save(new Member("member2", 10));
+        repository.save(new Member("member3", 10));
+        repository.save(new Member("member4", 10));
+        repository.save(new Member("member5", 10));
+
+        int age = 10;
+        int offset = 0;
+        int limit = 3;
+
+        // when
+        List<Member> members = repository.findByPage(age, offset, limit);
+        long totalCount = repository.totalCount(age);
+
+        // then
+        assertThat(members.size()).isEqualTo(limit);
+        assertThat(totalCount).isEqualTo(5L);
     }
 }
