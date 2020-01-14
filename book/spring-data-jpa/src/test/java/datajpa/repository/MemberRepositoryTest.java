@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,6 +34,8 @@ public class MemberRepositoryTest {
     private MemberRepository repository;
     @Autowired
     private TeamRepository teamRepository;
+    @PersistenceContext
+    EntityManager em;
 
     @Test
     public void testSave() {
@@ -215,6 +220,102 @@ public class MemberRepositoryTest {
         assertThat(page.isFirst()).isTrue();
         assertThat(page.isLast()).isFalse();
         assertThat(page.hasNext()).isTrue();
+    }
 
+    @Test
+    public void testBulkAgePlus() {
+        // given
+        repository.save(new Member("member1", 10));
+        repository.save(new Member("member2", 19));
+        repository.save(new Member("member4", 20));
+        repository.save(new Member("member3", 21));
+        repository.save(new Member("member5", 40));
+
+        // when
+        int resultCount = repository.bulkAgePlus(20);
+        // then
+        assertThat(resultCount).isEqualTo(3);
+
+        // 주의!! 영속성 컨텍스트
+        Member member5 = repository.findMemberByUsername("member5");
+        assertThat(member5.getAge()).isEqualTo(40);
+
+        // == @Modifying(clearAutomatically = true)
+        em.flush();
+        em.clear();
+
+        member5 = repository.findMemberByUsername("member5");
+        assertThat(member5.getAge()).isEqualTo(41);
+    }
+
+    @Test
+    public void findMemberLazy() {
+        // given
+        // member1 -> teamA
+        // member2 -> teamB
+
+        Team teamA = new Team("teamA");
+        Team teamB = new Team("teamB");
+
+        teamRepository.save(teamA);
+        teamRepository.save(teamB);
+
+        Member member1 = new Member("member1", 10, teamA);
+        Member member2 = new Member("member2", 10, teamB);
+
+        repository.save(member1);
+        repository.save(member2);
+
+        em.flush();
+        em.clear();
+
+        // List<Member> members = repository.findAll();
+        // List<Member> members = repository.findMemberFetchJoin();
+        // List<Member> members = repository.findAll();
+        // List<Member> members = repository.findByUsername("member1");
+        List<Member> members = repository.findMemberEntityGraph2();
+
+        for (Member member : members) {
+            System.out.println("member = " + member.getUsername());
+            System.out.println("member.teamClass = " + member.getTeam().getClass());
+            System.out.println("member.team = " + member.getTeam().getName());
+        }
+    }
+
+    @Test
+    public void queryHint() {
+        // given
+        Member member1 = new Member("member1", 10);
+        repository.save(member1);
+        em.flush();
+        em.clear();
+
+        // when
+        // Member findMember = repository.findById(member1.getId()).get();
+        Member findMember = repository.findReadOnlyByUsername("member1");
+        findMember.setUsername("member2");
+
+        em.flush();
+    }
+
+    @Test
+    public void testLock() {
+        // given
+        Member member1 = new Member("member1", 10);
+        repository.save(member1);
+        em.flush();
+        em.clear();
+
+        // when
+        List<Member> members = repository.findLockByUsername("member1");
+        //     select
+        //        member0_.member_id as member_i1_0_,
+        //        member0_.age as age2_0_,
+        //        member0_.team_id as team_id4_0_,
+        //        member0_.username as username3_0_
+        //    from
+        //        member member0_
+        //    where
+        //        member0_.username=? for update
     }
 }
