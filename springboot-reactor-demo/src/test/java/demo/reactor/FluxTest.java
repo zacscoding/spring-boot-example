@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import reactor.core.publisher.EmitterProcessor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
@@ -23,7 +23,7 @@ public class FluxTest {
     FluxSink<String> fluxSink;
     Flux<String> flux;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.emitterProcessor = EmitterProcessor.create();
         this.fluxSink = emitterProcessor.sink(OverflowStrategy.DROP);

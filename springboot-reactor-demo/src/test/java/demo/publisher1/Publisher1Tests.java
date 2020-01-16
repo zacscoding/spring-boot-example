@@ -3,10 +3,8 @@ package demo.publisher1;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import demo.dto.Pair;
-import demo.util.ThreadUtil;
 import java.util.concurrent.CountDownLatch;
-import javax.swing.TransferHandler;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
 
