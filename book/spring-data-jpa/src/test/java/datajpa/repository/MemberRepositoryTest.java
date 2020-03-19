@@ -282,6 +282,8 @@ public class MemberRepositoryTest {
         }
     }
 
+    // dirty checking에서는 원본과 변경 된 객체를 2개 유지
+    // 최적화가 되어있어도 리소스를 더 소모
     @Test
     public void queryHint() {
         // given
@@ -292,7 +294,7 @@ public class MemberRepositoryTest {
 
         // when
         // Member findMember = repository.findById(member1.getId()).get();
-        Member findMember = repository.findReadOnlyByUsername("member1");
+        Member findMember = repository.findReadOnlyByUsername(member1.getUsername());
         findMember.setUsername("member2");
 
         em.flush();
@@ -307,7 +309,7 @@ public class MemberRepositoryTest {
         em.clear();
 
         // when
-        List<Member> members = repository.findLockByUsername("member1");
+        List<Member> members = repository.findLockByUsername(member1.getUsername());
         //     select
         //        member0_.member_id as member_i1_0_,
         //        member0_.age as age2_0_,
@@ -317,5 +319,10 @@ public class MemberRepositoryTest {
         //        member member0_
         //    where
         //        member0_.username=? for update
+    }
+
+    @Test
+    public void testCallCustom() {
+        List<Member> members = repository.findMemberCustom();
     }
 }

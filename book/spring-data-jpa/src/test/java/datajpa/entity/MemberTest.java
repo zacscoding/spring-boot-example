@@ -1,14 +1,20 @@
 package datajpa.entity;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+
+import datajpa.repository.MemberRepository;
 
 @SpringBootTest
 @Transactional
@@ -17,6 +23,9 @@ public class MemberTest {
 
     @PersistenceContext
     private EntityManager em;
+
+    @Autowired
+    private MemberRepository memberRepository;
 
     @Test
     public void testEntity() {
@@ -47,5 +56,30 @@ public class MemberTest {
             System.out.println("member = " + member);
             System.out.println("-> member.team = " + member.getTeam());
         }
+    }
+
+    @Test
+    public void testJpaEventBaseEntity() throws Exception {
+        // given
+        Member member = new Member("member1");
+        memberRepository.save(member);
+
+        Thread.sleep(100L);
+        member.setUsername("member2");
+
+        em.flush(); // @PreUpdate
+        em.clear();
+
+        // when
+        Optional<Member> findOptional = memberRepository.findById(member.getId());
+
+        // then
+        assertThat(findOptional.isPresent()).isTrue();
+        Member find = findOptional.get();
+        assertThat(find.getCreatedDate()).isNotNull();
+        // assertThat(find.getUpdatedDate()).isNotNull();
+        assertThat(find.getLastModifiedDate()).isNotNull();
+        assertThat(find.getCreatedBy()).isNotNull();
+        assertThat(find.getLastModifiedBy()).isNotNull();
     }
 }

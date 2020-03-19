@@ -1,4 +1,9 @@
 spring:
+  data:
+    web:
+      pageable:
+        max-page-size: 200
+        default-page-size: 20
   datasource:
     url: jdbc:h2:tcp://localhost/~/datajpa
     username: sa
@@ -16,4 +21,7 @@ spring:
 
 logging.level:
   org.hibernate.SQL: trace
+#  org:
+#    springframework:
+#      transaction: trace
 # org.hibernate.type: trace

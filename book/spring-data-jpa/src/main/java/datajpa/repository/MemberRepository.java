@@ -20,7 +20,7 @@ import org.springframework.data.repository.query.Param;
 import datajpa.dto.MemberDto;
 import datajpa.entity.Member;
 
-public interface MemberRepository extends JpaRepository<Member, Long> {
+public interface MemberRepository extends JpaRepository<Member, Long>, MemberRepositoryCustom {
 
     List<Member> findByUsernameAndAgeGreaterThan(String username, int age);
 
@@ -83,11 +83,17 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     List<Member> findMemberEntityGraph2();
 
     // ===================== JPA Hint & Lock
-    // read only를 모든 메소드에 넣는거 보다, 성능 테스트 후 얻는 이점이 있어야..
+    // read only를 모든 메소드에 넣는거 보다, 성능 테스트 후 얻는 이점이 있어야 적용
     @QueryHints(value = {
             @QueryHint(name = "org.hibernate.readOnly", value = "true")
     })
     Member findReadOnlyByUsername(String username);
+
+    // forCounting : 추가로 호출하는 페이징을 위한 count 쿼리도 쿼리 힌트 적용
+    @QueryHints(value = {
+            @QueryHint(name = "org.hibernate.readOnly", value = "true")
+    }, forCounting = true)
+    Page<Member> findReadOnlyAllByUsername(String name, Pageable pageable);
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     List<Member> findLockByUsername(String username);
