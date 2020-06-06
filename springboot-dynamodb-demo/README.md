@@ -1,5 +1,5 @@
 # Spring boot with dynamodb  
-; this is a demo project for spring with dynamodb  
+; this is a demo project for learning dynamodb with spring boot  
 
 ## Commands   
 
@@ -16,6 +16,13 @@ Start dynamodb with docker and tests Create table / Create item / Get item / Upd
 ```cmd
 $ scripts/aws-cli.sh
 ```  
+
+> ## Run with aws-java-sdk-dynamodb and testcontainers  
+
+Start dynamodb with testcontainers and tests Create table / Create item / Get item / Update item / Delete item / Drop table.
+
+[See SdkBasicUsage.java](./src/test/java/demo/basic/SdkBasicUsage.java) 
+[See MapperBasicUsage.java](./src/test/java/demo/basic/MapperBasicUsage.java)  
 
 ---  
 

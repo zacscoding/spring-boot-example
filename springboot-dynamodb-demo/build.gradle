@@ -19,13 +19,20 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    // aws dynamodb sdk
+    implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.11.796'
+    // guava
+    // implementation 'com.google.guava:guava:29.0-jre'
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+    testCompile 'org.testcontainers:testcontainers:1.14.3'
+    testCompile 'org.testcontainers:junit-jupiter:1.14.3'
+    testCompile "org.testcontainers:dynalite:1.14.3"
 }
 
 test {

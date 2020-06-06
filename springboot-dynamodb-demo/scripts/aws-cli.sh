@@ -3,14 +3,20 @@
 # This cli is copied from https://woowabros.github.io/study/2019/06/05/spring-data-dynamodb-1.html
 SCRIPT_PATH=$( cd "$(dirname "$0")" ; pwd -P )
 
-echo "Start dynamodb with docker-compose"
-cd ${SCRIPT_PATH}/../docker && docker-compose up --force-recreate -d
-sleep 1s
-
 echo "##################################################################################"
 echo "Create table / Create item / Get item / Update item / Delete item / Drop table"
 echo "##################################################################################"
 echo ""
+
+compose_up() {
+  echo "Start dynamodb with docker-compose"
+  cd ${SCRIPT_PATH}/../docker && docker-compose up --force-recreate -d
+}
+
+compose_down() {
+  echo "Stop dynamodb"
+  cd ${SCRIPT_PATH}/../docker && docker-compose down
+}
 
 create_table() {
   echo "#############################################"
@@ -101,13 +107,12 @@ function drop_table() {
     --table-name Comment
 }
 
+compose_up
+sleep 1s
 create_table
 create_item
 get_item
 update_item
 delete_item
 drop_table
-
-
-echo "Stop dynamodb"
-cd ${SCRIPT_PATH}/../docker && docker-compose down
+compose_down
