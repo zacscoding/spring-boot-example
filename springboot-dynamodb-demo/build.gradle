@@ -22,9 +22,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     // aws dynamodb sdk
     implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.11.796'
+    // spring data dynamodb
+    implementation 'com.github.derjust:spring-data-dynamodb:5.1.0'
     // guava
     // implementation 'com.google.guava:guava:29.0-jre'
 
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {

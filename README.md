@@ -95,4 +95,11 @@
 - <a href="springboot-cloud-ribbon-demo">springboot-cloud-ribbon-demo</a>  
 ; client side loadbalancer with spring cloud ribbon  
 
+- <a href="springboot-resilience4j-demo">springboot-resilience4j-demo</a>  
+; circuitbreak with resilence4j  
+
+- <a href="springboot-dynamodb-demo">springboot-dynamodb-demo</a>  
+; demo crud api with aws cli, java sdk, spring-data  
+
+
   

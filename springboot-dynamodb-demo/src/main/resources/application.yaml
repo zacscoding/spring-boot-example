@@ -1,1 +1,10 @@
+server:
+  port: 3000
 
+aws:
+  dynamodb:
+    endpoint: http://localhost:8000
+    region: ap-northeast-2
+  credential:
+    access-key: dummy
+    secret-key: dummy

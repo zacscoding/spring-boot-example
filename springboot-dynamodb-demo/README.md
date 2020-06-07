@@ -21,8 +21,13 @@ $ scripts/aws-cli.sh
 
 Start dynamodb with testcontainers and tests Create table / Create item / Get item / Update item / Delete item / Drop table.
 
-[See SdkBasicUsage.java](./src/test/java/demo/basic/SdkBasicUsage.java) 
-[See MapperBasicUsage.java](./src/test/java/demo/basic/MapperBasicUsage.java)  
+[See SdkBasicUsage.java](./src/test/java/demo/basic/SdkBasicUsage.java)  
+[See MapperBasicUsage.java](./src/test/java/demo/basic/MapperBasicUsage.java)    
+
+> ## Simple CRUD api with spring data dynamodb  
+
+[See config package](./src/main/java/demo/config)  
+[See rest controller](./src/main/java/demo/rest/CommentController.java)  
 
 ---  
 
