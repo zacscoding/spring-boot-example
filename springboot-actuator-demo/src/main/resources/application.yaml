@@ -1,0 +1,49 @@
+# Server
+server:
+  port: 3000
+
+# Spring data jpa
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:23306/testdb?useSSL=false
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:23306/testdb?useSSL=false
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: false
+
+# Application info
+info:
+  app:
+    name: Account Example Application
+    version: 1.0.0
+    discription: This is a demo project for actuator
+
+# Actuator
+# https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-health-indicators
+management:
+  health:
+    diskspace:
+      enabled: false
+    datasource:
+      enabled: true
+    redis:
+      enabled: true
+    ping:
+      enabled: false
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      # default value is "/actuator"
+      base-path: /manage

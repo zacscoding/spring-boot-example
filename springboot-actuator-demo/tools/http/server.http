@@ -1,0 +1,8 @@
+### Test account server
+GET http://localhost:3000/accounts
+
+### Actuator - health
+GET http://localhost:3000/manage/health
+
+### Actuator - info
+GET http://localhost:3000/manage/info
