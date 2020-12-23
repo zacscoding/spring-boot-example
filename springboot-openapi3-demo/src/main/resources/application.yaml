@@ -1,0 +1,14 @@
+# Server configs
+server:
+  port: 8080
+
+# Spring doc configs
+springdoc:
+  api-docs:
+    # path of spec.json default: /v3/api-docs
+    path: /api-docs
+  swagger-ui:
+    # path of swagger ui
+    path: /index.html
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json

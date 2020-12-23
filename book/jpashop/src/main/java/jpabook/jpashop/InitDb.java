@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
  *  - SPRING1 BOOK
  *  - SPRING2 BOOK
  */
-@Component
+//@Component
 @RequiredArgsConstructor
 public class InitDb {
 
@@ -35,7 +35,7 @@ public class InitDb {
         initService.initDb2();
     }
 
-    @Component
+    //@Component
     @Transactional
     @RequiredArgsConstructor
     static class InitService {

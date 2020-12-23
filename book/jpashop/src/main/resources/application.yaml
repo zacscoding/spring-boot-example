@@ -1,19 +1,59 @@
+#spring:
+#  datasource:
+#    url: jdbc:h2:tcp://localhost/~/jpashop;MVCC=TRUE
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: create
+#      #ddl-auto: update
+#    properties:
+#      hibernate:
+#        # show_sql: true
+#        format_sql: true
+#        default_batch_fetch_size: 100
+#
+#logging.level:
+#  org.hibernate.SQL: debug
+## org.hibernate.type: trace
+
+#spring:
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/local_db?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+#    username: root
+#    password: password
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    hikari:
+#      jdbc-url: jdbc:mysql://localhost:3306/local_db?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+#    platform: mysql
+#    initialization-mode: always
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+#    open-in-view: false
+#    hibernate:
+#      ddl-auto: create
+#    properties:
+#      hibernate:
+#        format_sql: true
+#        default_batch_fetch_size: 100
+
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/jpashop;MVCC=TRUE
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    url: jdbc:mysql://localhost:3306/localdb?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/localdb?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    platform: mysql
+    initialization-mode: always
   jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
     hibernate:
-      ddl-auto: create
-      #ddl-auto: update
+      ddl-auto: create-drop
     properties:
       hibernate:
-        # show_sql: true
         format_sql: true
         default_batch_fetch_size: 100
-
-logging.level:
-  org.hibernate.SQL: debug
-# org.hibernate.type: trace
