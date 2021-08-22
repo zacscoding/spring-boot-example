@@ -1,0 +1,45 @@
+server:
+  port: 8890
+
+spring:
+  data:
+    web:
+      pageable:
+        default-page-size: 5
+        one-indexed-parameters: true
+        page-parameter: page
+  datasource:
+    url: jdbc:mysql://localhost:33306/my_database?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:33306/my_database?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    platform: mysql
+    initialization-mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        default_batch_fetch_size: 100
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true
+
+# Spring doc configs
+springdoc:
+  api-docs:
+    # path of spec.json default: /v3/api-docs
+    path: /api-docs
+  swagger-ui:
+    # path of swagger ui
+    path: /index.html
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  paths-to-match:
+    - /v1/api/**

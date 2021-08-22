@@ -1,0 +1,18 @@
+INSERT INTO accounts(last_name, first_name, created_at, updated_at)
+VALUES ('Bagshot', 'Bathilda', now(), now()),
+('Black', 'Sirius', now(), now()),
+('Brown', 'Lavender', now(), now()),
+('Chang', 'Cho', now(), now()),
+('Creevey', 'Colin', now(), now()),
+('Crouch', 'Bartemius', now(), now()),
+('Delacour', 'Fleur', now(), now()),
+('Diggle', 'Dedalus', now(), now()),
+('Diggory', 'Cedric', now(), now()),
+('Dumbledore', 'Aberforth', now(), now()),
+('Dumbledore', 'Albus', now(), now()),
+('Dursley', 'Dudley', now(), now()),
+('Dursley', 'Petunia', now(), now()),
+('Dursley', 'Vernon', now(), now()),
+('Filch', 'Argus', now(), now()),
+('Finnigan', 'Seamus', now(), now()),
+('Fletcher', 'Mundungus', now(), now());

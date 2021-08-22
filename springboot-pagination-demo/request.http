@@ -1,0 +1,23 @@
+### First page without page query
+GET http://localhost:8890/v1/api/accounts
+
+### First page with zero page query
+GET http://localhost:8890/v1/api/accounts?page=0
+
+### First page with one page query
+GET http://localhost:8890/v1/api/accounts?page=1
+
+### First page with one page query
+GET http://localhost:8890/v1/api/accounts?page=1&size=20
+
+### Sort
+GET http://localhost:8890/v1/api/accounts?sort=firstName,desc
+
+### Sort with multiple
+GET http://localhost:8890/v1/api/accounts?sort=firstName,desc&sort=lastName
+
+### Sort with multiple
+GET http://localhost:8890/v1/api/accounts?sort=lastName&sort=firstName,desc
+
+
+

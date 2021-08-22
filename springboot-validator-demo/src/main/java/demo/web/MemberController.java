@@ -4,8 +4,12 @@ import demo.dto.MemberRequest;
 import demo.dto.MemberResponse;
 import demo.service.MemberService;
 import demo.util.GsonUtil;
+import lombok.Data;
+
 import java.util.List;
+
 import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
