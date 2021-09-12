@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:53306/spring_batch
+    username: root
+    password: p@ssw0rd
+  batch:
+    jdbc:
+      initialize-schema: always
+
+#logging:
+#  level:
+#    org.springframework.transaction.interceptor: TRACE
