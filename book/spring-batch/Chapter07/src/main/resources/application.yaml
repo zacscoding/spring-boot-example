@@ -7,10 +7,9 @@ spring:
   batch:
     jdbc:
       initialize-schema: always
-    job:
-      enabled: false
-      names:
 
-#logging:
-#  level:
-#    org.springframework.transaction.interceptor: TRACE
+logging:
+  level:
+    root: WARN
+    io.spring.batch: TRACE
+    #org.springframework.transaction.interceptor: TRACE

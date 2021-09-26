@@ -12,6 +12,7 @@
     <module>Chapter02</module>
     <module>Chapter03</module>
     <module>Chapter04</module>
+    <module>Chapter07</module>
   </modules>
 
   <parent>
@@ -34,6 +35,13 @@
         <version>1.18.2</version>
         <scope>provided</scope>
         <optional>true</optional>
+      </dependency>
+
+      <!-- guava -->
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>31.0-jre</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
