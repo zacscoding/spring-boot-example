@@ -43,6 +43,14 @@
         <artifactId>guava</artifactId>
         <version>31.0-jre</version>
       </dependency>
+
+      <!-- p6spy -->
+      <dependency>
+        <groupId>com.github.gavlyukovskiy</groupId>
+        <artifactId>p6spy-spring-boot-starter</artifactId>
+        <version>1.6.4</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 </project>
