@@ -40,7 +40,7 @@ logging:
     root: WARN
     io.spring.batch: TRACE
     #org.hibernate.SQL: TRACE
-    p6spy: WARN
+    #p6spy: WARN
 
 #---
 #spring:

@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS customer (
     state         CHAR(2)     NOT NULL,
     zipCode       CHAR(5)
 );
+-- require stored procedures in example5
 -- DROP PROCEDURE IF EXISTS `customer_list`;
 -- CREATE PROCEDURE `customer_list`(
 --     IN cityOption CHAR(16)

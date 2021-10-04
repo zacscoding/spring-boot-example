@@ -1,0 +1,9 @@
+Aimee      CHoover    7341Vel Avenue          Mobile          AL35928
+Jonas      UGilbert   8852In St.              Saint Paul      MN57321
+Regan      MBaxter    4851Nec Av.             Gulfport        MS33193
+Octavius   TJohnsoninvalid fixlength 7418Cum Road            Houston         TX51507
+Sydnee     NRobinson  894 Ornare. Ave         Olathe          KS25606 is also invalid length
+Stuart     KMckenzie  5529Orci Av.            Nampa           ID18562
+Petra      ZLara      8401Et St.              Georgia         GA70323 is also invalid length
+Cherokee   TLara      8516Mauris St.          Seattle         WA28720  is also invalid length
+Athena     YBurt      4951Mollis Rd.          Newark          DE41034

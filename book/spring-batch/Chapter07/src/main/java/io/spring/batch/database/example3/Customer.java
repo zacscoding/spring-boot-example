@@ -12,7 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "Customer")
+@Entity
 @Table(name = "customer")
 @Getter
 @Setter(AccessLevel.PROTECTED)

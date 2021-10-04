@@ -3,6 +3,7 @@ package io.spring.batch.database.example2;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import org.springframework.batch.core.Job;
@@ -24,9 +25,11 @@ import org.springframework.context.annotation.Bean;
 
 import com.google.common.collect.ImmutableMap;
 
+import ch.qos.logback.classic.Level;
 import io.spring.batch.database.domain.Customer;
 import io.spring.batch.database.domain.CustomerRowMapper;
 import io.spring.batch.database.listener.LoggingChunkListener;
+import io.spring.batch.util.LogLevelUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,6 +47,12 @@ public class JdbcPagingJobMain {
     public static void main(String[] args) {
         args = new String[] { "city=Dover" };
         SpringApplication.run(JdbcPagingJobMain.class, args);
+    }
+
+    @PostConstruct
+    private void setUp() {
+        LogLevelUtil.setLevel("org.springframework.batch", Level.TRACE);
+        LogLevelUtil.setLevel("p6spy", Level.INFO);
     }
 
     @Bean
@@ -84,7 +93,7 @@ public class JdbcPagingJobMain {
                 .dataSource(dataSource)
                 .queryProvider(queryProvider)
                 .parameterValues(parameterValues)
-                .pageSize(10)
+                .pageSize(3)
                 .rowMapper(new CustomerRowMapper())
                 .build();
     }

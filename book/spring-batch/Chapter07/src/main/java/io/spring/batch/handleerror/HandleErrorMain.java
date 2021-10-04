@@ -2,9 +2,9 @@ package io.spring.batch.handleerror;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -21,7 +21,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.Resource;
 
+import ch.qos.logback.classic.Level;
 import io.spring.batch.file.domain.Customer;
+import io.spring.batch.util.LogLevelUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,8 +39,13 @@ public class HandleErrorMain {
     private final StepBuilderFactory stepBuilderFactory;
 
     public static void main(String[] args) {
-        args = new String[] { "city=Dover" };
+        args = new String[] { "customerFile=input/customerFixedWidth_Invalid.txt" };
         SpringApplication.run(HandleErrorMain.class, args);
+    }
+
+    @PostConstruct
+    private void setUp() {
+        LogLevelUtil.setLevel("org.springframework.batch", Level.INFO);
     }
 
     @Bean
@@ -46,15 +53,6 @@ public class HandleErrorMain {
         return jobBuilderFactory.get("copyCustomerJob")
                                 .incrementer(new RunIdIncrementer())
                                 .start(copyCustomerStep())
-                                .listener(new JobExecutionListener() {
-                                    @Override
-                                    public void beforeJob(JobExecution jobExecution) {
-                                        //LogLevelUtil.setLevel("p6spy", Level.INFO);
-                                    }
-
-                                    @Override
-                                    public void afterJob(JobExecution jobExecution) {}
-                                })
                                 .build();
     }
 
@@ -62,14 +60,16 @@ public class HandleErrorMain {
     public Step copyCustomerStep() {
         return stepBuilderFactory.get("copyCustomerStep")
                                  .<Customer, Customer>chunk(CHUNK_SIZE)
-                                 // .reader(customerItemReader(null, null)) // use JpaPagingItemReaderBuilder
-                                 .reader(customerFlatFileItemReader(null)) // custom query provider
-                                 .writer(customerItemWriter())
-
-                                 .faultTolerant()
-                                 .skip(Exception.class)
-                                 .skipLimit(100)
+                                 // .reader(customerItemReader(null, null))
+                                 // .faultTolerant()
+                                 // .skip(Exception.class)
+                                 // .noSkip(ParseException.class)
+                                 // .skipLimit(10)
+                                 .reader(customerFlatFileItemReader(null))
                                  .listener(customerItemListener())
+                                 .writer(customerItemWriter())
+                                 .faultTolerant()
+                                 .skipPolicy(new FileVerificationSkipper())
                                  .build();
     }
 

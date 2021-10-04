@@ -18,7 +18,9 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.batch.item.database.JpaCursorItemReader;
 import org.springframework.batch.item.database.JpaPagingItemReader;
+import org.springframework.batch.item.database.builder.JpaCursorItemReaderBuilder;
 import org.springframework.batch.item.database.builder.JpaPagingItemReaderBuilder;
 import org.springframework.batch.item.database.orm.AbstractJpaQueryProvider;
 import org.springframework.beans.factory.annotation.Value;
@@ -77,6 +79,7 @@ public class JpaMain {
     public Step copyCustomerStep() {
         return stepBuilderFactory.get("copyCustomerStep")
                                  .<Customer, Customer>chunk(CHUNK_SIZE)
+                                 //.reader(customerItemReaderByCursor(null, null))
                                  // .reader(customerItemReader(null, null)) // use JpaPagingItemReaderBuilder
                                  .reader(createItemReaderByQueryProvider(null, null)) // custom query provider
                                  .writer(customerItemWriter())
@@ -93,6 +96,21 @@ public class JpaMain {
             items.forEach(item -> logger.info("Current customer: {}. Total Item Write: #{}", item,
                                               itemCount.incrementAndGet()));
         };
+    }
+
+    @Bean
+    @StepScope
+    public JpaCursorItemReader<Customer> customerItemReaderByCursor(
+            EntityManagerFactory entityManagerFactory,
+            @Value("#{jobParameters['city']}") String city) {
+
+        return new JpaCursorItemReaderBuilder<Customer>()
+                .name("customerItemReader")
+                .entityManagerFactory(entityManagerFactory)
+                .queryString("SELECT c FROM Customer c where c.city = :city")
+                //.queryProvider()
+                .parameterValues(Collections.singletonMap("city", city))
+                .build();
     }
 
     @Bean
@@ -121,6 +139,7 @@ public class JpaMain {
                 .entityManagerFactory(entityManagerFactory)
                 .queryProvider(queryProvider)
                 .parameterValues(Collections.singletonMap("city", city))
+                .pageSize(CHUNK_SIZE)
                 .build();
     }
 
@@ -132,11 +151,8 @@ public class JpaMain {
 
         public Query createQuery() {
             final EntityManager em = getEntityManager();
-
-            final Query query = em.createQuery("SELECT c FROM Customer c WHERE c.city = :city");
-            query.setParameter("city", cityName);
-
-            return query;
+            return em.createQuery("SELECT c FROM Customer c WHERE c.city = :city")
+                     .setParameter("city", cityName);
         }
 
         @Override

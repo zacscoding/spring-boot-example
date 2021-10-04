@@ -3,6 +3,7 @@ package io.spring.batch.database.example3;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManagerFactory;
 
 import org.hibernate.SessionFactory;
@@ -25,6 +26,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import ch.qos.logback.classic.Level;
+import io.spring.batch.util.LogLevelUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,6 +45,12 @@ public class HibernateMain {
     public static void main(String[] args) {
         args = new String[] { "city=Dover" };
         SpringApplication.run(HibernateMain.class, args);
+    }
+
+    @PostConstruct
+    private void setUp() {
+        LogLevelUtil.setLevel("org.springframework.batch", Level.TRACE);
+        LogLevelUtil.setLevel("p6spy", Level.INFO);
     }
 
     @Bean
@@ -92,6 +101,9 @@ public class HibernateMain {
                 .name("customerItemReader")
                 .sessionFactory(entityManagerFactory.unwrap(SessionFactory.class))
                 .queryString("from Customer where city = :city")
+                // .queryName(String) // 하이버네이트 구성에 포함된 네임드 하이버네이트 쿼리를 참조함
+                // .queryProvider(HibernateQueryProvider<T>) // 하이버네이트 쿼리(HQL) 프로그래밍으로 빌드하는 기능 제공
+                // .nativeQuery(String) // 네이티브 SQL 쿼리를 실행한 뒤 결과를 하이버네이트로 매핑하는데 사용
                 .parameterValues(Collections.singletonMap("city", city))
                 .build();
         /*
@@ -120,6 +132,8 @@ public class HibernateMain {
                 .name("customerItemReader")
                 .sessionFactory(entityManagerFactory.unwrap(SessionFactory.class))
                 .queryString("from Customer where city = :city")
+                // .queryName(String)
+                // .queryProvider()
                 .parameterValues(Collections.singletonMap("city", city))
                 .pageSize(CHUNK_SIZE)
                 .build();

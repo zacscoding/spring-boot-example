@@ -2,6 +2,8 @@ package io.spring.batch.database.example9;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
@@ -15,8 +17,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import ch.qos.logback.classic.Level;
 import io.spring.batch.database.domain.Customer;
 import io.spring.batch.database.listener.LoggingChunkListener;
+import io.spring.batch.util.LogLevelUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,6 +38,11 @@ public class ItemStreamSupportMain {
     public static void main(String[] args) {
         args = new String[] { "city=Dover" };
         SpringApplication.run(ItemStreamSupportMain.class, args);
+    }
+
+    @PostConstruct
+    private void setUp() {
+        LogLevelUtil.setLevel("p6spy", Level.INFO);
     }
 
     @Bean

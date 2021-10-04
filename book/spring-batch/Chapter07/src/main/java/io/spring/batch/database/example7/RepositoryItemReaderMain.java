@@ -101,6 +101,7 @@ public class RepositoryItemReaderMain {
                 .methodName("findByCity")
                 .repository(repository)
                 .sorts(Collections.singletonMap("lastName", Direction.ASC))
+                .pageSize(CHUNK_SIZE)
                 .build();
         /*
         -- select query

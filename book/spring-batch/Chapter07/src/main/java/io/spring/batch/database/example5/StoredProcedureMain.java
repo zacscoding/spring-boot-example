@@ -3,6 +3,7 @@ package io.spring.batch.database.example5;
 import java.sql.Types;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import org.springframework.batch.core.Job;
@@ -22,9 +23,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.ArgumentPreparedStatementSetter;
 import org.springframework.jdbc.core.SqlParameter;
 
+import ch.qos.logback.classic.Level;
 import io.spring.batch.database.domain.Customer;
 import io.spring.batch.database.domain.CustomerRowMapper;
 import io.spring.batch.database.listener.LoggingChunkListener;
+import io.spring.batch.util.LogLevelUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,6 +45,11 @@ public class StoredProcedureMain {
     public static void main(String[] args) {
         args = new String[] { "city=Dover" };
         SpringApplication.run(StoredProcedureMain.class, args);
+    }
+
+    @PostConstruct
+    private void setUp() {
+        LogLevelUtil.setLevel("p6spy", Level.INFO);
     }
 
     @Bean
