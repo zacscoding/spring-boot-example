@@ -1,0 +1,34 @@
+spring:
+  sql:
+    init:
+      mode: always
+      platform: mysql
+      schema-locations:
+        - schema-mysql.sql
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:53306/spring_batch?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: p@ssw0rd
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:53306/spring_batch?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+  batch:
+    jdbc:
+      initialize-schema: always
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true
+
+logging:
+  config:
+  level:
+    root: INFO
+    io.spring.batch: TRACE
