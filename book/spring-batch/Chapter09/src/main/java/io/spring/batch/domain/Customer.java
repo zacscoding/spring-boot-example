@@ -1,5 +1,7 @@
 package io.spring.batch.domain;
 
+import java.io.Serializable;
+
 import com.google.common.base.MoreObjects;
 
 import lombok.AllArgsConstructor;
@@ -11,7 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Customer {
+public class Customer implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private String firstName;
     private String middleInitial;
@@ -20,6 +23,7 @@ public class Customer {
     private String city;
     private String state;
     private String zip;
+    private String email;
 
     @Override
     public String toString() {
@@ -31,6 +35,7 @@ public class Customer {
                           .add("city", city)
                           .add("state", state)
                           .add("zip", zip)
+                          .add("email", email)
                           .toString();
     }
 }

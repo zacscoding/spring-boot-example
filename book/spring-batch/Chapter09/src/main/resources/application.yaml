@@ -30,5 +30,5 @@ decorator:
 logging:
   config:
   level:
-    root: INFO
+    root: WARN
     io.spring.batch: TRACE
