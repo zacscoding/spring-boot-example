@@ -2,6 +2,7 @@
 - [배치 처리 프로파일링하기](#배치-처리-프로파일링하기)
   - [VisualVM 알아보기](#VisualVM-알아보기)
   - [스프링 배치 애플리케이션 프로파일링하기](#스프링-배치-애플리케이션-프로파일링하기)
+- [잡 확장하기](#잡-확장하기)
 
 ---
 
@@ -64,6 +65,105 @@ CPU 사용률, 메모리 사용률(Heap과 PermGen), 로딩된 클래스 수, �
 
 
 ### CPU 프로파일링
+
+CPU 프로파일링을 위해 아래와 같이 `AccountItemProcessor`에 0~100만 사이의 모든 소수를 계산하자.  
+
+```java
+public class AccountItemProcessor implements ItemProcessor<Statement, Statement> {
+
+  @Override
+  public Statement process(Statement item) throws Exception {
+    // FOR PROFILE
+    final int threadCount = 10;
+    final CountDownLatch doneSignal = new CountDownLatch(threadCount);
+
+    for (int i = 0; i < threadCount; i++) {
+      final Thread thread = new Thread(() -> {
+        try {
+          for (int j = 0; j < 100000; j++) {
+            new BigInteger(String.valueOf(j)).isProbablePrime(0);
+          }
+        } finally {
+          doneSignal.countDown();
+        }
+      });
+      thread.setDaemon(true);
+      thread.start();
+    }
+    doneSignal.await();
+      ...
+  }
+}
+```
+
+![VisualVM Monitor](https://user-images.githubusercontent.com/25560203/140643641-46d2f88b-69c6-4a01-a3c7-e1c683a6a98a.png)
+
+![VisualVM CPU Profile](https://user-images.githubusercontent.com/25560203/140643798-4a1a1f94-f208-49ac-9326-3f76b14e1284.png)  
+
+### 메모리 프로파일링
+
+아래와 같이 메모리를 증가하는 코드를 추가하자.
+
+```java
+public class AccountItemProcessor implements ItemProcessor<Statement, Statement> {
+
+  @Override
+  public Statement process(Statement item) throws Exception {
+    String memoryBuster = "memoryBuster";
+
+    for (int i = 0; i < 200; i++) {
+      memoryBuster += memoryBuster;
+    }
+    ...
+  }
+}
+```
+
+![Visual VM](https://user-images.githubusercontent.com/25560203/140644143-52288f54-a8c5-444d-a723-cbc3c4f0745c.png)
+
+Profiler 또는 Snapshot 이용하기  
+
+---  
+
+# 잡 확장하기
+
+## 다중 스레드 스텝  
+
+```java
+@Bean
+@StepScope
+public FlatFileItemReader<Transaction> fileTransactionReader(
+        @Value("#{jobParameters['inputFlatFile']}") Resource inputFile) {
+
+    return new FlatFileItemReaderBuilder<Transaction>()
+            ...
+            .saveState(false) // 상태를 저장하지 않는다
+            ...
+            .build();
+}
+
+@Bean
+public Step step1() {
+    return stepBuilderFactory.get("step1")
+            ...
+            .taskExecutor(new SimpleAsyncTaskExecutor()) // 매 청크마다 해당 Excutor에서 실행한다.
+            ...
+            .build();
+}
+```
+
+```log
+2021-11-07 21:33:03.313  INFO 8099 --- [cTaskExecutor-2] i.s.batch.multithread.MultiThreadMain    : beforeChunk: execution#1
+2021-11-07 21:33:03.314  INFO 8099 --- [cTaskExecutor-4] i.s.batch.multithread.MultiThreadMain    : beforeChunk: execution#1
+2021-11-07 21:33:03.313  INFO 8099 --- [cTaskExecutor-3] i.s.batch.multithread.MultiThreadMain    : beforeChunk: execution#1
+2021-11-07 21:33:03.314  INFO 8099 --- [cTaskExecutor-1] i.s.batch.multithread.MultiThreadMain    : beforeChunk: execution#1
+2021-11-07 21:33:03.502  INFO 8099 --- [cTaskExecutor-3] i.s.batch.multithread.MultiThreadMain    : afterChunk: execution#1
+2021-11-07 21:33:03.504  INFO 8099 --- [cTaskExecutor-5] i.s.batch.multithread.MultiThreadMain    : beforeChunk: execution#1
+```
+
+## 병렬 스텝
+
+
 
 
 

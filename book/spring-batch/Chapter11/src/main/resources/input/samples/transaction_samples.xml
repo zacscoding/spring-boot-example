@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<transactions>
+  <transaction>
+    <transactionId>2462744</transactionId>
+    <accountId>1</accountId>
+    <description>Skinix</description>
+    <credit />
+    <debit>-438</debit>
+    <timestamp>2018-06-01 19:39:53</timestamp>
+  </transaction>
+  <transaction>
+    <transactionId>4252844</transactionId>
+    <accountId>2</accountId>
+    <description>Mydeo</description>
+    <credit />
+    <debit>-3488</debit>
+    <timestamp>2018-06-25 17:36:05</timestamp>
+  </transaction>
+  <transaction>
+    <transactionId>7396381</transactionId>
+    <accountId>3</accountId>
+    <description>Jaloo</description>
+    <credit />
+    <debit>-3562</debit>
+    <timestamp>2018-06-14 11:49:18</timestamp>
+  </transaction>
+  <transaction>
+    <transactionId>5393887</transactionId>
+    <accountId>4</accountId>
+    <description>Myworks</description>
+    <credit>18667.10</credit>
+    <debit/>
+    <timestamp>2018-06-10 07:13:21</timestamp>
+  </transaction>
+</transactions>
